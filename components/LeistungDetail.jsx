@@ -175,8 +175,10 @@ const LeistungDetailApp = () => {
                 <button className="btn btn-primary" onClick={() => setTerminOpen(true)}>
                   Termin online <Icon name="arrow-right" size={16} className="btn-arrow"/>
                 </button>
-                <div style={{marginTop:'16px', textAlign:'center', fontSize:'14px', color:'#9CC4A1'}}>
-                  oder <a href="tel:+498938808687" style={{color:'#FFFFFF', textDecoration:'underline'}}>089 38 80 86 87</a>
+                <div style={{marginTop:'16px', display:'flex', flexDirection:'column', gap:'6px', fontSize:'14px', color:'#9CC4A1'}}>
+                  <span>oder anrufen:</span>
+                  <a href="tel:+498938808687" style={{color:'#FFFFFF', textDecoration:'underline'}}>089 38 80 86 87 <span style={{color:'#9CC4A1', fontSize:'12px'}}>(Dr. Jahn)</span></a>
+                  <a href="tel:+498938889500" style={{color:'#FFFFFF', textDecoration:'underline'}}>089 38 88 95 00 <span style={{color:'#9CC4A1', fontSize:'12px'}}>(Dr. Hancock-Diener)</span></a>
                 </div>
               </div>
 

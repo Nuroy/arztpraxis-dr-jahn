@@ -74,12 +74,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.05);
-  transition: filter 800ms ease;
+  filter: none;
   display: block;
-}
-.team-hero-card:hover img {
-  filter: grayscale(0%);
 }
 .team-hero-card .caption {
   position: absolute;
@@ -137,46 +133,42 @@
   max-width: 56ch;
   margin: 24px auto 0;
 }
-.doctor-card {
+.doctors-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 48px;
+}
+@media (min-width: 1024px) {
+  .doctors-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+}
+.doctor-card {
+  display: flex;
+  flex-direction: column;
   background: #FFFFFF;
   border: 1px solid var(--border-soft);
-  margin-bottom: 64px;
   overflow: hidden;
   transition: box-shadow 400ms ease;
 }
 .doctor-card:hover {
   box-shadow: 0 24px 48px -16px rgba(28, 35, 30, 0.12);
 }
-@media (min-width: 1024px) {
-  .doctor-card {
-    grid-template-columns: 5fr 7fr;
-  }
-  .doctor-card.reverse {
-    grid-template-columns: 7fr 5fr;
-  }
-  .doctor-card.reverse .doctor-photo {
-    order: 2;
-  }
-}
 .doctor-photo {
   position: relative;
   background: var(--bg-canvas);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
 }
 .doctor-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   filter: grayscale(100%) contrast(1.05);
   transition: filter 800ms ease, transform 1200ms ease;
   display: block;
 }
-.doctor-card:hover .doctor-photo img {
-  filter: grayscale(0%);
+.doctor-photo img.color-reveal {
+  filter: grayscale(0%) contrast(1);
   transform: scale(1.03);
 }
 .doctor-photo-meta {
@@ -375,12 +367,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.05);
-  transition: filter 600ms ease, transform 800ms ease;
+  filter: none;
+  transition: transform 800ms ease;
   display: block;
 }
 .staff-card:hover .staff-photo img {
-  filter: grayscale(0%);
   transform: scale(1.05);
 }
 .staff-photo::after {
@@ -628,31 +619,35 @@
   transform: translateX(4px);
 }
 
-/* Reveal animations */
+/* Reveal animations — pop style (scale + blur) */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 800ms ease, transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(0.92);
+  filter: blur(6px);
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out), filter 800ms var(--ease-out);
 }
 .reveal.in-view {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
+  filter: blur(0);
 }
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 600ms ease, transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(0.92);
+  filter: blur(6px);
+  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out), filter 600ms var(--ease-out);
 }
 .reveal-stagger.in-view > * {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
+  filter: blur(0);
 }
 .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0ms; }
-.reveal-stagger.in-view > *:nth-child(2) { transition-delay: 100ms; }
-.reveal-stagger.in-view > *:nth-child(3) { transition-delay: 200ms; }
-.reveal-stagger.in-view > *:nth-child(4) { transition-delay: 300ms; }
-.reveal-stagger.in-view > *:nth-child(5) { transition-delay: 400ms; }
-.reveal-stagger.in-view > *:nth-child(6) { transition-delay: 500ms; }
+.reveal-stagger.in-view > *:nth-child(2) { transition-delay: 150ms; }
+.reveal-stagger.in-view > *:nth-child(3) { transition-delay: 300ms; }
+.reveal-stagger.in-view > *:nth-child(4) { transition-delay: 450ms; }
+.reveal-stagger.in-view > *:nth-child(5) { transition-delay: 600ms; }
+.reveal-stagger.in-view > *:nth-child(6) { transition-delay: 750ms; }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 640px) {

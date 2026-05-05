@@ -1,0 +1,396 @@
+/* Neupatienten page styles */
+
+/* ============ HERO ============ */
+.np-hero {
+  padding-top: 120px;
+  padding-bottom: 64px;
+}
+@media (min-width: 1024px) {
+  .np-hero { padding-top: 160px; padding-bottom: 80px; }
+}
+
+/* ============ CHECKLIST ============ */
+.np-checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .np-checklist-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+}
+
+.np-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.np-check-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-size: 15px;
+  font-weight: 500;
+}
+.np-check-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ============ LANGUAGE TABS ============ */
+.np-lang-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-subtle);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  margin: 0 auto 48px;
+}
+.np-lang-tab {
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 200ms var(--ease-out);
+}
+.np-lang-tab.active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xs);
+}
+.np-lang-tab:hover:not(.active) {
+  color: var(--text-primary);
+}
+
+/* ============ OPTION CARDS ============ */
+.np-option-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .np-option-cards { grid-template-columns: 1fr 1fr; }
+}
+
+.np-option-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  text-align: center;
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.np-option-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.np-option-card-primary {
+  border-color: var(--brand-primary);
+  border-width: 2px;
+}
+
+.np-option-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.np-option-icon.primary {
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+}
+
+/* ============ FORM MAIN ============ */
+.np-form-main {
+  padding-top: 120px;
+  padding-bottom: 64px;
+}
+@media (min-width: 1024px) {
+  .np-form-main { padding-top: 140px; padding-bottom: 80px; }
+}
+
+/* ============ ANAMNESE FORM ============ */
+.anamnese-form {
+  max-width: var(--reading-max);
+  margin: 0 auto;
+}
+
+.anamnese-form-header {
+  margin-bottom: 40px;
+}
+.anamnese-form-header h2 {
+  margin: 24px 0 0;
+}
+.anamnese-back-btn {
+  margin-bottom: 8px;
+}
+
+.anamnese-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: rgba(184, 92, 46, 0.08);
+  border: 1px solid rgba(184, 92, 46, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--accent-warning);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.anamnese-section {
+  border: none;
+  padding: 0;
+  margin: 0 0 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.anamnese-section:last-of-type {
+  border-bottom: none;
+}
+
+.anamnese-legend {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 0;
+}
+.anamnese-legend svg {
+  color: var(--brand-primary);
+}
+
+.anamnese-intro {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+/* Fields */
+.anamnese-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.anamnese-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.anamnese-input,
+.anamnese-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  box-sizing: border-box;
+}
+.anamnese-input:focus,
+.anamnese-textarea:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(58, 157, 80, 0.1);
+}
+.anamnese-input::placeholder,
+.anamnese-textarea::placeholder {
+  color: var(--text-muted);
+}
+.anamnese-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Grid rows */
+.anamnese-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.anamnese-row-3 {
+  display: grid;
+  grid-template-columns: 2fr 0.6fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  .anamnese-row-2 { grid-template-columns: 1fr; }
+  .anamnese-row-3 { grid-template-columns: 1fr; }
+}
+
+/* Radio buttons */
+.anamnese-radios {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.anamnese-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms var(--ease-out);
+}
+.anamnese-radio:hover {
+  border-color: var(--brand-primary);
+}
+.anamnese-radio.selected {
+  border-color: var(--brand-primary);
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+  font-weight: 500;
+}
+.anamnese-radio input {
+  display: none;
+}
+.anamnese-radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 150ms;
+}
+.anamnese-radio.selected .anamnese-radio-dot {
+  border-color: var(--brand-primary);
+}
+.anamnese-radio.selected .anamnese-radio-dot::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+}
+
+/* Checkboxes */
+.anamnese-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .anamnese-checkbox-grid { grid-template-columns: 1fr; }
+}
+
+.anamnese-checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.anamnese-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+.anamnese-checkbox input {
+  display: none;
+}
+.anamnese-check-box {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 150ms;
+  color: #fff;
+  margin-top: 1px;
+}
+.anamnese-checkbox input:checked + .anamnese-check-box {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+/* Actions */
+.anamnese-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ============ CTA DARK OVERRIDE ============ */
+.np-cta .leistungen-cta {
+  background: var(--bg-emphasis);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-2xl);
+  padding: 64px 32px;
+}
+@media (min-width: 1024px) {
+  .np-cta .leistungen-cta { padding: 80px; }
+}
+.np-cta .leistungen-cta .eyebrow { color: #A8C9AC; }
+.np-cta .leistungen-cta h2 { color: #FFFFFF; }
+.np-cta .leistungen-cta p { color: #C9D5CB; }
+.np-cta .btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 480px) {
+  .np-hero { padding-top: 100px; padding-bottom: 48px; }
+  .np-option-card { padding: 28px 20px; }
+  .np-form-main { padding-top: 100px; }
+  .anamnese-form-header h2 { font-size: 24px; }
+  .anamnese-legend { font-size: 18px; }
+  .anamnese-radios { gap: 8px; }
+  .anamnese-radio { padding: 8px 14px; font-size: 13px; }
+  .anamnese-actions { flex-direction: column; }
+  .anamnese-actions .btn { width: 100%; justify-content: center; }
+}

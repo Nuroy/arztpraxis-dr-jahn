@@ -9,7 +9,7 @@ const Hero = ({ onOpenTermin }) => (
         <div>
           <div className="eyebrow hero-eyebrow">Zahnmedizin in München-Schwabing</div>
           <h1 className="display-xl">Bewährtes und Fortschritt für Ihr <em className="italic-accent">Lächeln</em>.</h1>
-          <p className="body-xl hero-sub">Praxisgemeinschaft Dr. Hancock-Diener und Dr. Jahn. Wir nehmen uns Zeit — für Ihre Gesundheit, Ihre Ästhetik, Ihr Wohlbefinden.</p>
+          <p className="body-xl hero-sub">Praxisgemeinschaft Dr. Birte Hancock-Diener und Dr. Irene Jahn. Wir nehmen uns Zeit für Ihre Gesundheit, Ihre Ästhetik, Ihr Wohlbefinden.</p>
           <div className="hero-ctas">
             <button className="btn btn-primary" onClick={onOpenTermin}>
               Termin vereinbaren <Icon name="arrow-right" size={16} className="btn-arrow" />
@@ -20,12 +20,12 @@ const Hero = ({ onOpenTermin }) => (
           </div>
         </div>
         <div className="hero-image-wrap">
-          <img className="hero-image" src="assets/praxis-behandlung.jpg" alt="Behandlungsraum der Praxis" />
+          <img className="hero-image" src="assets/praxis-empfang.jpg" alt="Empfang der Praxis" />
           <div className="hero-badge">
             <div className="check"><Icon name="check" size={16} /></div>
             <div className="hero-badge-text">
               <div className="hero-badge-title">Meisterlabor-Qualität</div>
-              <div className="hero-badge-sub">Partnerschaft seit 20+ Jahren</div>
+              <div className="hero-badge-sub">Partnerschaft seit 25+ & 30+ Jahren</div>
             </div>
           </div>
         </div>
@@ -36,23 +36,25 @@ const Hero = ({ onOpenTermin }) => (
 
 // ----- TRUST BAR -----
 const TRUST = [
-  { icon: "shield", text: "30+ Jahre Praxis-Erfahrung" },
+  { icon: "shield", text: "20+ Jahre Praxis-Erfahrung" },
   { icon: "award", text: "Meisterlabor-Partnerschaft" },
-  { icon: "clock", text: "Online-Buchung 24/7" },
+  { icon: "clock", text: "Terminanfrage" },
   { icon: "leaf", text: "Sanfte Behandlungsmethoden" },
   { icon: "pin", text: "Friedrichstraße 33, Schwabing" },
 ];
 const TrustBar = () => (
   <div className="trustbar">
-    <div className="container">
-      <div className="trustbar-inner">
-        {TRUST.map((t, i) => (
-          <div key={i} className="trust-item">
-            <Icon name={t.icon} size={20} />
-            <span>{t.text}</span>
-          </div>
-        ))}
-      </div>
+    <div className="trustbar-track">
+      {[0, 1].map(copy => (
+        <div key={copy} className="trustbar-inner" aria-hidden={copy === 1 ? "true" : undefined}>
+          {TRUST.map((t, i) => (
+            <div key={i} className="trust-item">
+              <Icon name={t.icon} size={20} />
+              <span>{t.text}</span>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   </div>
 );
@@ -67,9 +69,9 @@ const Intro = () => (
         </div>
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>
-          <h2 className="display-lg">Eine Praxisgemeinschaft, die <em className="italic-accent">Zeit</em> nimmt.</h2>
-          <p className="body-lg">Seit über 20 Jahren führen Dr. Birte Hancock-Diener und Dr. Irene Jahn ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit den besten zahntechnischen Meisterlaboren Süddeutschlands.</p>
-          <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur — bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
+          <h2 className="display-lg">Eine Praxisgemeinschaft, die sich <em className="italic-accent">Zeit</em> nimmt.</h2>
+          <p className="body-lg">Seit über 20 Jahren führen Dr. Birte Hancock-Diener und Dr. Irene Jahn ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
+          <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur: bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
           <a href="team.html" className="btn-tertiary">Mehr über uns erfahren <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
         </div>
       </div>
@@ -79,11 +81,11 @@ const Intro = () => (
 
 // ----- LEISTUNGEN -----
 const SERVICES = [
-  { icon: "shield-tooth", title: "Prophylaxe & Zahnerhaltung", desc: "Zahnerhaltung, professionelle Reinigung, Parodontologie und Endodontologie — Vorsorge ist die beste Medizin.", items: [{label:"Zahnerhaltung / Prophylaxe", slug:"zahnerhaltung-prophylaxe"}, {label:"Parodontologie", slug:"parodontologie"}, {label:"Endodontologie", slug:"endodontologie"}], anchor: "prophylaxe" },
-  { icon: "sparkle", title: "Ästhetik", desc: "Bleaching und ästhetische Korrekturen — für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
+  { icon: "shield-tooth", title: "Prophylaxe & Zahnerhaltung", desc: "Zahnerhaltung, professionelle Reinigung, Parodontologie und Endodontologie. Vorsorge ist die beste Medizin.", items: [{label:"Zahnerhaltung / Prophylaxe", slug:"zahnerhaltung-prophylaxe"}, {label:"Parodontologie", slug:"parodontologie"}, {label:"Endodontologie", slug:"endodontologie"}], anchor: "prophylaxe" },
+  { icon: "sparkle", title: "Ästhetik", desc: "Bleaching und ästhetische Korrekturen für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
   { icon: "implant", title: "Implantologie & Chirurgie", desc: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe.", items: [{label:"Implantologie", slug:"implantologie"}, {label:"Oralchirurgie / Kieferchirurgie", slug:"oralchirurgie"}], anchor: "chirurgie" },
   { icon: "moon", title: "Schienentherapie", desc: "Knirschen, Schnarchen, Migräne und sanfte Zahnkorrektur mit Alignern.", items: [{label:"Schienentherapie", slug:"schienentherapie"}, {label:"Schnarchschienen", slug:"schnarchschienen"}, {label:"NTI Aufbiss-Schienen", slug:"nti-aufbiss-schienen"}, {label:"Zahnkorrektur Schienen", slug:"zahnkorrektur-schienen"}], anchor: "schienen" },
-  { icon: "smile", title: "Kinderzahnheilkunde", desc: "Sanfter, spielerischer Einstieg — schon ab dem ersten Zahn.", items: [{label:"Kinderzahnheilkunde", slug:"kinderzahnheilkunde"}], anchor: "kinder" },
+  { icon: "smile", title: "Kinderzahnheilkunde", desc: "Sanfter, spielerischer Einstieg, schon ab dem ersten Zahn.", items: [{label:"Kinderzahnheilkunde", slug:"kinderzahnheilkunde"}], anchor: "kinder" },
   { icon: "heart", title: "Hilfe bei Zahnarztangst", desc: "Zeit, Verständnis und Behandlung im eigenen Tempo.", items: [{label:"Hilfe bei Zahnarztangst", slug:"zahnarztangst"}], anchor: "angst" },
 ];
 const Leistungen = () => (
@@ -92,7 +94,7 @@ const Leistungen = () => (
       <div className="section-header">
         <div className="eyebrow">Unsere Leistungen</div>
         <h2 className="display-lg">Zahnmedizin in <em className="italic-accent">ihrer ganzen Breite</em>.</h2>
-        <p className="body-lg">13 Behandlungsbereiche, sechs Schwerpunkte — alles unter einem Dach.</p>
+        <p className="body-lg">13 Behandlungsbereiche, sechs Schwerpunkte, alles unter einem Dach.</p>
       </div>
       <div className="leistungen-grid">
         {SERVICES.map((s, i) => (
@@ -134,17 +136,17 @@ const Werte = () => (
         <div className="wert-card">
           <span className="wert-num">01</span>
           <h3 className="heading-lg">Wir nehmen uns Zeit</h3>
-          <p>Beratung, Diagnose, Behandlung — alles in Ruhe. Bei uns sind Sie kein Termin im Minutentakt, sondern Mensch mit individuellen Bedürfnissen.</p>
+          <p>Beratung, Diagnose, Behandlung: alles in Ruhe. Bei uns sind Sie kein Termin im Minutentakt, sondern Mensch mit individuellen Bedürfnissen.</p>
         </div>
         <div className="wert-card">
           <span className="wert-num">02</span>
           <h3 className="heading-lg">Meisterlabor-Qualität</h3>
-          <p>Über 20 Jahre Zusammenarbeit mit zahntechnischen Meisterlaboren. Jeder Zahnersatz wird individuell angefertigt und sorgfältig kontrolliert.</p>
+          <p>Über 25 bzw. 30 Jahren Zusammenarbeit mit deutschen zahntechnischen Meisterlaboren. Jeder Zahnersatz wird individuell und sorgfältig nach den neuesten Standards hergestellt.</p>
         </div>
         <div className="wert-card">
           <span className="wert-num">03</span>
           <h3 className="heading-lg">Erfahrung, die wirkt</h3>
-          <p>Zwei Zahnärztinnen, drei Jahrzehnte Praxiserfahrung, regelmäßige Fortbildungen — Sie sind in fachkundigen Händen.</p>
+          <p>Zwei Zahnärztinnen, drei Jahrzehnte Praxiserfahrung, regelmäßige Fortbildungen. Sie sind in fachkundigen Händen.</p>
         </div>
       </div>
     </div>
@@ -152,14 +154,31 @@ const Werte = () => (
 );
 
 // ----- TEAM -----
-const Team = ({ onOpenTermin }) => (
+const Team = ({ onOpenTermin }) => {
+  const teamRef = useRef2(null);
+  useEffect2(() => {
+    if (!teamRef.current) return;
+    const cards = teamRef.current.querySelectorAll('.team-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = [...cards].indexOf(e.target);
+          setTimeout(() => e.target.classList.add('pop'), idx * 200);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(c => obs.observe(c));
+    return () => obs.disconnect();
+  }, []);
+  return (
   <section id="team" className="section">
     <div className="container">
       <div className="section-header">
         <div className="eyebrow">Ihre Zahnärztinnen</div>
         <h2 className="display-lg">Zwei Zahnärztinnen, <em className="italic-accent">ein Anspruch</em>.</h2>
       </div>
-      <div className="team-grid">
+      <div className="team-grid" ref={teamRef}>
         <div className="team-card">
           <div className="team-photo">
             <img src="assets/dr-hancock-diener.jpg" alt="Dr. Birte Hancock-Diener" />
@@ -168,11 +187,11 @@ const Team = ({ onOpenTermin }) => (
             <h3 className="team-name">Dr. Birte Hancock-Diener</h3>
             <p className="team-role">Zahnärztin</p>
             <div className="team-tags">
-              <span className="team-tag">Zahnerhaltung</span>
               <span className="team-tag">Ästhetik</span>
-              <span className="team-tag">Vorsorge</span>
+              <span className="team-tag">Implantate</span>
+              <span className="team-tag">Zahnerhaltung</span>
             </div>
-            <p className="team-bio">Seit über 20 Jahren begleitet sie Patient:innen — von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.</p>
+            <p className="team-bio">Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.</p>
             <div className="team-actions">
               <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Hancock-Diener</button>
               <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
@@ -187,11 +206,11 @@ const Team = ({ onOpenTermin }) => (
             <h3 className="team-name">Dr. Irene Jahn</h3>
             <p className="team-role">Zahnärztin</p>
             <div className="team-tags">
+              <span className="team-tag">Ästhetik</span>
               <span className="team-tag">Zahnerhaltung</span>
-              <span className="team-tag">Vorsorge</span>
-              <span className="team-tag">Schmerzbehandlung</span>
+              <span className="team-tag">Angstpatienten</span>
             </div>
-            <p className="team-bio">Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung — gerade bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.</p>
+            <p className="team-bio">Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung, besonders bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.</p>
             <div className="team-actions">
               <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Jahn</button>
               <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
@@ -201,7 +220,8 @@ const Team = ({ onOpenTermin }) => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 window.Hero = Hero;
 window.TrustBar = TrustBar;

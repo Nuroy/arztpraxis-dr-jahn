@@ -7,14 +7,14 @@ const CATEGORIES = [
     num: "01",
     eyebrow: "Vorsorge & Erhaltung",
     title: "Prophylaxe & Zahnerhaltung",
-    intro: "Vorsorge ist die beste Medizin. Mit professioneller Reinigung, gezielter Parodontologie und schonender Wurzelbehandlung erhalten wir Ihre eigenen Zähne — ein Leben lang.",
+    intro: "Vorsorge ist die beste Medizin. Mit professioneller Reinigung, gezielter Parodontologie und schonender Wurzelbehandlung erhalten wir Ihre eigenen Zähne, ein Leben lang.",
     duration: "30–90 Min.",
     coverage: "Gesetzlich + privat",
     image: "assets/praxis-behandlung.jpg",
     featured: {
       slug: "zahnerhaltung-prophylaxe",
       title: "Zahnerhaltung / Prophylaxe",
-      desc: "Die professionelle Zahnreinigung ist die Basis Ihrer Zahngesundheit. Wir entfernen Beläge, dort wo die häusliche Pflege nicht hinkommt — sanft, gründlich und mit Zeit.",
+      desc: "Die professionelle Zahnreinigung ist die Basis Ihrer Zahngesundheit. Wir entfernen Beläge, dort wo die häusliche Pflege nicht hinkommt, sanft, gründlich und mit Zeit.",
       checks: [
         "Untersuchung und Befundung der Mundhöhle",
         "Entfernung von Zahnstein und Verfärbungen",
@@ -23,7 +23,7 @@ const CATEGORIES = [
       ]
     },
     subs: [
-      { slug: "parodontologie", icon: "shield", title: "Parodontologie", desc: "Behandlung von entzündetem Zahnfleisch und Zahnfleisch-Taschen — in zwei Phasen, schonend und gezielt." },
+      { slug: "parodontologie", icon: "shield", title: "Parodontologie", desc: "Behandlung von entzündetem Zahnfleisch und Zahnfleisch-Taschen, in zwei Phasen, schonend und gezielt." },
       { slug: "endodontologie", icon: "shield-tooth", title: "Endodontologie", desc: "Wurzelbehandlung mit modernen Verfahren. Heute fast immer schmerzarm und in den meisten Fällen erfolgreich." }
     ]
   },
@@ -32,23 +32,23 @@ const CATEGORIES = [
     num: "02",
     eyebrow: "Form & Funktion",
     title: "Ästhetik",
-    intro: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen — natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
+    intro: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen, natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
     duration: "60–180 Min.",
     coverage: "Privatleistung",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&q=80&auto=format&fit=crop",
     featured: {
       slug: "aesthetik-funktion",
       title: "Ästhetik und Funktion",
-      desc: "Ästhetik beginnt mit Funktion. Wir korrigieren mit Veneers, Kronen oder Composite-Bonding — immer im Einklang mit Ihrem Biss, Ihrer Sprache und Ihrer natürlichen Mimik.",
+      desc: "Ästhetik beginnt mit Funktion. Wir korrigieren mit Veneers, Kronen oder Composite-Bonding, immer im Einklang mit Ihrem Biss, Ihrer Sprache und Ihrer natürlichen Mimik.",
       checks: [
-        "Beratung und digitale Vorab-Visualisierung",
+        "Beratung und gemeinsame Zielplanung",
         "Veneers aus Keramik oder Composite",
         "Form- und Farbkorrekturen",
         "Meisterlabor-gefertigte Präzisions-Arbeiten"
       ]
     },
     subs: [
-      { slug: "bleaching", icon: "sparkle", title: "Bleaching", desc: "Sanfte Aufhellung Ihrer Zähne — als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause." }
+      { slug: "bleaching", icon: "sparkle", title: "Bleaching", desc: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause." }
     ]
   },
   {
@@ -56,23 +56,23 @@ const CATEGORIES = [
     num: "03",
     eyebrow: "Zahnersatz & Eingriffe",
     title: "Implantologie & Chirurgie",
-    intro: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe — mit 3D-Diagnostik, computer-gestützter Planung und mikrochirurgischen Verfahren.",
+    intro: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe mit digitaler Diagnostik, computer-gestützter Planung und mikrochirurgischen Verfahren.",
     duration: "60 Min. – mehrere Sitzungen",
     coverage: "Privatleistung + Festzuschuss",
     image: "assets/praxis-behandlung-detail.jpg",
     featured: {
       slug: "implantologie",
       title: "Implantologie",
-      desc: "Implantate ersetzen Zähne wie eigene. Aus Titan oder Keramik, mit individuell gefertigter Krone aus dem Meisterlabor — ein Ergebnis, das Jahrzehnte halten kann.",
+      desc: "Implantate ersetzen Zähne wie eigene. Aus Titan oder Keramik, mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
       checks: [
-        "3D-Diagnostik und Planung",
+        "Digitale Diagnostik und Planung",
         "Schonendes Einsetzen unter lokaler Betäubung",
         "Versorgung mit Krone, Brücke oder Prothese",
         "Lebensdauer typischerweise 20+ Jahre"
       ]
     },
     subs: [
-      { slug: "oralchirurgie", icon: "implant", title: "Oralchirurgie / Kieferchirurgie", desc: "Weisheitszähne, Wurzelspitzenresektion, Knochenaufbau — schonende Verfahren mit kurzer Heilungszeit." }
+      { slug: "oralchirurgie", icon: "implant", title: "Oralchirurgie / Kieferchirurgie", desc: "Weisheitszähne, Wurzelspitzenresektion, Knochenaufbau: schonende Verfahren mit kurzer Heilungszeit." }
     ]
   },
   {
@@ -80,14 +80,14 @@ const CATEGORIES = [
     num: "04",
     eyebrow: "Schienen & Korrektur",
     title: "Schienentherapie",
-    intro: "Knirschen, Schnarchen, Migräne, schiefe Zähne — moderne Schienen können viele Probleme sanft lösen. Jede Schiene wird individuell für Sie angefertigt.",
+    intro: "Knirschen, Schnarchen, Migräne, schiefe Zähne: moderne Schienen können viele Probleme sanft lösen. Jede Schiene wird individuell für Sie angefertigt.",
     duration: "Beratung 30 Min., Anpassung 1–2 Termine",
     coverage: "Teilweise Kassenleistung",
     image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1400&q=80&auto=format&fit=crop",
     featured: {
       slug: "schienentherapie",
       title: "Schienentherapie",
-      desc: "Bruxismus — das nächtliche Knirschen — schadet Zähnen und Kiefergelenk. Eine individuell angepasste Knirsch-Schiene schützt zuverlässig und entlastet die Muskulatur.",
+      desc: "Bruxismus, das nächtliche Knirschen, schadet Zähnen und Kiefergelenk. Eine individuell angepasste Knirsch-Schiene schützt zuverlässig und entlastet die Muskulatur.",
       checks: [
         "Funktionsdiagnostik und Bissanalyse",
         "Individuelle Anfertigung im Meisterlabor",
@@ -96,9 +96,9 @@ const CATEGORIES = [
       ]
     },
     subs: [
-      { slug: "schnarchschienen", icon: "moon", title: "Schnarchschienen", desc: "Sanfte Vorverlagerung des Unterkiefers während des Schlafs — wirksam bei leichter bis mittlerer Schlafapnoe." },
-      { slug: "nti-aufbiss-schienen", icon: "shield", title: "NTI Aufbiss-Schienen", desc: "Kleine Aufbiss-Schiene gegen Spannungs-Kopfschmerz und Migräne — entlastet die Kaumuskulatur gezielt." },
-      { slug: "zahnkorrektur-schienen", icon: "sparkle", title: "Zahnkorrektur Schienen", desc: "Unsichtbare Aligner für sanfte Zahnkorrektur — herausnehmbar, transparent, alltagstauglich." }
+      { slug: "schnarchschienen", icon: "moon", title: "Schnarchschienen", desc: "Sanfte Vorverlagerung des Unterkiefers während des Schlafs, wirksam bei leichter bis mittlerer Schlafapnoe." },
+      { slug: "nti-aufbiss-schienen", icon: "shield", title: "NTI Aufbiss-Schienen", desc: "Kleine Aufbiss-Schiene gegen Spannungs-Kopfschmerz und Migräne. Sie entlastet die Kaumuskulatur gezielt." },
+      { slug: "zahnkorrektur-schienen", icon: "sparkle", title: "Zahnkorrektur Schienen", desc: "Unsichtbare Aligner für sanfte Zahnkorrektur: herausnehmbar, transparent, alltagstauglich." }
     ]
   },
   {
@@ -106,7 +106,7 @@ const CATEGORIES = [
     num: "05",
     eyebrow: "Für die Kleinen",
     title: "Kinderzahnheilkunde",
-    intro: "Ein guter erster Eindruck wirkt ein Leben lang. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen — schon ab dem ersten Zahn.",
+    intro: "Ein guter erster Eindruck wirkt ein Leben lang. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.",
     duration: "30–45 Min.",
     coverage: "Vollständig Kassenleistung",
     image: "https://images.unsplash.com/photo-1581585504013-9eb45c4d8f63?w=1400&q=80&auto=format&fit=crop",
@@ -128,19 +128,19 @@ const CATEGORIES = [
     num: "06",
     eyebrow: "Mit Verständnis",
     title: "Hilfe bei Zahnarztangst",
-    intro: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst — und behandeln in Ihrem Tempo.",
+    intro: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
     duration: "Erstgespräch ohne Behandlung möglich",
     coverage: "Reguläre Kassenleistung",
     image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1400&q=80&auto=format&fit=crop",
     featured: {
       slug: "zahnarztangst",
       title: "Hilfe bei Zahnarztangst",
-      desc: "Wir beginnen mit einem Erstgespräch — ohne Behandlung, ohne Druck. Sie zeigen uns, wie weit wir gehen dürfen. Pausen-Signal jederzeit. Keine Überraschungen.",
+      desc: "Wir beginnen mit einem Erstgespräch, ohne Behandlung, ohne Druck. Sie zeigen uns, wie weit wir gehen dürfen. Pausen-Signal jederzeit. Keine Überraschungen.",
       checks: [
         "Erstgespräch ausschließlich zum Kennenlernen",
         "Schritt-für-Schritt-Ankündigung jeder Behandlung",
-        "Vereinbartes Pausen-Signal — Sie haben die Kontrolle",
-        "Auf Wunsch Entspannungsverfahren oder Lachgas"
+        "Vereinbartes Vereinbartes Pausen-Signal: Sie haben die Kontrolle",
+        "Auf Wunsch Entspannungsverfahren oder leichte Sedierung"
       ]
     },
     subs: []
@@ -164,8 +164,8 @@ const ALL_LEISTUNGEN_INDEX = [
 ];
 
 const APPROACH_STEPS = [
-  { num: "01", title: "Erstgespräch & Diagnose", desc: "Wir nehmen uns Zeit — hören zu, untersuchen, klären auf. Ohne Druck, ohne vorgefertigte Behandlungspläne." },
-  { num: "02", title: "Beratung & Heil-/Kostenplan", desc: "Sie bekommen einen verständlichen, transparenten Plan. Mit allen Optionen, Risiken und Kosten — schriftlich." },
+  { num: "01", title: "Erstgespräch & Diagnose", desc: "Wir nehmen uns Zeit, hören zu, untersuchen, klären auf. Ohne Druck, ohne vorgefertigte Behandlungspläne." },
+  { num: "02", title: "Beratung & Heil-/Kostenplan", desc: "Sie bekommen einen verständlichen, transparenten Plan. Mit allen Optionen, Risiken und Kosten, schriftlich." },
   { num: "03", title: "Behandlung in Ihrem Tempo", desc: "Wir behandeln so sanft wie möglich, so gründlich wie nötig. Pausen sind jederzeit möglich. Sie behalten die Kontrolle." },
   { num: "04", title: "Nachsorge & Kontrolle", desc: "Nach der Behandlung bleiben wir an Ihrer Seite. Kontrolltermine, Recall-System und schnelle Hilfe bei Fragen." }
 ];
@@ -276,7 +276,7 @@ const LeistungenApp = () => {
               <div className="eyebrow">Unsere Leistungen</div>
               <h1 className="display-2xl">Zahnmedizin in <em className="italic-accent">ihrer ganzen Breite</em>.</h1>
               <p className="body-xl" style={{color:'var(--text-secondary)', marginTop:'24px', maxWidth:'56ch'}}>
-                Von der ersten Vorsorge bis zur hochpräzisen Implantologie — alles unter einem Dach. 13 Behandlungsbereiche, sechs Schwerpunkte, ein Anspruch: Ihre Zähne so lange wie möglich gesund erhalten.
+                Von der ersten Vorsorge bis zur hochpräzisen Implantologie, alles unter einem Dach. 13 Behandlungsbereiche, sechs Schwerpunkte, ein Anspruch: Ihre Zähne so lange wie möglich gesund erhalten.
               </p>
             </div>
             <div>
@@ -304,7 +304,7 @@ const LeistungenApp = () => {
             <div>
               <div className="eyebrow">Unser Vorgehen</div>
               <h2 className="display-lg">Vier Schritte. <em className="italic-accent" style={{color:'#9CC4A1'}}>Immer.</em></h2>
-              <p style={{color:'#C9D5CB', marginTop:'24px', maxWidth:'40ch'}}>Egal, ob Routine-Kontrolle oder mehrjähriger Behandlungsplan — wir folgen demselben Prinzip: Verstehen, Aufklären, Behandeln, Begleiten.</p>
+              <p style={{color:'#C9D5CB', marginTop:'24px', maxWidth:'40ch'}}>Egal, ob Routine-Kontrolle oder mehrjähriger Behandlungsplan, wir folgen demselben Prinzip: Verstehen, Aufklären, Behandeln, Begleiten.</p>
             </div>
             <div className="approach-steps">
               {APPROACH_STEPS.map((s, i) => (
@@ -326,7 +326,7 @@ const LeistungenApp = () => {
           <div className="leistungen-cta">
             <div className="eyebrow">Termin vereinbaren</div>
             <h2 className="display-lg" style={{marginTop:'12px'}}>Sie wissen nicht, <em className="italic-accent">was Sie brauchen?</em></h2>
-            <p className="body-lg">Kein Problem. Kommen Sie zu einem unverbindlichen Erstgespräch — wir hören zu, schauen uns Ihre Zähne an und beraten Sie ehrlich. Ohne Vorab-Diagnose, ohne Druck.</p>
+            <p className="body-lg">Kein Problem. Kommen Sie zu einem unverbindlichen Erstgespräch, wir hören zu, schauen uns Ihre Zähne an und beraten Sie ehrlich. Ohne Vorab-Diagnose, ohne Druck.</p>
             <div className="btn-row">
               <button className="btn btn-primary" onClick={() => setTerminOpen(true)}>
                 Termin vereinbaren <Icon name="arrow-right" size={16} className="btn-arrow"/>

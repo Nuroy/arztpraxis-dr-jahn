@@ -59,6 +59,9 @@ const Header = ({ onOpenTermin }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef(null);
+  const [kontaktOpen, setKontaktOpen] = useState(false);
+  const kontaktTimer = useRef(null);
+  const [mobileKontaktOpen, setMobileKontaktOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -69,15 +72,19 @@ const Header = ({ onOpenTermin }) => {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) setMobileKontaktOpen(false);
   }, [mobileOpen]);
 
   const openDrop = () => { clearTimeout(closeTimer.current); setDropdownOpen(true); };
   const closeDrop = () => { closeTimer.current = setTimeout(() => setDropdownOpen(false), 150); };
+  const openKontakt = () => { clearTimeout(kontaktTimer.current); setKontaktOpen(true); };
+  const closeKontakt = () => { kontaktTimer.current = setTimeout(() => setKontaktOpen(false), 150); };
 
   const smooth = (id) => (e) => {
     e.preventDefault();
     setMobileOpen(false);
     setDropdownOpen(false);
+    setKontaktOpen(false);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -123,7 +130,48 @@ const Header = ({ onOpenTermin }) => {
             </div>
             <a href="team.html" className="nav-item">Team</a>
             <a href="#ueber" className="nav-item" onClick={smooth("ueber")}>Über uns</a>
-            <a href="#standort" className="nav-item" onClick={smooth("standort")}>Kontakt</a>
+            <div onMouseEnter={openKontakt} onMouseLeave={closeKontakt} style={{ position: "relative" }}>
+              <a href="#standort" className={`nav-item ${kontaktOpen ? "open" : ""}`} aria-expanded={kontaktOpen} onClick={smooth("standort")}>
+                Kontakt <Icon name="chevron-down" size={16} className="chev" />
+              </a>
+              <div className={`dropdown dropdown-contact ${kontaktOpen ? "open" : ""}`} role="menu">
+                <a href="#termin" className="dropdown-item" onClick={(e) => { e.preventDefault(); setKontaktOpen(false); onOpenTermin(); }}>
+                  <div className="icon-box"><Icon name="calendar" size={20} /></div>
+                  <div>
+                    <div className="item-title">Termin buchen</div>
+                    <div className="item-desc">Online-Terminanfrage stellen</div>
+                  </div>
+                </a>
+                <a href="neupatienten.html" className="dropdown-item">
+                  <div className="icon-box"><Icon name="user" size={20} /></div>
+                  <div>
+                    <div className="item-title">Neupatienten</div>
+                    <div className="item-desc">Anmeldebogen & Infos für Ihren ersten Besuch</div>
+                  </div>
+                </a>
+                <a href="#standort" className="dropdown-item" onClick={smooth("standort")}>
+                  <div className="icon-box"><Icon name="pin" size={20} /></div>
+                  <div>
+                    <div className="item-title">Standort &amp; Anfahrt</div>
+                    <div className="item-desc">Friedrichstraße 33, 80801 München</div>
+                  </div>
+                </a>
+                <a href="tel:+498938808687" className="dropdown-item">
+                  <div className="icon-box"><Icon name="phone" size={20} /></div>
+                  <div>
+                    <div className="item-title">Dr. Jahn</div>
+                    <div className="item-desc">089 38 80 86 87</div>
+                  </div>
+                </a>
+                <a href="tel:+498938889500" className="dropdown-item">
+                  <div className="icon-box"><Icon name="phone" size={20} /></div>
+                  <div>
+                    <div className="item-title">Dr. Hancock-Diener</div>
+                    <div className="item-desc">089 38 88 95 00</div>
+                  </div>
+                </a>
+              </div>
+            </div>
           </nav>
 
           <div className="header-right">
@@ -142,7 +190,19 @@ const Header = ({ onOpenTermin }) => {
         <a href="leistungen.html">Leistungen</a>
         <a href="team.html">Team</a>
         <a href="#ueber" onClick={smooth("ueber")}>Über uns</a>
-        <a href="#standort" onClick={smooth("standort")}>Kontakt</a>
+        <div className="mobile-dropdown-group">
+          <button className="mobile-dropdown-trigger" onClick={() => setMobileKontaktOpen(!mobileKontaktOpen)}>
+            Kontakt <Icon name="chevron-down" size={20} className={`chev ${mobileKontaktOpen ? "open" : ""}`} />
+          </button>
+          {mobileKontaktOpen && (
+            <div className="mobile-sub-links">
+              <a href="#termin" onClick={(e) => { e.preventDefault(); setMobileOpen(false); onOpenTermin(); }}>Termin buchen</a>
+              <a href="neupatienten.html">Neupatienten</a>
+              <a href="#standort" onClick={smooth("standort")}>Standort &amp; Anfahrt</a>
+              <a href="tel:+498938808687">Telefon</a>
+            </div>
+          )}
+        </div>
         <a href="#faq" onClick={smooth("faq")}>FAQ</a>
         <button className="btn btn-primary mobile-cta" onClick={() => { setMobileOpen(false); onOpenTermin(); }}>
           Termin vereinbaren <Icon name="arrow-right" size={16} className="btn-arrow" />

@@ -1,26 +1,26 @@
 /* Design tokens — Zahnarztpraxis Schwabing */
 :root {
   /* Backgrounds */
-  --bg-canvas: #F4F1EA;
+  --bg-canvas: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #FAF8F3;
+  --bg-subtle: #EDF5ED;
   --bg-emphasis: #1F3A28;
 
   /* Brand */
-  --brand-primary: #2E7D40;
-  --brand-primary-hover: #266B36;
+  --brand-primary: #3A9D50;
+  --brand-primary-hover: #2F8A43;
   --brand-soft: #E7EFE6;
   --brand-deep: #1F3A28;
 
   /* Text */
   --text-primary: #161616;
   --text-secondary: #5C5C5C;
-  --text-muted: #8A8A85;
-  --text-on-dark: #F4F1EA;
+  --text-muted: #8A8A8A;
+  --text-on-dark: #FFFFFF;
 
   /* Borders */
-  --border-subtle: #E8E4DB;
-  --border-strong: #CFC9BD;
+  --border-subtle: #E5E5E5;
+  --border-strong: #CCCCCC;
 
   /* Accent */
   --accent-warning: #B85C2E;

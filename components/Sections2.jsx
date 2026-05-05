@@ -1,43 +1,42 @@
 // Tech Spotlight (3D-ish tooth), Testimonials, Termin CTA, Standort, FAQ, Footer
 const { useState: useS3, useEffect: useE3 } = React;
 
-// ----- 3D-ish rotating tooth (CSS-driven, not WebGL) -----
-const ToothModel = () => (
+// ----- Scan visual (bold tooth outline + scan-line animation) -----
+const ScanVisual = () => (
   <div className="tech-3d">
-    <span className="tech-tag t1">3D-Diagnostik</span>
+    <span className="tech-tag t1">Intraoraler 3D-Scanner</span>
     <span className="tech-tag t2">Digitales Röntgen</span>
-    <div className="tooth-stage">
-      <svg className="tooth-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="toothG" cx="40%" cy="35%" r="70%">
-            <stop offset="0%" stopColor="#FFFFFF"/>
-            <stop offset="55%" stopColor="#F4EFE2"/>
-            <stop offset="100%" stopColor="#C9BFA6"/>
-          </radialGradient>
-          <radialGradient id="toothShade" cx="60%" cy="60%" r="60%">
-            <stop offset="0%" stopColor="rgba(0,0,0,0)"/>
-            <stop offset="100%" stopColor="rgba(31,58,40,0.35)"/>
-          </radialGradient>
-          <linearGradient id="rootG" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#E8DFC8"/>
-            <stop offset="100%" stopColor="#A89878"/>
-          </linearGradient>
-        </defs>
-        {/* root left */}
-        <path d="M70 130 Q 60 180 75 220 Q 85 230 95 220 Q 95 180 95 140 Z" fill="url(#rootG)"/>
-        {/* root right */}
-        <path d="M130 130 Q 140 180 125 220 Q 115 230 105 220 Q 105 180 105 140 Z" fill="url(#rootG)"/>
-        {/* crown */}
-        <path d="M50 70 Q 55 30 100 25 Q 145 30 150 70 Q 155 110 140 135 Q 120 145 100 140 Q 80 145 60 135 Q 45 110 50 70 Z" fill="url(#toothG)"/>
-        <path d="M50 70 Q 55 30 100 25 Q 145 30 150 70 Q 155 110 140 135 Q 120 145 100 140 Q 80 145 60 135 Q 45 110 50 70 Z" fill="url(#toothShade)"/>
-        {/* highlight */}
-        <ellipse cx="78" cy="55" rx="12" ry="22" fill="rgba(255,255,255,0.6)"/>
-        <ellipse cx="82" cy="50" rx="4" ry="8" fill="rgba(255,255,255,0.9)"/>
+    <div className="scan-visual">
+      <div className="scan-glow"></div>
+      <svg className="scan-tooth" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+        {/* Tooth outline traced from PNG icon */}
+        <path d="
+          M 78 68
+          C 60 68, 30 82, 28 120
+          C 26 150, 38 178, 52 206
+          C 60 222, 68 240, 76 248
+          C 80 252, 84 250, 86 244
+          C 90 232, 92 216, 94 200
+          C 95 190, 98 184, 100 182
+          C 102 184, 105 190, 106 200
+          C 108 216, 110 232, 114 244
+          C 116 250, 120 252, 124 248
+          C 132 240, 140 222, 148 206
+          C 162 178, 174 150, 172 120
+          C 170 82, 140 68, 122 68
+          C 112 68, 106 74, 100 80
+          C 94 74, 88 68, 78 68
+          Z
+        " fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
+        {/* Decorative notch/sparkle on upper-left crown */}
+        <path d="
+          M 78 68
+          C 78 68, 72 58, 66 62
+          C 58 68, 62 80, 68 84
+        " fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
       </svg>
+      <div className="scan-line"></div>
     </div>
-    <span className="tech-3d-hotspot h1" title="Zahnschmelz"></span>
-    <span className="tech-3d-hotspot h2" title="Pulpa"></span>
-    <span className="tech-3d-hotspot h3" title="Wurzel"></span>
   </div>
 );
 
@@ -48,7 +47,7 @@ const TechSpotlight = () => (
         <div>
           <div className="eyebrow">Moderne Zahnheilkunde</div>
           <h2 className="display-lg">Präzision, die man <em className="italic-accent" style={{color:'#9CC4A1'}}>sehen</em> kann.</h2>
-          <p className="body-lg" style={{marginTop:'24px'}}>Moderne Zahnmedizin ist heute deutlich mehr als Bohren und Füllen. Mit digitaler Diagnostik, präzisen 3D-Aufnahmen und enger Zusammenarbeit mit zahntechnischen Meisterlaboren erreichen wir Ergebnisse, die noch vor wenigen Jahren undenkbar waren.</p>
+          <p className="body-lg" style={{marginTop:'24px'}}>Moderne Zahnmedizin ist heute deutlich mehr als Bohren und Füllen. Mit digitaler Diagnostik, präzisen intraoralen 3D-Aufnahmen und enger Zusammenarbeit mit zahntechnischen Meisterlaboren erreichen wir Ergebnisse, die noch vor wenigen Jahren undenkbar waren.</p>
           <ul className="tech-bullets">
             <li><Icon name="check" size={20}/><span>Digitales Röntgen für minimale Strahlenbelastung</span></li>
             <li><Icon name="check" size={20}/><span>3D-Scans für präzise Diagnose und Planung</span></li>
@@ -56,7 +55,7 @@ const TechSpotlight = () => (
           </ul>
           <a href="leistungen.html" className="btn-tertiary" style={{color:'#9CC4A1'}}>Unsere Leistungen ansehen <Icon name="arrow-right" size={14} className="btn-arrow"/></a>
         </div>
-        <ToothModel/>
+        <ScanVisual/>
       </div>
     </div>
   </section>
@@ -64,7 +63,7 @@ const TechSpotlight = () => (
 
 // ----- Testimonials -----
 const TESTI = [
-  { quote: "Endlich eine Praxis, in der man sich wirklich Zeit nimmt. Frau Dr. Jahn hat mir alles geduldig erklärt — ich gehe zum ersten Mal gerne zum Zahnarzt.", author: "Sabine M.", meta: "Patientin seit 2019" },
+  { quote: "Endlich eine Praxis, in der man sich wirklich Zeit nimmt. Frau Dr. Jahn hat mir alles geduldig erklärt, ich gehe zum ersten Mal gerne zum Zahnarzt.", author: "Sabine M.", meta: "Patientin seit 2019" },
   { quote: "Sehr professionell, sehr menschlich. Die Behandlung war absolut schmerzfrei, das Ergebnis übertrifft meine Erwartungen.", author: "Markus K.", meta: "Patient seit 2021" },
   { quote: "Ich war ein klassischer Angstpatient. Hier habe ich gelernt, dass es auch anders geht. Vielen Dank an das gesamte Team.", author: "Julia R.", meta: "über Google" },
 ];
@@ -108,7 +107,7 @@ const Testimonials = () => (
 );
 
 // ----- Booking calendar — up to 3 Wunschtermine, real month navigation, mailto: submission -----
-const PRAXIS_EMAIL = "IHRE-EMAIL@HIER-EINTRAGEN.de"; // TODO: echte E-Mail-Adresse eintragen
+const PRAXIS_EMAIL = "empfang@zahnarztpraxis-schwabing.de";
 const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const WDAYS = ["So","Mo","Di","Mi","Do","Fr","Sa"];
 
@@ -172,7 +171,7 @@ const CalendarBooking = () => {
     if (!phone.trim()) { setError("Bitte geben Sie Ihre Telefonnummer ein."); return; }
     const dn = doctor==="hancock" ? "Dr. Hancock-Diener" : "Dr. Jahn";
     const lines = slots.map((s,i) => `  Wunschtermin ${i+1}: ${fmtSlot(s)}`).join('\n');
-    const subject = encodeURIComponent(`Terminanfrage – ${name.trim()} – ${dn}`);
+    const subject = encodeURIComponent(`Terminanfrage von ${name.trim()} bei ${dn}`);
     const body = encodeURIComponent(
       `Neue Terminanfrage über die Website\n\nName: ${name.trim()}\nTelefon: ${phone.trim()}\nGewünschte Ärztin: ${dn}\n\n${lines}\n\nBitte kontaktieren Sie den/die Patient:in telefonisch zur Terminbestätigung.`
     );
@@ -276,7 +275,7 @@ const CalendarBooking = () => {
 
           {slots.length > 0 && slots.length < 3 && !selDate && (
             <p className="cal-hint" style={{color:'var(--brand-primary)'}}>
-              <Icon name="plus" size={14}/> Noch {3-slots.length} Wunschtermin{3-slots.length>1?'e':''} möglich — wählen Sie ein weiteres Datum.
+              <Icon name="plus" size={14}/> Noch {3-slots.length} Wunschtermin{3-slots.length>1?'e':''} möglich. Wählen Sie ein weiteres Datum.
             </p>
           )}
         </>
@@ -310,7 +309,7 @@ const TerminCTA = ({ onOpenTermin }) => {
             <div>
               <div className="eyebrow">Termin vereinbaren</div>
               <h2 className="display-lg">Bereit für Ihr <em className="italic-accent" style={{color:'#9CC4A1'}}>schönstes Lächeln</em>?</h2>
-              <p className="body-lg lead">Wählen Sie Ihren Wunschtermin — wir rufen Sie zurück und bestätigen. Oder erreichen Sie uns direkt telefonisch.</p>
+              <p className="body-lg lead">Wählen Sie Ihren Wunschtermin, wir rufen Sie zurück und bestätigen. Oder erreichen Sie uns direkt telefonisch.</p>
               <div style={{display:'flex',gap:'24px',alignItems:'center',color:'#C9D5CB',fontSize:'14px',flexWrap:'wrap'}}>
                 <div style={{display:'inline-flex',alignItems:'center',gap:'8px'}}>
                   <Icon name="clock" size={18}/> Mo–Do 8–18 Uhr · Fr 8–16 Uhr
@@ -347,7 +346,7 @@ const TerminCTA = ({ onOpenTermin }) => {
                   </a>
                   <div className="notfall-box">
                     <Icon name="alert" size={20}/>
-                    <span>Außerhalb der Sprechzeiten: <strong>Notdienst 089 72 33 093</strong></span>
+                    <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong>01805 908008</strong> (14 Ct/Min.)</span>
                   </div>
                 </div>
               )}
@@ -445,11 +444,12 @@ const Standort = () => (
                 <span className="day">Fr</span><span className="time">8 – 16 Uhr</span>
                 <span className="day">Sa, So</span><span className="time" style={{color:'var(--text-muted)'}}>geschlossen</span>
               </div>
+              <p style={{fontSize:'13px', color:'var(--text-muted)', marginTop:'8px'}}>Abweichungen im Einzelfall möglich.</p>
             </div>
           </div>
           <div className="info-block">
             <div className="info-label">Anfahrt</div>
-            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>U3/U6 Münchner Freiheit — ca. 10 Min. Fußweg.</div>
+            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>U3/U6 Münchner Freiheit, ca. 10 Min. Fußweg.</div>
           </div>
           <div className="info-block">
             <div className="info-label">Telefon</div>
@@ -466,12 +466,12 @@ const Standort = () => (
 
 // ----- FAQ -----
 const FAQS = [
-  { q: "Wie vereinbare ich einen Termin?", a: "Wählen Sie online Ihren Wunschtermin — wir rufen Sie anschließend zurück, um den Termin zu bestätigen. Alternativ erreichen Sie uns telefonisch zu unseren Sprechzeiten unter den Direktnummern beider Ärztinnen." },
-  { q: "Was sollte ich zum ersten Termin mitbringen?", a: "Versicherungskarte, Bonusheft (falls vorhanden), frühere Röntgenbilder, eine Liste aktueller Medikamente und gegebenenfalls Ihren Allergie-Pass. Bei Kindern bitte das Kinder-Untersuchungsheft." },
+  { q: "Wie vereinbare ich einen Termin?", a: "Wählen Sie online Ihren Wunschtermin, wir rufen Sie anschließend zurück, um den Termin zu bestätigen. Alternativ erreichen Sie uns telefonisch zu unseren Sprechzeiten unter den Direktnummern beider Ärztinnen." },
+  { q: "Was sollte ich zum ersten Termin mitbringen?", a: "Versicherungskarte, Bonusheft (falls vorhanden), frühere Röntgenbilder (vorab mailen oder den Arztkontakt bereithalten), eine Liste aktueller Medikamente und gegebenenfalls Ihren Allergie-Pass. Bei Kindern bitte das Kinder-Untersuchungsheft." },
   { q: "Welche Krankenkassen werden akzeptiert?", a: "Wir behandeln gesetzlich und privat versicherte Patient:innen sowie Selbstzahler. Bei Privatleistungen erstellen wir Ihnen vorab einen transparenten Heil- und Kostenplan." },
   { q: "Wie lange dauert eine professionelle Zahnreinigung?", a: "Eine PZR dauert in der Regel 45 bis 60 Minuten. Inklusive Beratung, Reinigung schwer zugänglicher Stellen, Politur und Fluoridierung." },
-  { q: "Behandeln Sie auch Angstpatienten?", a: "Ja — und das ist uns besonders wichtig. Wir nehmen uns Zeit, beginnen mit einem Erstgespräch ohne Behandlung und stimmen jeden weiteren Schritt mit Ihnen ab." },
-  { q: "Was passiert bei einem Notfall außerhalb der Sprechzeiten?", a: "Wenden Sie sich an den zahnärztlichen Notdienst Bayern unter 089 72 33 093. Der Notdienst ist rund um die Uhr erreichbar." },
+  { q: "Behandeln Sie auch Angstpatienten?", a: "Ja, und das ist uns besonders wichtig. Wir nehmen uns Zeit, beginnen mit einem Erstgespräch ohne Behandlung und stimmen jeden weiteren Schritt mit Ihnen ab." },
+  { q: "Was passiert bei einem Notfall außerhalb der Sprechzeiten?", a: "Wenden Sie sich an den zahnärztlichen Notdienst unter www.notdienst-zahn.de oder telefonisch unter 01805 908008 (14 Ct/Min.). Der Notdienst ist rund um die Uhr erreichbar." },
 ];
 const FAQ = () => {
   const [open, setOpen] = useS3(0);
@@ -522,7 +522,7 @@ const Footer = () => (
             <li><a href="#ueber">Über uns</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="#">Praxis-Tour</a></li>
-            <li><a href="#">Neupatienten</a></li>
+            <li><a href="neupatienten.html">Neupatienten</a></li>
           </ul>
         </div>
         <div className="footer-col">
@@ -542,8 +542,8 @@ const Footer = () => (
           <ul>
             <li><a href="tel:+498938808687" className="font-mono">089 38 80 86 87</a></li>
             <li><a href="tel:+498938889500" className="font-mono">089 38 88 95 00</a></li>
-            <li><a href="mailto:kontakt@zahnarztpraxis-schwabing.de">E-Mail</a></li>
-            <li><a href="#" style={{color:'var(--accent-warning)'}}>Notfall: 089 72 33 093</a></li>
+            <li><a href="mailto:empfang@zahnarztpraxis-schwabing.de">E-Mail</a></li>
+            <li><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>Notdienst: 01805 908008</a></li>
           </ul>
         </div>
       </div>
@@ -574,7 +574,7 @@ const TerminModal = ({ open, onClose }) => {
         <button className="modal-close" onClick={onClose} aria-label="Schließen"><Icon name="x" size={18}/></button>
         <div className="modal-header">
           <h3>Wunschtermin anfragen</h3>
-          <p>Wählen Sie Ihren Wunschtermin — wir rufen Sie zur Bestätigung zurück.</p>
+          <p>Wählen Sie Ihren Wunschtermin, wir rufen Sie zur Bestätigung zurück.</p>
           <div className="booking-tabs">
             <button className={`booking-tab ${tab === "online" ? "active" : ""}`} onClick={() => setTab("online")}>Wunschtermin</button>
             <button className={`booking-tab ${tab === "call" ? "active" : ""}`} onClick={() => setTab("call")}>Anrufen</button>
@@ -601,7 +601,7 @@ const TerminModal = ({ open, onClose }) => {
               </a>
               <div className="notfall-box">
                 <Icon name="alert" size={20}/>
-                <span>Außerhalb der Sprechzeiten: <strong>Notdienst 089 72 33 093</strong></span>
+                <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong>01805 908008</strong> (14 Ct/Min.)</span>
               </div>
             </div>
           )}

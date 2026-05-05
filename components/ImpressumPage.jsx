@@ -21,7 +21,7 @@ const ImpressumPage = () => {
               <p>D-80801 München</p>
               <p style={{marginTop: '12px'}}>Tel. (+49) 089 / 38 88 95 00</p>
               <p>Fax (+49) 089 / 38 88 89 84</p>
-              <p style={{marginTop: '8px'}}>E-Mail: <a href="mailto:praxis@dr-hancock.de">praxis@dr-hancock.de</a></p>
+              <p style={{marginTop: '8px'}}>E-Mail: <a href="mailto:empfang@zahnarztpraxis-schwabing.de">empfang@zahnarztpraxis-schwabing.de</a></p>
             </div>
 
             <div className="legal-contact-block">
@@ -31,7 +31,7 @@ const ImpressumPage = () => {
               <p>D-80801 München</p>
               <p style={{marginTop: '12px'}}>Tel. (+49) 089 / 38 80 86 87</p>
               <p>Fax (+49) 089 / 38 88 89 84</p>
-              <p style={{marginTop: '8px'}}>E-Mail: <a href="mailto:dr-jahn@zahnarztpraxis-schwabing.de">dr-jahn@zahnarztpraxis-schwabing.de</a></p>
+              <p style={{marginTop: '8px'}}>E-Mail: <a href="mailto:empfang@zahnarztpraxis-schwabing.de">empfang@zahnarztpraxis-schwabing.de</a></p>
             </div>
 
             <hr className="legal-divider" />
