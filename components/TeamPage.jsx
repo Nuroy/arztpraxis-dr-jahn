@@ -8,7 +8,7 @@ const DOCTORS = [
     name: "Dr. Birte Hancock-Diener",
     role: "Zahnärztin · Inhaberin",
     photo: "assets/dr-hancock-diener.jpg",
-    seit: "Praxis-Inhaberin seit 2006",
+    seit: "Praxis-Inhaberin seit 2002",
     tags: ["Ästhetik", "Implantate", "Zahnerhaltung"],
     bio: "Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.",
     phone: "089 38 88 95 00",
@@ -50,7 +50,7 @@ const VALUES = [
   {
     icon: "sparkle",
     title: "Fortbildung als Anspruch",
-    desc: "Regelmäßige Weiterbildungen, insbesondere für die Ärztinnen. Was sich in der Zahnmedizin bewährt, kommt zu Ihnen. Alles andere lassen wir weg."
+    desc: "Regelmäßige Weiterbildungen, insbesondere für die Ärztinnen mehrmals jährlich. Was sich in der Zahnmedizin bewährt, kommt zu Ihnen. Alles andere lassen wir weg."
   }
 ];
 

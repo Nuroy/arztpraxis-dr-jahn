@@ -71,7 +71,7 @@ const Intro = () => (
           <div className="eyebrow">Willkommen</div>
           <h2 className="display-lg">Eine Praxisgemeinschaft, die sich <em className="italic-accent">Zeit</em> nimmt.</h2>
           <p className="body-lg">Seit über 20 Jahren führen Dr. Birte Hancock-Diener und Dr. Irene Jahn ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
-          <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur: bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
+          <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur. Bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
           <a href="team.html" className="btn-tertiary">Mehr über uns erfahren <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
         </div>
       </div>
@@ -81,11 +81,11 @@ const Intro = () => (
 
 // ----- LEISTUNGEN -----
 const SERVICES = [
-  { icon: "shield-tooth", title: "Prophylaxe & Zahnerhaltung", desc: "Zahnerhaltung, professionelle Reinigung, Parodontologie und Endodontologie. Vorsorge ist die beste Medizin.", items: [{label:"Zahnerhaltung / Prophylaxe", slug:"zahnerhaltung-prophylaxe"}, {label:"Parodontologie", slug:"parodontologie"}, {label:"Endodontologie", slug:"endodontologie"}], anchor: "prophylaxe" },
-  { icon: "sparkle", title: "Ästhetik", desc: "Bleaching und ästhetische Korrekturen für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
+  { icon: "shield-tooth", title: "Prophylaxe & Zahnerhaltung", desc: "Zahnerhaltung, professionelle Zahnreinigung, Parodontologie und Endodontologie.  Vorsorge ist die beste Medizin.", items: [{label:"Zahnerhaltung / Prophylaxe", slug:"zahnerhaltung-prophylaxe"}, {label:"Parodontologie", slug:"parodontologie"}, {label:"Endodontologie", slug:"endodontologie"}], anchor: "prophylaxe" },
+  { icon: "sparkle", title: "Ästhetik", desc: "Bleaching und ästhetische Korrektionen, für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
   { icon: "implant", title: "Implantologie & Chirurgie", desc: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe.", items: [{label:"Implantologie", slug:"implantologie"}, {label:"Oralchirurgie / Kieferchirurgie", slug:"oralchirurgie"}], anchor: "chirurgie" },
   { icon: "moon", title: "Schienentherapie", desc: "Knirschen, Schnarchen, Migräne und sanfte Zahnkorrektur mit Alignern.", items: [{label:"Schienentherapie", slug:"schienentherapie"}, {label:"Schnarchschienen", slug:"schnarchschienen"}, {label:"NTI Aufbiss-Schienen", slug:"nti-aufbiss-schienen"}, {label:"Zahnkorrektur Schienen", slug:"zahnkorrektur-schienen"}], anchor: "schienen" },
-  { icon: "smile", title: "Kinderzahnheilkunde", desc: "Sanfter, spielerischer Einstieg, schon ab dem ersten Zahn.", items: [{label:"Kinderzahnheilkunde", slug:"kinderzahnheilkunde"}], anchor: "kinder" },
+  { icon: "smile", title: "Kinderzahnheilkunde", desc: "Sanfter, spielerischer Einstieg,  schon ab dem ersten Zahn.", items: [{label:"Kinderzahnheilkunde", slug:"kinderzahnheilkunde"}], anchor: "kinder" },
   { icon: "heart", title: "Hilfe bei Zahnarztangst", desc: "Zeit, Verständnis und Behandlung im eigenen Tempo.", items: [{label:"Hilfe bei Zahnarztangst", slug:"zahnarztangst"}], anchor: "angst" },
 ];
 const Leistungen = () => (
@@ -94,7 +94,7 @@ const Leistungen = () => (
       <div className="section-header">
         <div className="eyebrow">Unsere Leistungen</div>
         <h2 className="display-lg">Zahnmedizin in <em className="italic-accent">ihrer ganzen Breite</em>.</h2>
-        <p className="body-lg">13 Behandlungsbereiche, sechs Schwerpunkte, alles unter einem Dach.</p>
+        <p className="body-lg">13 Behandlungsbereiche, alles unter einem Dach.</p>
       </div>
       <div className="leistungen-grid">
         {SERVICES.map((s, i) => (
@@ -146,7 +146,7 @@ const Werte = () => (
         <div className="wert-card">
           <span className="wert-num">03</span>
           <h3 className="heading-lg">Erfahrung, die wirkt</h3>
-          <p>Zwei Zahnärztinnen, drei Jahrzehnte Praxiserfahrung, regelmäßige Fortbildungen. Sie sind in fachkundigen Händen.</p>
+          <p>Zwei Zahnärztinnen, drei Jahrzehnte Praxiserfahrung, regelmäßige Fortbildungen.  Sie sind in fachkundigen Händen.</p>
         </div>
       </div>
     </div>
@@ -210,7 +210,7 @@ const Team = ({ onOpenTermin }) => {
               <span className="team-tag">Zahnerhaltung</span>
               <span className="team-tag">Angstpatienten</span>
             </div>
-            <p className="team-bio">Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung, besonders bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.</p>
+            <p className="team-bio">Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung,  gerade bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.</p>
             <div className="team-actions">
               <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Jahn</button>
               <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>

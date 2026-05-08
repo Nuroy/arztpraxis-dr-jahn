@@ -55,7 +55,7 @@ const NeupatientenApp = () => {
               </div>
               <div className="reveal">
                 <div className="eyebrow">
-                  {isDE ? "Willkommen in unserer Praxis" : "Welcome to our practice"}
+                  {isDE ? "Willkommen in unserer Praxis" : "Welcome to our dental practice"}
                 </div>
                 <h1 className="display-2xl" style={{maxWidth:'16ch'}}>
                   {isDE

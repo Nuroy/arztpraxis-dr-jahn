@@ -50,7 +50,7 @@ const TechSpotlight = () => (
           <p className="body-lg" style={{marginTop:'24px'}}>Moderne Zahnmedizin ist heute deutlich mehr als Bohren und Füllen. Mit digitaler Diagnostik, präzisen intraoralen 3D-Aufnahmen und enger Zusammenarbeit mit zahntechnischen Meisterlaboren erreichen wir Ergebnisse, die noch vor wenigen Jahren undenkbar waren.</p>
           <ul className="tech-bullets">
             <li><Icon name="check" size={20}/><span>Digitales Röntgen für minimale Strahlenbelastung</span></li>
-            <li><Icon name="check" size={20}/><span>3D-Scans für präzise Diagnose und Planung</span></li>
+            <li><Icon name="check" size={20}/><span>3D-Scans für präzise Diagnose und Herstellung von hochwertigem Zahnersatz</span></li>
             <li><Icon name="check" size={20}/><span>Zertifizierte Meisterlabor-Partner</span></li>
           </ul>
           <a href="leistungen.html" className="btn-tertiary" style={{color:'#9CC4A1'}}>Unsere Leistungen ansehen <Icon name="arrow-right" size={14} className="btn-arrow"/></a>
@@ -275,7 +275,7 @@ const CalendarBooking = () => {
 
           {slots.length > 0 && slots.length < 3 && !selDate && (
             <p className="cal-hint" style={{color:'var(--brand-primary)'}}>
-              <Icon name="plus" size={14}/> Noch {3-slots.length} Wunschtermin{3-slots.length>1?'e':''} möglich. Wählen Sie ein weiteres Datum.
+              <Icon name="plus" size={14}/> Noch {3-slots.length} Wunschtermin{3-slots.length>1?'e':''} möglich,  wählen Sie ein weiteres Datum.
             </p>
           )}
         </>
@@ -309,10 +309,10 @@ const TerminCTA = ({ onOpenTermin }) => {
             <div>
               <div className="eyebrow">Termin vereinbaren</div>
               <h2 className="display-lg">Bereit für Ihr <em className="italic-accent" style={{color:'#9CC4A1'}}>schönstes Lächeln</em>?</h2>
-              <p className="body-lg lead">Wählen Sie Ihren Wunschtermin, wir rufen Sie zurück und bestätigen. Oder erreichen Sie uns direkt telefonisch.</p>
+              <p className="body-lg lead">Wählen Sie Ihren Wunschtermin,  wir rufen Sie zurück und bestätigen. Oder erreichen Sie uns direkt telefonisch.</p>
               <div style={{display:'flex',gap:'24px',alignItems:'center',color:'#C9D5CB',fontSize:'14px',flexWrap:'wrap'}}>
                 <div style={{display:'inline-flex',alignItems:'center',gap:'8px'}}>
-                  <Icon name="clock" size={18}/> Mo–Do 8–18 Uhr · Fr 8–16 Uhr
+                  <Icon name="clock" size={18}/> Mo–Do 8–18 Uhr · Fr 8–16 Uhr - mögliche Abweichungen im Einzelfall
                 </div>
                 <div style={{display:'inline-flex',alignItems:'center',gap:'8px'}}>
                   <Icon name="phone" size={18}/> Rückruf werktags &lt; 24 h
@@ -449,7 +449,7 @@ const Standort = () => (
           </div>
           <div className="info-block">
             <div className="info-label">Anfahrt</div>
-            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>U3/U6 Münchner Freiheit, ca. 10 Min. Fußweg.</div>
+            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>U3/U6 Münchner Freiheit, ca. 7-10 Min. Fußweg.</div>
           </div>
           <div className="info-block">
             <div className="info-label">Telefon</div>
@@ -466,11 +466,11 @@ const Standort = () => (
 
 // ----- FAQ -----
 const FAQS = [
-  { q: "Wie vereinbare ich einen Termin?", a: "Wählen Sie online Ihren Wunschtermin, wir rufen Sie anschließend zurück, um den Termin zu bestätigen. Alternativ erreichen Sie uns telefonisch zu unseren Sprechzeiten unter den Direktnummern beider Ärztinnen." },
-  { q: "Was sollte ich zum ersten Termin mitbringen?", a: "Versicherungskarte, Bonusheft (falls vorhanden), frühere Röntgenbilder (vorab mailen oder den Arztkontakt bereithalten), eine Liste aktueller Medikamente und gegebenenfalls Ihren Allergie-Pass. Bei Kindern bitte das Kinder-Untersuchungsheft." },
+  { q: "Wie vereinbare ich einen Termin?", a: "Wählen Sie online Ihren Wunschtermin,  wir rufen Sie anschließend zurück, um den Termin zu bestätigen. Alternativ erreichen Sie uns telefonisch zu unseren Sprechzeiten unter den Direktnummern beider Ärztinnen." },
+  { q: "Was sollte ich zum ersten Termin mitbringen?", a: "Versicherungskarte, Bonusheft (falls vorhanden), frühere Röntgenbilder (vorab mailen oder zum Arztkontakt bereithalten), eine Liste aktueller Medikamente und gegebenenfalls Ihren Allergie-Pass. Bei Kindern bitte das Kinder-Untersuchungsheft." },
   { q: "Welche Krankenkassen werden akzeptiert?", a: "Wir behandeln gesetzlich und privat versicherte Patient:innen sowie Selbstzahler. Bei Privatleistungen erstellen wir Ihnen vorab einen transparenten Heil- und Kostenplan." },
-  { q: "Wie lange dauert eine professionelle Zahnreinigung?", a: "Eine PZR dauert in der Regel 45 bis 60 Minuten. Inklusive Beratung, Reinigung schwer zugänglicher Stellen, Politur und Fluoridierung." },
-  { q: "Behandeln Sie auch Angstpatienten?", a: "Ja, und das ist uns besonders wichtig. Wir nehmen uns Zeit, beginnen mit einem Erstgespräch ohne Behandlung und stimmen jeden weiteren Schritt mit Ihnen ab." },
+  { q: "Wie lange dauert eine professionelle Zahnreinigung?", a: "Eine PZR dauert in der Regel 45 bis 60 Minuten inklusive Beratung, Reinigung schwer zugänglicher Stellen, Politur und Fluoridierung." },
+  { q: "Behandeln Sie auch Angstpatienten?", a: "Ja und das ist uns besonders wichtig. Wir nehmen uns Zeit, beginnen mit einem Erstgespräch ohne Behandlung und stimmen jeden weiteren Schritt mit Ihnen ab." },
   { q: "Was passiert bei einem Notfall außerhalb der Sprechzeiten?", a: "Wenden Sie sich an den zahnärztlichen Notdienst unter www.notdienst-zahn.de oder telefonisch unter 01805 908008 (14 Ct/Min.). Der Notdienst ist rund um die Uhr erreichbar." },
 ];
 const FAQ = () => {
@@ -574,7 +574,7 @@ const TerminModal = ({ open, onClose }) => {
         <button className="modal-close" onClick={onClose} aria-label="Schließen"><Icon name="x" size={18}/></button>
         <div className="modal-header">
           <h3>Wunschtermin anfragen</h3>
-          <p>Wählen Sie Ihren Wunschtermin, wir rufen Sie zur Bestätigung zurück.</p>
+          <p>Wählen Sie Ihren Wunschtermin,  wir rufen Sie zur Bestätigung zurück.</p>
           <div className="booking-tabs">
             <button className={`booking-tab ${tab === "online" ? "active" : ""}`} onClick={() => setTab("online")}>Wunschtermin</button>
             <button className={`booking-tab ${tab === "call" ? "active" : ""}`} onClick={() => setTab("call")}>Anrufen</button>

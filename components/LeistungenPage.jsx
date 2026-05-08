@@ -7,8 +7,8 @@ const CATEGORIES = [
     num: "01",
     eyebrow: "Vorsorge & Erhaltung",
     title: "Prophylaxe & Zahnerhaltung",
-    intro: "Vorsorge ist die beste Medizin. Mit professioneller Reinigung, gezielter Parodontologie und schonender Wurzelbehandlung erhalten wir Ihre eigenen Zähne, ein Leben lang.",
-    duration: "30–90 Min.",
+    intro: "Vorsorge ist die beste Medizin. Mit professioneller Reinigung, gezielter Parodontologie und schonender Wurzelbehandlung erhalten wir Ihre eigenen Zähne,  ein Leben lang.",
+    duration: "30 – 90 Min.",
     coverage: "Gesetzlich + privat",
     image: "assets/praxis-behandlung.jpg",
     featured: {
@@ -34,7 +34,7 @@ const CATEGORIES = [
     title: "Ästhetik",
     intro: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen, natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
     duration: "60–180 Min.",
-    coverage: "Privatleistung",
+    coverage: "Privatleistung / Eigenanteil",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&q=80&auto=format&fit=crop",
     featured: {
       slug: "aesthetik-funktion",
@@ -56,7 +56,7 @@ const CATEGORIES = [
     num: "03",
     eyebrow: "Zahnersatz & Eingriffe",
     title: "Implantologie & Chirurgie",
-    intro: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe mit digitaler Diagnostik, computer-gestützter Planung und mikrochirurgischen Verfahren.",
+    intro: "Hochwertiger, langlebiger Zahnersatz auf Implantaten und schonende oralchirurgische Eingriffe, mit digitaler Diagnostik, computer-gestützter Planung und mikrochirurgischen Verfahren.",
     duration: "60 Min. – mehrere Sitzungen",
     coverage: "Privatleistung + Festzuschuss",
     image: "assets/praxis-behandlung-detail.jpg",
@@ -276,7 +276,7 @@ const LeistungenApp = () => {
               <div className="eyebrow">Unsere Leistungen</div>
               <h1 className="display-2xl">Zahnmedizin in <em className="italic-accent">ihrer ganzen Breite</em>.</h1>
               <p className="body-xl" style={{color:'var(--text-secondary)', marginTop:'24px', maxWidth:'56ch'}}>
-                Von der ersten Vorsorge bis zur hochpräzisen Implantologie, alles unter einem Dach. 13 Behandlungsbereiche, sechs Schwerpunkte, ein Anspruch: Ihre Zähne so lange wie möglich gesund erhalten.
+                Von der ersten Vorsorge bis zur hochpräzisen Implantologie, alles unter einem Dach. 13 Behandlungsbereiche, ein Anspruch: Ihre Zähne so lange wie möglich gesund erhalten.
               </p>
             </div>
             <div>
