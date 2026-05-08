@@ -9,7 +9,7 @@ window.LEISTUNG_DATA = {
     image: "assets/praxis-behandlung.jpg",
     meta: [
       { label: "Dauer", value: "45–60 Min." },
-      { label: "Häufigkeit", value: "1–2× pro Jahr" },
+      { label: "Häufigkeit", value: "1 – 2× pro Jahr" },
       { label: "Kosten", value: "Privatleistung" },
       { label: "Schmerzfrei", value: "Ja" }
     ],
@@ -33,7 +33,7 @@ window.LEISTUNG_DATA = {
     faqs: [
       { q: "Wie oft sollte ich zur PZR kommen?", a: "Bei gesundem Zahnfleisch reicht 1× pro Jahr. Bei erhöhtem Karies- oder Parodontitis-Risiko empfehlen wir 2× pro Jahr." },
       { q: "Tut die Zahnreinigung weh?", a: "Nein. Die meisten Patient:innen empfinden die PZR als angenehm. Bei empfindlichen Zähnen können wir lokal betäuben." },
-      { q: "Wird die PZR von der Krankenkasse übernommen?", a: "Die gesetzlichen Krankenkassen übernehmen die Kosten meist nicht. Viele Zusatzversicherungen erstatten 1–2 PZR pro Jahr." }
+      { q: "Wird die PZR von der Krankenkasse übernommen?", a: "Die gesetzlichen Krankenkassen übernehmen die Kosten meist nicht, im Einzelfall mit bis zu 50€ im Jahr. Viele Zusatzversicherungen erstatten 1–2 PZR pro Jahr." }
     ]
   },
   "parodontologie": {
@@ -41,11 +41,11 @@ window.LEISTUNG_DATA = {
     title: "Parodontologie",
     titleAccent: "gesundem Zahnfleisch",
     eyebrow: "Gegen Zahnfleischentzündung",
-    lede: "Parodontitis ist die häufigste Ursache für Zahnverlust im Erwachsenenalter, und oft schmerzfrei. Wir behandeln sie in zwei Phasen: gründlich, gezielt und schonend.",
+    lede: "Parodontitis ist die häufigste Ursache für Zahnverlust im Erwachsenenalter und entwickelt sich oft unbemerkt. Wir behandeln sie in zwei Phasen: gründlich, gezielt und schonend.",
     image: "assets/praxis-behandlung.jpg",
     meta: [
-      { label: "Dauer", value: "60–90 Min." },
-      { label: "Sitzungen", value: "4–10 innerhalb 2 Jahren" },
+      { label: "Dauer", value: "60 – 90 Min." },
+      { label: "Sitzungen", value: "4 – 10 innerhalb 2 Jahren" },
       { label: "Kosten", value: "Kassenleistung" },
       { label: "Erfolgsquote", value: "über 90 %" }
     ],
@@ -55,15 +55,15 @@ window.LEISTUNG_DATA = {
     },
     inclusions: [
       { title: "Vortherapie und Hygienephase", desc: "Reinigung der Zähne und Anleitung zur perfekten häuslichen Pflege." },
-      { title: "Geschlossene Reinigung der Zahnfleischtaschen", desc: "Entfernung der Bakterien aus den Taschen mit speziellen Instrumenten." },
+      { title: "Geschlossene Reinigung der Zahnfleischtaschen", desc: "und Entfernung der Bakterien aus den Taschen mit speziellen Instrumenten in Lokalanästhesie." },
       { title: "Antibiotische Therapie", desc: "Bei Bedarf zusätzliche lokale oder systemische Antibiose." },
       { title: "Erhaltungstherapie (UPT)", desc: "Regelmäßige Kontrollen und Reinigungen, der Schlüssel zum Langzeiterfolg." }
     ],
     process: [
       { num: "01", title: "Diagnostik", desc: "Messung aller Zahnfleischtaschen, Röntgenkontrolle, Bakteriendiagnostik wenn nötig." },
-      { num: "02", title: "Vorbehandlung", desc: "Professionelle Reinigung und individuelle Pflegeanleitung, Voraussetzung für den Therapie-Erfolg." },
+      { num: "02", title: "Vorbehandlung", desc: "Professionelle Zahnreinigung und individuelle Pflegeanleitung, Voraussetzung für den Therapie-Erfolg." },
       { num: "03", title: "Geschlossene Therapie", desc: "Sanfte Reinigung der Taschen unter lokaler Betäubung, meist in 1 Sitzung." },
-      { num: "04", title: "Re-Evaluation", desc: "Kontrolle nach 3–6 Monaten: bei vereinzelten Resten gegebenenfalls chirurgische Nachsorge." },
+      { num: "04", title: "Re-Evaluation", desc: "Kontrolle nach 3 – 6 Monaten: bei vereinzelten Restentzündungen gegebenenfalls chirurgische Nachsorge." },
       { num: "05", title: "Erhaltungstherapie", desc: "2–6× UPT innerhalb von 2 Jahren, danach lebenslange engmaschige Betreuung mit individuellem Recall." }
     ],
     faqs: [
@@ -77,7 +77,7 @@ window.LEISTUNG_DATA = {
     title: "Endodontologie",
     titleAccent: "eigenen Zahn erhalten",
     eyebrow: "Wurzelbehandlung",
-    lede: "Wurzelbehandlung hat einen schlechten Ruf, doch zu Unrecht. Mit modernen Verfahren ist sie heute fast immer schmerzarm und in den meisten Fällen erfolgreich.",
+    lede: "Wurzelbehandlung hat einen schlechten Ruf, doch zu Unrecht. Mit modernen Verfahren ist sie heute fast immer schmerzfrei oder schmerzarm und in den meisten Fällen erfolgreich.",
     image: "assets/praxis-behandlung.jpg",
     meta: [
       { label: "Dauer", value: "60–90 Min." },
@@ -114,7 +114,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Lächeln",
     eyebrow: "Form trifft Funktion",
     lede: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen: natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/frontzaehne-aesthetik.jpg",
     meta: [
       { label: "Dauer", value: "60–180 Min." },
       { label: "Sitzungen", value: "2–4 Termine" },
@@ -149,7 +149,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "helleres Lächeln",
     eyebrow: "Sanfte Aufhellung",
     lede: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/laecheln-weisse-zaehne.jpg",
     meta: [
       { label: "Dauer", value: "90–120 Min." },
       { label: "Sitzungen", value: "1 Termin" },
@@ -161,14 +161,14 @@ window.LEISTUNG_DATA = {
       body: "Mit den Jahren verfärben sich Zähne durch Kaffee, Tee, Rotwein und Tabak. Bleaching kann diese Verfärbungen schonend entfernen, ohne den Zahnschmelz zu schädigen.\n\nWir bieten zwei Verfahren: das schnelle In-Office-Bleaching in der Praxis (nach einer Sitzung sichtbares Ergebnis) und das Home-Bleaching mit individuell angefertigter Schiene für sanfte Nacht-für-Nacht-Aufhellung."
     },
     inclusions: [
-      { title: "Vorab eine professionelle Reinigung", desc: "Saubere Zähne sind Voraussetzung für gleichmäßiges Bleaching." },
+      { title: "Vorab eine professionelle Zahnreinigung", desc: "Saubere Zähne sind Voraussetzung für gleichmäßiges Bleaching." },
       { title: "Schutz von Zahnfleisch und Lippen", desc: "Sorgfältiges Abdecken aller umliegenden Bereiche." },
       { title: "Klinisch geprüfte Bleaching-Gele", desc: "Konzentrationen und Verfahren auf Ihren Zahnstatus abgestimmt." },
       { title: "Nachsorge-Hinweise", desc: "Welche Lebensmittel Sie 48 Stunden meiden sollten und wie das Ergebnis lange hält." }
     ],
     process: [
-      { num: "01", title: "Zahnfarbe bestimmen und Befund", desc: "Wir bestimmen Ihre aktuelle Zahnfarbe und prüfen, ob Ihre Zähne und Ihr Zahnfleisch fürs Bleaching geeignet sind." },
-      { num: "02", title: "Professionelle Reinigung", desc: "Saubere Zahnoberflächen für ein gleichmäßiges Ergebnis." },
+      { num: "01", title: "Zahnfarbe bestimmen und Befund", desc: "Wir bestimmen Ihre aktuelle Zahnfarbe und prüfen, ob Ihre Zähne und Ihr Zahnfleisch für das Bleaching geeignet sind." },
+      { num: "02", title: "Professionelle Zahnreinigung", desc: "Saubere Zahnoberflächen für ein gleichmäßiges Ergebnis." },
       { num: "03", title: "Bleaching-Sitzung", desc: "In-Office: 90–120 Min. in der Praxis unter Anästhesie. Home: individuelle Schiene für 4–5 Nächte, bei Bedarf auf bis zu 10 Nächte verlängerbar." },
       { num: "04", title: "Ergebniskontrolle", desc: "Wir vergleichen Vorher/Nachher und besprechen die Pflege." }
     ],
@@ -183,23 +183,23 @@ window.LEISTUNG_DATA = {
     title: "Implantologie",
     titleAccent: "feste Zähne wie eigene",
     eyebrow: "Hochwertiger Zahnersatz",
-    lede: "Implantate ersetzen Zähne wie eigene. Aus Titan oder Keramik, mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
-    image: "assets/praxis-behandlung-detail.jpg",
+    lede: "Implantate ersetzen Zähne wie eigene. Aus Titan (oder bei Unverträglichkeit aus Keramik), mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
+    image: "assets/implantat-aufbau.jpg",
     meta: [
       { label: "Dauer OP", value: "30–60 Min." },
       { label: "Einheilzeit", value: "3–6 Monate" },
-      { label: "Kosten", value: "Privatleistung" },
+      { label: "Kosten", value: "Privatleistung + Festzuschuss mit Zuzahlung" },
       { label: "Haltbarkeit", value: "20+ Jahre" }
     ],
     intro: {
       title: "Die natürlichste Form des Zahnersatzes",
-      body: "Ein Implantat ist eine künstliche Zahnwurzel aus Titan oder Keramik, die in den Kieferknochen eingesetzt wird. Darauf wird die Krone befestigt, fest wie ein eigener Zahn. Sie spüren kein Fremdkörper, kein Klemmen, kein Verschieben.\n\nWir planen jedes Implantat nach ausführlicher Analyse am Computer. Das Ergebnis: maximale Präzision, minimaler Eingriff, vorhersehbares Ergebnis."
+      body: "Ein Implantat ist eine künstliche Zahnwurzel aus Titan (oder bei Unverträglichkeit aus Keramik), die in den Kieferknochen eingesetzt wird. Darauf wird die Krone befestigt, fest wie ein eigener Zahn. Sie spüren keinen Fremdkörper, kein Klemmen, kein Verschieben.\n\nWir planen jedes Implantat nach ausführlicher Analyse am Computer. Das Ergebnis: maximale Präzision, minimaler Eingriff, vorhersehbares Ergebnis."
     },
     inclusions: [
       { title: "Digitale Panorama-Röntgenaufnahme und computergestützte Implantat-Planung", desc: "OPG, Knochenanalyse und individuelle Planung." },
       { title: "Schonendes Einsetzen", desc: "Unter lokaler Betäubung, auf Wunsch mit leichter Sedierung." },
-      { title: "Versorgung mit Krone, Brücke oder Prothese", desc: "Individuell gefertigt im Meisterlabor, passgenau und natürlich." },
-      { title: "Nachsorge und Gewährleistung", desc: "Engmaschige Kontrollen und 2 Jahre Gewährleistung. Wir stehen für unsere Arbeit ein." }
+      { title: "Versorgung mit Krone, Brücke oder Prothese", desc: "individuell gefertigt im Meisterlabor, passgenau und natürlich." },
+      { title: "Nachsorge und Gewährleistung", desc: "engmaschige Kontrollen und 2 Jahre Gewährleistung. Wir stehen für unsere Arbeit ein." }
     ],
     process: [
       { num: "01", title: "Beratung und Diagnostik", desc: "OPG, Knochenanalyse, individueller Therapieplan." },
@@ -240,7 +240,7 @@ window.LEISTUNG_DATA = {
     ],
     process: [
       { num: "01", title: "Diagnostik und Aufklärung", desc: "Klinische Untersuchung, digitale Röntgenaufnahmen, ausführliche Aufklärung." },
-      { num: "02", title: "OP-Planung", desc: "Individuelle Planung des Eingriffs, bei komplexen Fällen mit computergestützter Software." },
+      { num: "02", title: "OP-Planung", desc: "Individuelle Planung des Eingriffs" },
       { num: "03", title: "Eingriff", desc: "Schonende Durchführung unter lokaler Betäubung. Sie sind wach, spüren aber nichts." },
       { num: "04", title: "Nachsorge", desc: "Kontrolle nach 24h, Fadenentfernung nach 7–10 Tagen, weitere Kontrolle nach 4 Wochen." }
     ],
@@ -292,7 +292,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "ruhigeren Nächten",
     eyebrow: "Gegen Schnarchen",
     lede: "Sanfte Vorverlagerung des Unterkiefers während des Schlafs, wirksam bei leichter bis mittlerer Schlafapnoe und Schnarchen.",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/schnarchschiene-permadental.jpg",
     meta: [
       { label: "Dauer", value: "2 Termine" },
       { label: "Tragezeit", value: "Nachts" },
@@ -301,7 +301,7 @@ window.LEISTUNG_DATA = {
     ],
     intro: {
       title: "Ruhe für Sie und Ihre Partner:in",
-      body: "Schnarchen ist nicht nur störend, es kann ein Anzeichen für obstruktive Schlafapnoe sein. Eine Unterkiefer-Protrusionsschiene (UPS) verlagert den Unterkiefer leicht nach vorn und hält die Atemwege frei.\n\nWir arbeiten eng mit Schlaflaboren und HNO-Ärzt:innen zusammen. Wenn nötig, klären wir vorab die Diagnose."
+      body: "Schnarchen ist nicht nur störend, es kann ein Anzeichen für obstruktive Schlafapnoe sein. Eine Unterkiefer-Protrusionsschiene (UPS) verlagert den Unterkiefer leicht nach vorn und hält die Atemwege frei. In unserer Praxis setzen wir auf bewährte Systeme wie die Schnarchschienen von <a href='https://www.permadental.de' target='_blank' rel='noopener noreferrer' style='color: var(--brand-primary); text-decoration: underline;'>Permadental</a>.\n\nWir arbeiten eng mit Schlaflaboren und HNO-Ärzt:innen zusammen. Wenn nötig, klären wir vorab die Diagnose."
     },
     inclusions: [
       { title: "Diagnostische Abklärung", desc: "Auf Wunsch mit schlafmedizinischem Partner-Zentrum." },
@@ -328,7 +328,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "weniger Migräne",
     eyebrow: "Gegen Spannungs-Kopfschmerz",
     lede: "Kleine Aufbiss-Schiene gegen Spannungs-Kopfschmerz und Migräne. Sie entlastet die Kaumuskulatur gezielt.",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/nti-schiene.jpg",
     meta: [
       { label: "Dauer", value: "2 Termine" },
       { label: "Tragezeit", value: "Nachts" },
@@ -337,7 +337,7 @@ window.LEISTUNG_DATA = {
     ],
     intro: {
       title: "Klein, aber wirkungsvoll",
-      body: "Die NTI-Schiene ist eine sehr kleine Aufbiss-Schiene, die nur die Frontzähne abdeckt. Sie verhindert das maximale Zusammenpressen der Kaumuskulatur und kann so spannungsbedingte Kopfschmerzen und Migräne deutlich reduzieren.\n\nFür viele Patient:innen ist sie eine Lebensveränderung, gerade wenn klassische Schienen nicht vertragen werden.\n\nHinweis: Derzeit ist keine Rohschalen-Lieferung möglich. Reparaturen an bestehenden NTI-Schienen führen wir selbstverständlich durch."
+      body: "Die NTI-Schiene ist eine sehr kleine Aufbiss-Schiene, die nur die Frontzähne abdeckt. Sie verhindert das maximale Zusammenpressen der Kaumuskulatur und kann so spannungsbedingte Kopfschmerzen und Migräne deutlich reduzieren.\n\nFür viele Patient:innen ist sie eine Lebensveränderung, gerade wenn klassische Schienen nicht vertragen werden.\n\nHinweis: Derzeit ist keine Rohschalen-Lieferung möglich. Reparaturen an bestehenden NTI-Schienen oder das Neubefüllen der Schalen und Anpassen führen wir selbstverständlich gerne durch."
     },
     inclusions: [
       { title: "Sorgfältige Diagnostik", desc: "Klärung, ob NTI für Sie geeignet ist. Sie ist nicht für alle Fälle die richtige Wahl." },
@@ -347,7 +347,7 @@ window.LEISTUNG_DATA = {
     ],
     process: [
       { num: "01", title: "Diagnostik und Beratung", desc: "Anamnese der Kopfschmerzen, Funktionsbefund, Aufklärung über NTI." },
-      { num: "02", title: "Abformung, Anfertigung und Eingliederung", desc: "Präzise Abformung der Frontzähne, individuelle Herstellung im Labor, Anpassung und genaue Trage-Schulung." },
+      { num: "02", title: "Abformung, Anfertigung und Eingliederung", desc: "Individuelle und direkte Herstellung und Anpassung im Mund, anschließend genaue Trage-Schulung." },
       { num: "03", title: "Engmaschige Kontrollen", desc: "Erste Kontrolle nach 2 Wochen, dann nach 6 Wochen. Bissverhältnisse können sich ändern." }
     ],
     faqs: [
@@ -370,19 +370,19 @@ window.LEISTUNG_DATA = {
       { label: "Kosten", value: "ab 1.500 € pro Kiefer" }
     ],
     intro: {
-      title: "Korrektur ohne Klammer",
+      title: "Korrektur ohne festsitzende Apparaturen.",
       body: "Aligner sind transparente, herausnehmbare Schienen, die Zähne sanft in die gewünschte Position bewegen. Sie tragen jede Schiene ca. zwei Wochen und wechseln dann auf die nächste, bis zum Endergebnis.\n\nIdeal für leichte bis mittlere Korrekturen, Engstand oder Lückenschluss. Wir prüfen ehrlich, ob Aligner für Ihre Situation die richtige Wahl sind oder ob klassische Kieferorthopädie besser passt."
     },
     inclusions: [
       { title: "Digitaler Scan und 3D-Planung", desc: "Sie sehen vorab am Bildschirm, wie Ihr Lächeln nachher aussehen wird." },
       { title: "Individuelle Aligner-Serie", desc: "Bis zu 30+ Schienen, präzise berechnet für Ihre Korrektur." },
-      { title: "Engmaschige Kontrollen", desc: "Alle 6–8 Wochen Kontrolle in der Praxis." },
+      { title: "Engmaschige Kontrollen", desc: "Alle 3–8 Wochen Kontrolle in der Praxis." },
       { title: "Stabilisierung mit Retainer", desc: "Nach Behandlungsende: feiner Retainer, damit das Ergebnis hält." }
     ],
     process: [
       { num: "01", title: "Beratung und 3D-Scan", desc: "Wir scannen Ihre Zähne und zeigen Ihnen das geplante Endergebnis." },
       { num: "02", title: "Therapie-Plan", desc: "Anzahl der Aligner, Behandlungsdauer, Kostenvoranschlag." },
-      { num: "03", title: "Aligner-Behandlung", desc: "Sie tragen jede Schiene 1–2 Wochen, 22h pro Tag, auch nachts." },
+      { num: "03", title: "Aligner-Behandlung", desc: "Sie tragen jede Schiene 10 Tage bis 2 Wochen, 22h pro Tag, auch nachts." },
       { num: "04", title: "Kontrollen", desc: "Alle 6–8 Wochen in der Praxis: Fortschritt prüfen, neue Aligner ausgeben." },
       { num: "05", title: "Retention", desc: "Festsitzender oder herausnehmbarer Retainer hält das Ergebnis dauerhaft." }
     ],
@@ -398,7 +398,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "ihre Kinder",
     eyebrow: "Für die Kleinen",
     lede: "Wir wollen, dass Ihr Kind den Zahnarzt-Besuch in guter Erinnerung behält. Mit ruhigem Tempo, kindgerechter Sprache und kleinen Mutproben statt großer Behandlungen.",
-    image: "https://images.unsplash.com/photo-1581585504013-9eb45c4d8f63?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/vertrauen-hand.jpg",
     meta: [
       { label: "Dauer", value: "30–45 Min." },
       { label: "Ab Alter", value: "ab 1. Zahn" },
@@ -407,18 +407,18 @@ window.LEISTUNG_DATA = {
     ],
     intro: {
       title: "Ein guter erster Eindruck wirkt ein Leben lang",
-      body: "Die ersten Zahnarztbesuche prägen oft das ganze Leben. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.\n\nAlles mit Erklären, Zeigen und Anfassen. Kinder dürfen alles anschauen und ausprobieren, bevor irgendetwas passiert. Wir erklären jeden Schritt mit kindgerechter Sprache. Und das wichtigste: Wir machen keine Behandlung, wenn Ihr Kind nicht bereit ist."
+      body: "Die ersten Zahnarztbesuche prägen oft das ganze Leben. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.\n\nAlles mit Erklären, Zeigen und Anfassen. Kinder dürfen alles anschauen und ausprobieren, bevor irgendetwas passiert. Wir erklären jeden Schritt mit kindgerechter Sprache. Und das Wichtigste: Wir machen keine Behandlung, wenn Ihr Kind nicht bereit ist."
     },
     inclusions: [
       { title: "Kennenlern-Termine", desc: "Erster Besuch oft nur zum Anschauen und Spielen, ohne Untersuchung." },
-      { title: "Kindgerechte Untersuchung", desc: "Mit 'Zauber-Lupe' (Spiegel) und 'Kitzel-Pinsel' (Sonde)." },
+      { title: "Kindgerechte Untersuchung", desc: "Mit Erklären, Zeigen und Anfassen." },
       { title: "Versiegelung der bleibenden Zähne", desc: "Schützt die Kauflächen der ersten bleibenden Backenzähne." },
       { title: "Eltern-Beratung zu Pflege und Ernährung", desc: "Konkrete Tipps für jeden Altersabschnitt." }
     ],
     process: [
       { num: "01", title: "Erstkontakt", desc: "Mit Eltern und Kind, entspannt, ohne Termin-Druck. Anschauen, fragen, kennenlernen." },
       { num: "02", title: "Erste Untersuchung", desc: "Spielerisch im Sitzen oder Liegen, wann immer Ihr Kind bereit ist." },
-      { num: "03", title: "Putzschule", desc: "Wir zeigen Ihrem Kind und Ihnen, wie's richtig geht." },
+      { num: "03", title: "Putzschule", desc: "Wir zeigen Ihrem Kind und Ihnen, wie es richtig geht." },
       { num: "04", title: "Recall", desc: "Alle 6 Monate ein freundlicher Besuch, Routine statt Ausnahmesituation." }
     ],
     faqs: [
@@ -433,7 +433,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Tempo",
     eyebrow: "Mit Verständnis",
     lede: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
-    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/vertrauen-hand.jpg",
     meta: [
       { label: "Erstgespräch", value: "Ohne Behandlung" },
       { label: "Pausen-Signal", value: "Jederzeit" },
@@ -448,10 +448,10 @@ window.LEISTUNG_DATA = {
       { title: "Erstgespräch ausschließlich zum Kennenlernen", desc: "Sie kommen, sehen die Praxis, lernen das Team kennen. Keine Behandlung." },
       { title: "Schritt-für-Schritt-Ankündigung", desc: "Wir kündigen jeden einzelnen Schritt an. Nichts geschieht ohne Ihre Zustimmung." },
       { title: "Pausen-Signal: Sie haben die Kontrolle", desc: "Heben Sie die Hand, und wir stoppen sofort. Immer." },
-      { title: "Auf Wunsch leichte Sedierung", desc: "Sanfte Entspannungsverfahren, bei Bedarf leichte Sedierung." }
+      { title: "Sanfte Entspannungsverfahren", desc: "bei Bedarf leichte Sedierung." }
     ],
     process: [
-      { num: "01", title: "Telefonisches Vorgespräch", desc: "Wenn schon Anrufen schwer ist: schreiben Sie uns. Wir antworten persönlich." },
+      { num: "01", title: "Telefonisches Vorgespräch", desc: "Wenn schon das Anrufen schwer ist: schreiben Sie uns. Wir antworten persönlich." },
       { num: "02", title: "Erstgespräch in der Praxis", desc: "Kein Behandlungsstuhl, keine Untersuchung. Nur reden, kennenlernen, Fragen klären." },
       { num: "03", title: "Vorsichtige erste Untersuchung", desc: "Wenn Sie soweit sind: zunächst nur schauen, kein Anfassen, kein Bohren." },
       { num: "04", title: "Behandlungs-Plan in Ihrem Tempo", desc: "Wir teilen größere Behandlungen in kleine, gut verkraftbare Schritte." },
