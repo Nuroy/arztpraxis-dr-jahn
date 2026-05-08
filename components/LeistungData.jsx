@@ -115,6 +115,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Form trifft Funktion",
     lede: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen: natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
     image: "assets/frontzaehne-aesthetik.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60–180 Min." },
       { label: "Sitzungen", value: "2–4 Termine" },
@@ -150,6 +151,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Sanfte Aufhellung",
     lede: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause.",
     image: "assets/laecheln-weisse-zaehne.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "90–120 Min." },
       { label: "Sitzungen", value: "1 Termin" },
@@ -185,6 +187,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Hochwertiger Zahnersatz",
     lede: "Implantate ersetzen Zähne wie eigene. Aus Titan (oder bei Unverträglichkeit aus Keramik), mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
     image: "assets/implantat-aufbau.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Dauer OP", value: "30–60 Min." },
       { label: "Einheilzeit", value: "3–6 Monate" },
@@ -293,6 +296,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Gegen Schnarchen",
     lede: "Sanfte Vorverlagerung des Unterkiefers während des Schlafs, wirksam bei leichter bis mittlerer Schlafapnoe und Schnarchen.",
     image: "assets/schnarchschiene-permadental.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "2 Termine" },
       { label: "Tragezeit", value: "Nachts" },
@@ -329,6 +333,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Gegen Spannungs-Kopfschmerz",
     lede: "Kleine Aufbiss-Schiene gegen Spannungs-Kopfschmerz und Migräne. Sie entlastet die Kaumuskulatur gezielt.",
     image: "assets/nti-schiene.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Dauer", value: "2 Termine" },
       { label: "Tragezeit", value: "Nachts" },
@@ -399,6 +404,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Für die Kleinen",
     lede: "Wir wollen, dass Ihr Kind den Zahnarzt-Besuch in guter Erinnerung behält. Mit ruhigem Tempo, kindgerechter Sprache und kleinen Mutproben statt großer Behandlungen.",
     image: "assets/vertrauen-hand.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Dauer", value: "30–45 Min." },
       { label: "Ab Alter", value: "ab 1. Zahn" },
@@ -434,6 +440,7 @@ window.LEISTUNG_DATA = {
     eyebrow: "Mit Verständnis",
     lede: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
     image: "assets/vertrauen-hand.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Erstgespräch", value: "Ohne Behandlung" },
       { label: "Pausen-Signal", value: "Jederzeit" },

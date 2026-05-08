@@ -25,6 +25,7 @@
 }
 @media (min-width: 1024px) { .detail-hero .lede { font-size: 20px; } }
 
+/* Base styles - Fallback für Einträge ohne imageFormat */
 .detail-hero-image {
   aspect-ratio: 4/5;
   border-radius: var(--radius-xl);
@@ -32,7 +33,30 @@
   box-shadow: var(--shadow-md);
   background: var(--bg-subtle);
 }
+
+/* Landscape-Format (16:9) */
+.detail-hero-image.landscape {
+  aspect-ratio: 16/9;
+}
+
+/* Portrait-Format (9:16) */
+.detail-hero-image.portrait {
+  aspect-ratio: 9/16;
+}
+
+/* Bild bleibt contain, damit es nicht abgeschnitten wird */
 .detail-hero-image img { width:100%; height:100%; object-fit: contain; }
+
+/* Responsive: Auf Mobile weniger extrem */
+@media (max-width: 768px) {
+  .detail-hero-image.landscape {
+    aspect-ratio: 4/3;  /* Weniger breit auf Mobile */
+  }
+
+  .detail-hero-image.portrait {
+    aspect-ratio: 3/4;  /* Weniger hoch auf Mobile */
+  }
+}
 
 .detail-meta-strip {
   display: grid;

@@ -97,7 +97,7 @@ const LeistungDetailApp = () => {
                 <a href={`leistungen.html#${data.parent.anchor}`} className="btn btn-secondary">Zur Übersicht</a>
               </div>
             </div>
-            <div className="detail-hero-image">
+            <div className={`detail-hero-image ${data.imageFormat || 'portrait'}`}>
               <img src={data.image} alt={data.title} loading="lazy"/>
             </div>
           </div>
