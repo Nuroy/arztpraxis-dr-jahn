@@ -109,7 +109,7 @@ const CATEGORIES = [
     intro: "Ein guter erster Eindruck wirkt ein Leben lang. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.",
     duration: "30–45 Min.",
     coverage: "Vollständig Kassenleistung",
-    image: "https://images.unsplash.com/photo-1581585504013-9eb45c4d8f63?w=1400&q=80&auto=format&fit=crop",
+    image: "assets/vertrauen-hand.jpg",
     featured: {
       slug: "kinderzahnheilkunde",
       title: "Kinderzahnheilkunde",
