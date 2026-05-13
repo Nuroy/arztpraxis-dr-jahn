@@ -195,6 +195,24 @@
   border: none;
 }
 
+/* Mobile menu header with logo */
+.mobile-menu-header {
+  padding-bottom: 32px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border-subtle);
+}
+.mobile-menu-header .mobile-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  border: none;
+}
+.mobile-menu-header .logo-mark {
+  width: 64px;
+  height: 64px;
+}
+
 /* Mobile dropdown accordion */
 .mobile-dropdown-group { display: flex; flex-direction: column; }
 .mobile-dropdown-trigger {
@@ -229,7 +247,41 @@
 .hero {
   padding-top: 120px;
   padding-bottom: 64px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Logo-Wasserzeichen im Hero-Hintergrund */
+.hero-logo-watermark {
+  position: absolute;
+  top: 50%;
+  left: -150px;
+  transform: translateY(-50%) rotate(-15deg);
+  width: 500px;
+  height: 500px;
+  background-image: url('../assets/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-logo-watermark {
+    width: 300px;
+    height: 300px;
+    left: -100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-logo-watermark {
+    display: none;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero { padding-top: 160px; padding-bottom: 120px; }
 }
@@ -1048,6 +1100,10 @@
 }
 @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; } }
 .footer-brand .logo-link { margin-bottom: 16px; }
+.footer-brand .logo-mark {
+  width: 72px;
+  height: 72px;
+}
 .footer-brand p { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; max-width: 32ch; }
 .footer-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
 
@@ -1118,8 +1174,14 @@
 }
 .modal-close:hover { background: var(--border-subtle); }
 
+.modal-logo {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 16px;
+}
+
 .modal-header {
-  padding: 32px 32px 0;
+  padding: 0 32px 0;
 }
 .modal-header h3 { margin: 0 0 8px; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 28px; }
 .modal-header p { margin: 0 0 24px; color: var(--text-secondary); font-size: 15px; }

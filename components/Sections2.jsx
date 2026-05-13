@@ -566,6 +566,9 @@ const TerminModal = ({ open, onClose }) => {
     <div className={`modal-backdrop ${open ? "open" : ""}`} onClick={onClose} aria-hidden={!open}>
       <div className="modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <button className="modal-close" onClick={onClose} aria-label="Schließen"><Icon name="x" size={18}/></button>
+        <div className="modal-logo">
+          <div className="logo-mark" style={{width: '48px', height: '48px'}} aria-hidden="true"></div>
+        </div>
         <div className="modal-header">
           <h3>Wunschtermin anfragen</h3>
           <p>Wählen Sie Ihren Wunschtermin,  wir rufen Sie zur Bestätigung zurück.</p>

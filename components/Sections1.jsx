@@ -4,6 +4,7 @@ const { useState: useState2, useEffect: useEffect2, useRef: useRef2 } = React;
 // ----- HERO -----
 const Hero = ({ onOpenTermin }) => (
   <section id="top" className="hero">
+    <div className="hero-logo-watermark"></div>
     <div className="container">
       <div className="hero-grid">
         <div>

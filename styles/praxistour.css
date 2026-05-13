@@ -9,6 +9,33 @@
 .praxistour-hero {
   padding: 120px 0 60px;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Logo-Wasserzeichen im Hintergrund */
+.hero-logo-bg {
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 400px;
+  background-image: url('../assets/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-logo-bg {
+    width: 300px;
+    height: 300px;
+    right: -80px;
+  }
 }
 
 .praxistour-hero .container {
