@@ -129,6 +129,7 @@ const Header = ({ onOpenTermin }) => {
               </div>
             </div>
             <a href="team.html" className="nav-item">Team</a>
+            <a href="praxistour.html" className="nav-item">Praxis-Tour</a>
             <a href="#ueber" className="nav-item" onClick={smooth("ueber")}>Über uns</a>
             <div onMouseEnter={openKontakt} onMouseLeave={closeKontakt} style={{ position: "relative" }}>
               <a href="#standort" className={`nav-item ${kontaktOpen ? "open" : ""}`} aria-expanded={kontaktOpen} onClick={smooth("standort")}>
@@ -187,17 +188,9 @@ const Header = ({ onOpenTermin }) => {
       </header>
 
       <div className={`mobile-menu ${mobileOpen ? "open" : ""}`} aria-hidden={!mobileOpen}>
-        <div className="mobile-menu-header">
-          <a href="index.html" className="mobile-logo-link">
-            <div className="logo-mark" aria-hidden="true"></div>
-            <div className="logo-text">
-              <span className="logo-name">Hancock-Diener &amp; Jahn</span>
-              <span className="logo-sub">Zahnmedizin Schwabing</span>
-            </div>
-          </a>
-        </div>
         <a href="leistungen.html">Leistungen</a>
         <a href="team.html">Team</a>
+        <a href="praxistour.html">Praxis-Tour</a>
         <a href="#ueber" onClick={smooth("ueber")}>Über uns</a>
         <div className="mobile-dropdown-group">
           <button className="mobile-dropdown-trigger" onClick={() => setMobileKontaktOpen(!mobileKontaktOpen)}>

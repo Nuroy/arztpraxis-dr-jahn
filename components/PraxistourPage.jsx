@@ -60,7 +60,6 @@ const PraxistourPage = () => {
       <main className="praxistour-page">
         {/* Hero-Bereich */}
         <section className="praxistour-hero">
-          <div className="hero-logo-bg"></div>
           <div className="container">
             <nav className="breadcrumb" aria-label="Breadcrumb">
               <a href="index.html">Start</a>

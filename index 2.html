@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praxis Dr. Jahn – Zahnmedizin in Schwabing</title>
+    <meta name="description" content="Zahnarztpraxis Dr. Jahn in München-Schwabing. Zahnmedizin mit Ruhe und Präzision für Erwachsene und Familien. Seit 2012 in der Leopoldstraße.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           RESET & BASE
+        ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1F2B26;
+            --color-secondary: #EDE7DD;
+            --color-accent: #B8705A;
+            --color-white: #FFFFFF;
+            --color-warmgray: #F7F5F2;
+            --color-text: #2C2C2C;
+            --color-text-light: #6B6B6B;
+            --color-border: #E0DCD7;
+
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 32px;
+            --space-lg: 64px;
+            --space-xl: 120px;
+            --space-xxl: 160px;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--color-text);
+            background: var(--color-white);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+        ======================================== */
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.15;
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 2vw, 1.8rem);
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.75;
+            max-width: 580px;
+        }
+
+        .text-small {
+            font-size: 0.875rem;
+            letter-spacing: 0.02em;
+        }
+
+        .text-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        /* ========================================
+           NAVIGATION
+        ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s ease, padding 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 48px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-text-light);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-primary) !important;
+            padding: 10px 24px;
+            border: 1px solid var(--color-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-primary);
+            color: var(--color-white) !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-lang {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            border-left: 1px solid var(--color-border);
+            padding-left: 20px;
+        }
+
+        .nav-lang a {
+            transition: color 0.3s;
+        }
+
+        .nav-lang a.active {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--color-primary);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding: 0 80px;
+            padding-left: 10%;
+        }
+
+        .hero-content h1 {
+            color: var(--color-primary);
+            margin-bottom: 32px;
+        }
+
+        .hero-content h1 em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            color: var(--color-text-light);
+            margin-bottom: 48px;
+            font-size: 1rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            letter-spacing: 0.02em;
+            transition: gap 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            gap: 20px;
+        }
+
+        .hero-cta .arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: var(--color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image-placeholder::after {
+            content: 'Praxisfoto: Empfangsbereich mit natürlichem Licht';
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.04em;
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+        }
+
+        /* ========================================
+           LEITGEDANKE SECTION
+        ======================================== */
+        .leitgedanke {
+            padding: var(--space-xxl) 10%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .leitgedanke-text {
+            max-width: 560px;
+            margin-left: 15%;
+        }
+
+        .leitgedanke-text p {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            line-height: 1.8;
+            color: var(--color-primary);
+            margin-bottom: 48px;
+        }
+
+        .leitgedanke-signature {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+        }
+
+        /* ========================================
+           LEISTUNGEN SECTION
+        ======================================== */
+        .leistungen {
+            padding: var(--space-xxl) 10%;
+            background: var(--color-warmgray);
+        }
+
+        .leistungen-header {
+            margin-bottom: 80px;
+        }
+
+        .leistungen-header .text-label {
+            margin-bottom: 16px;
+        }
+
+        .leistungen-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px 80px;
+            max-width: 1200px;
+        }
+
+        .leistung-card {
+            padding: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .leistung-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .leistung-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 20px;
+            stroke: var(--color-primary);
+            stroke-width: 1.2;
+            fill: none;
+        }
+
+        .leistung-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .leistung-card p {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .leistung-link {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .leistung-link:hover {
+            gap: 14px;
+        }
+
+        /* ========================================
+           TEAM SECTION
+        ======================================== */
+        .team {
+            padding: var(--space-xxl) 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .team-header {
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .team-header .text-label {
+            margin-bottom: 16px;
+        }
+
+        .team-link {
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            color: var(--color-text-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s, gap 0.3s;
+        }
+
+        .team-link:hover {
+            color: var(--color-primary);
+            gap: 14px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .team-member {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .team-member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-portrait {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--color-secondary);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-portrait::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            font-size: 0.7rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.04em;
+        }
+
+        .team-member h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-member .team-role {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.02em;
+        }
+
+        /* ========================================
+           PRAXIS-EINBLICKE SECTION
+        ======================================== */
+        .einblicke {
+            padding: var(--space-xxl) 10%;
+            background: var(--color-warmgray);
+        }
+
+        .einblicke-header {
+            margin-bottom: 80px;
+        }
+
+        .einblicke-header .text-label {
+            margin-bottom: 16px;
+        }
+
+        .einblicke-gallery {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-rows: auto auto;
+            gap: 24px;
+            max-width: 1200px;
+        }
+
+        .einblicke-item {
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .einblicke-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .einblicke-item:nth-child(1) {
+            grid-row: 1 / 3;
+        }
+
+        .einblicke-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            background: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+        }
+
+        .einblicke-placeholder span {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.04em;
+        }
+
+        /* ========================================
+           VERTRAUEN SECTION
+        ======================================== */
+        .vertrauen {
+            padding: 80px 10%;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .vertrauen-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .vertrauen-item {
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .vertrauen-item:hover {
+            opacity: 1;
+        }
+
+        /* ========================================
+           KONTAKT SECTION
+        ======================================== */
+        .kontakt {
+            padding: var(--space-xxl) 10%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .kontakt-info .text-label {
+            margin-bottom: 16px;
+        }
+
+        .kontakt-info h2 {
+            margin-bottom: 48px;
+        }
+
+        .kontakt-details {
+            list-style: none;
+            margin-bottom: 48px;
+        }
+
+        .kontakt-details li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.9rem;
+        }
+
+        .kontakt-details .detail-label {
+            color: var(--color-text-light);
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .kontakt-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: var(--color-white);
+            background: var(--color-primary);
+            padding: 16px 32px;
+            transition: background 0.3s ease, gap 0.3s ease;
+        }
+
+        .kontakt-cta:hover {
+            background: #2a3d33;
+            gap: 18px;
+        }
+
+        .kontakt-map {
+            background: var(--color-secondary);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .kontakt-map::after {
+            content: 'Kartenansicht – Leopoldstraße, Schwabing';
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.04em;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            padding: 48px 10%;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            color: var(--color-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.04em;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* ========================================
+           COOKIE BANNER
+        ======================================== */
+        .cookie-banner {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            max-width: 380px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            padding: 24px;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease 2s forwards;
+        }
+
+        .cookie-banner p {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cookie-accept {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 8px 20px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cookie-accept:hover {
+            background: #2a3d33;
+        }
+
+        .cookie-settings {
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            padding: 8px 20px;
+            background: none;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .cookie-settings:hover {
+            border-color: var(--color-primary);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========================================
+           FADE-IN ANIMATION
+        ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           SITEMAP OVERLAY
+        ======================================== */
+        .sitemap-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--color-white);
+            z-index: 3000;
+            overflow-y: auto;
+            padding: 80px 10%;
+        }
+
+        .sitemap-overlay.active {
+            display: block;
+        }
+
+        .sitemap-close {
+            position: absolute;
+            top: 32px;
+            right: 48px;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            color: var(--color-text-light);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 8px;
+        }
+
+        .sitemap-close:hover {
+            color: var(--color-primary);
+        }
+
+        .sitemap-content h2 {
+            margin-bottom: 64px;
+        }
+
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px 80px;
+        }
+
+        .sitemap-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: var(--color-primary);
+        }
+
+        .sitemap-section ul {
+            list-style: none;
+        }
+
+        .sitemap-section li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .sitemap-section a {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+
+        .sitemap-section a:hover {
+            color: var(--color-primary);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-content {
+                padding: 160px 8% 80px;
+                order: 2;
+            }
+
+            .hero-image {
+                height: 50vh;
+                order: 1;
+            }
+
+            .leistungen-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kontakt {
+                grid-template-columns: 1fr;
+                gap: 64px;
+            }
+
+            .sitemap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --space-xl: 80px;
+                --space-xxl: 100px;
+            }
+
+            .nav {
+                padding: 20px 24px;
+            }
+
+            .nav.scrolled {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                padding: 140px 6% 60px;
+            }
+
+            .hero-image {
+                height: 40vh;
+            }
+
+            .leitgedanke {
+                padding: var(--space-xl) 6%;
+            }
+
+            .leitgedanke-text {
+                margin-left: 0;
+            }
+
+            .leistungen {
+                padding: var(--space-xl) 6%;
+            }
+
+            .leistungen-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .team {
+                padding: var(--space-xl) 6%;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .team-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .einblicke {
+                padding: var(--space-xl) 6%;
+            }
+
+            .einblicke-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .einblicke-item:nth-child(1) {
+                grid-row: auto;
+            }
+
+            .kontakt {
+                padding: var(--space-xl) 6%;
+            }
+
+            .vertrauen-inner {
+                gap: 32px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+                padding: 40px 6%;
+            }
+
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cookie-banner {
+                left: 16px;
+                right: 16px;
+                max-width: none;
+            }
+        }
+
+        /* ========================================
+           FOCUS STATES (Accessibility)
+        ======================================== */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 4px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            padding: 12px 24px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 0.85rem;
+            z-index: 9999;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+        <a href="/" class="nav-logo">Dr. Jahn</a>
+        <ul class="nav-links">
+            <li><a href="/praxis">Praxis</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/leistungen">Leistungen</a></li>
+            <li><a href="/ablauf">Ablauf & Behandlung</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
+            <li class="nav-lang"><a href="#" class="active">DE</a> / <a href="#">EN</a></li>
+            <li><a href="/termin" class="nav-cta">Termin vereinbaren</a></li>
+        </ul>
+        <button class="nav-mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero" aria-label="Willkommen">
+            <div class="hero-content">
+                <h1>Zahnmedizin<br>mit <em>Ruhe.</em><br>Mitten in Schwabing.</h1>
+                <p class="hero-subtitle">Praxis Dr. Jahn – für Erwachsene und Familien.<br>Seit 2012 in der Leopoldstraße.</p>
+                <a href="/termin" class="hero-cta">Termin vereinbaren <span class="arrow">&rarr;</span></a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder" role="img" aria-label="Blick in den hellen Empfangsbereich der Praxis mit natürlichem Licht"></div>
+            </div>
+        </section>
+
+        <!-- Leitgedanke -->
+        <section class="leitgedanke fade-in" aria-label="Philosophie">
+            <div class="leitgedanke-text">
+                <p>Wir glauben, dass gute Zahnmedizin Zeit braucht. Zeit zum Zuhören, Zeit für Präzision, Zeit für den Menschen. Unsere Praxis ist ein Ort der Ruhe – für Behandlungen, die wirken, ohne zu überfordern.</p>
+                <span class="leitgedanke-signature">— Dr. Jahn</span>
+            </div>
+        </section>
+
+        <!-- Leistungen -->
+        <section class="leistungen" aria-label="Leistungen">
+            <div class="leistungen-header fade-in">
+                <span class="text-label">Leistungen</span>
+                <h2>Was wir für Sie tun</h2>
+            </div>
+            <div class="leistungen-grid">
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <circle cx="16" cy="16" r="12"/>
+                        <path d="M12 16h8M16 12v8"/>
+                    </svg>
+                    <h3>Prophylaxe</h3>
+                    <p>Professionelle Zahnreinigung und individuelle Vorsorgekonzepte als Fundament Ihrer Mundgesundheit.</p>
+                    <a href="/leistungen/prophylaxe" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M8 24l4-8 4 4 4-12 4 16"/>
+                    </svg>
+                    <h3>Ästhetische Zahnmedizin</h3>
+                    <p>Bleaching, Veneers und unsichtbare Korrekturen – für ein natürliches, harmonisches Erscheinungsbild.</p>
+                    <a href="/leistungen/aesthetik" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <rect x="8" y="14" width="16" height="12" rx="2"/>
+                        <path d="M12 14V10a4 4 0 018 0v4"/>
+                    </svg>
+                    <h3>Implantologie</h3>
+                    <p>Festsitzender Zahnersatz auf höchstem Niveau – schonend eingesetzt, dauerhaft belastbar.</p>
+                    <a href="/leistungen/implantologie" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <circle cx="16" cy="12" r="5"/>
+                        <path d="M8 26c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                    </svg>
+                    <h3>Kinderzahnheilkunde</h3>
+                    <p>Einfühlsame Behandlung der Kleinsten – damit der Zahnarztbesuch von Anfang an positiv besetzt bleibt.</p>
+                    <a href="/leistungen/kinder" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M6 16c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10"/>
+                        <path d="M16 10v6l4 4"/>
+                    </svg>
+                    <h3>Parodontologie</h3>
+                    <p>Systematische Behandlung von Zahnfleischerkrankungen – für langfristigen Zahnerhalt.</p>
+                    <a href="/leistungen/parodontologie" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+                <div class="leistung-card">
+                    <svg class="leistung-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M16 6C10 6 6 12 6 16s4 10 10 10 10-6 10-10S22 6 16 6z"/>
+                        <path d="M13 15l2 2 4-4"/>
+                    </svg>
+                    <h3>Angstpatienten</h3>
+                    <p>Behutsame Begleitung bei Zahnarztangst – mit Geduld, Einfühlungsvermögen und auf Wunsch Sedierung.</p>
+                    <a href="/leistungen/angstpatienten" class="leistung-link">Mehr erfahren <span>&rarr;</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="team" aria-label="Unser Team">
+            <div class="team-header">
+                <div>
+                    <span class="text-label">Team</span>
+                    <h2>Die Menschen<br>hinter der Praxis</h2>
+                </div>
+                <a href="/team" class="team-link">Das gesamte Team kennenlernen <span>&rarr;</span></a>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Dr. med. dent. Jahn</h3>
+                    <span class="team-role">Praxisinhaber, Implantologie</span>
+                </div>
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Dr. med. dent. Weber</h3>
+                    <span class="team-role">Ästhetische Zahnmedizin</span>
+                </div>
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Dr. med. dent. Lehmann</h3>
+                    <span class="team-role">Kinderzahnheilkunde</span>
+                </div>
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Anna Schreiber</h3>
+                    <span class="team-role">Dentalhygienikerin</span>
+                </div>
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Maria Hoffmann</h3>
+                    <span class="team-role">Praxismanagement</span>
+                </div>
+                <div class="team-member">
+                    <div class="team-portrait" data-label="Porträt"></div>
+                    <h3>Lisa Bauer</h3>
+                    <span class="team-role">Auszubildende</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Praxis-Einblicke -->
+        <section class="einblicke" aria-label="Einblicke in die Praxis">
+            <div class="einblicke-header fade-in">
+                <span class="text-label">Einblicke</span>
+                <h2>Unsere Räume</h2>
+            </div>
+            <div class="einblicke-gallery">
+                <div class="einblicke-item">
+                    <div class="einblicke-placeholder">
+                        <span>Behandlungszimmer 1 – mit Blick in den Innenhof</span>
+                    </div>
+                </div>
+                <div class="einblicke-item">
+                    <div class="einblicke-placeholder">
+                        <span>Empfangsbereich</span>
+                    </div>
+                </div>
+                <div class="einblicke-item">
+                    <div class="einblicke-placeholder">
+                        <span>Prophylaxe-Raum</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vertrauen -->
+        <section class="vertrauen fade-in" aria-label="Mitgliedschaften und Qualifikationen">
+            <div class="vertrauen-inner">
+                <span class="vertrauen-item">DGI Mitglied</span>
+                <span class="vertrauen-item">DGZMK</span>
+                <span class="vertrauen-item">Zertifizierte Implantologie</span>
+                <span class="vertrauen-item">Qualitätsmanagement ISO 9001</span>
+                <span class="vertrauen-item">MODERN DENTAL seit 2012</span>
+            </div>
+        </section>
+
+        <!-- Kontakt -->
+        <section class="kontakt" aria-label="Kontakt und Anfahrt">
+            <div class="kontakt-info">
+                <span class="text-label">Kontakt</span>
+                <h2>Besuchen<br>Sie uns</h2>
+                <ul class="kontakt-details">
+                    <li>
+                        <span class="detail-label">Adresse</span>
+                        <span>Leopoldstraße 82, 80802 München</span>
+                    </li>
+                    <li>
+                        <span class="detail-label">Telefon</span>
+                        <span>089 – 38 16 78 90</span>
+                    </li>
+                    <li>
+                        <span class="detail-label">E-Mail</span>
+                        <span>praxis@dr-jahn.de</span>
+                    </li>
+                    <li>
+                        <span class="detail-label">Öffnungszeiten</span>
+                        <span>Mo–Fr 8:00–18:00</span>
+                    </li>
+                    <li>
+                        <span class="detail-label">U-Bahn</span>
+                        <span>U3/U6 Giselastraße (2 Min.)</span>
+                    </li>
+                </ul>
+                <a href="/termin" class="kontakt-cta">Termin vereinbaren <span>&rarr;</span></a>
+            </div>
+            <div class="kontakt-map" role="img" aria-label="Kartenansicht der Praxis in Schwabing"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span class="footer-left">Praxis Dr. Jahn</span>
+        <ul class="footer-links">
+            <li><a href="/impressum">Impressum</a></li>
+            <li><a href="/datenschutz">Datenschutz</a></li>
+            <li><a href="#" id="sitemap-trigger">Sitemap</a></li>
+        </ul>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie-Hinweis">
+        <p>Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu ermöglichen. Weitere Informationen finden Sie in unserer Datenschutzerklärung.</p>
+        <div class="cookie-actions">
+            <button class="cookie-accept" id="cookie-accept">Akzeptieren</button>
+            <button class="cookie-settings">Einstellungen</button>
+        </div>
+    </div>
+
+    <!-- Sitemap Overlay -->
+    <div class="sitemap-overlay" id="sitemap-overlay" role="dialog" aria-label="Sitemap">
+        <button class="sitemap-close" id="sitemap-close">Schließen &times;</button>
+        <div class="sitemap-content">
+            <h2>Sitemap</h2>
+            <div class="sitemap-grid">
+                <div class="sitemap-section">
+                    <h3>Startseite</h3>
+                    <ul>
+                        <li><a href="/">Homepage</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Praxis</h3>
+                    <ul>
+                        <li><a href="/praxis">Philosophie & Geschichte</a></li>
+                        <li><a href="/praxis#raeume">Räumlichkeiten</a></li>
+                        <li><a href="/praxis#werte">Unsere Werte</a></li>
+                        <li><a href="/praxis#schwabing">Warum Schwabing</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Team</h3>
+                    <ul>
+                        <li><a href="/team">Teamübersicht</a></li>
+                        <li><a href="/team/dr-jahn">Dr. Jahn – Praxisinhaber</a></li>
+                        <li><a href="/team/dr-weber">Dr. Weber – Ästhetik</a></li>
+                        <li><a href="/team/dr-lehmann">Dr. Lehmann – Kinder</a></li>
+                        <li><a href="/team/schreiber">A. Schreiber – Prophylaxe</a></li>
+                        <li><a href="/team/hoffmann">M. Hoffmann – Management</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Leistungen</h3>
+                    <ul>
+                        <li><a href="/leistungen">Übersicht</a></li>
+                        <li><a href="/leistungen/prophylaxe">Prophylaxe & PZR</a></li>
+                        <li><a href="/leistungen/aesthetik">Ästhetische Zahnmedizin</a></li>
+                        <li><a href="/leistungen/implantologie">Implantologie</a></li>
+                        <li><a href="/leistungen/kinder">Kinderzahnheilkunde</a></li>
+                        <li><a href="/leistungen/parodontologie">Parodontologie</a></li>
+                        <li><a href="/leistungen/angstpatienten">Angstpatienten</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Ablauf & Behandlung</h3>
+                    <ul>
+                        <li><a href="/ablauf">Der erste Termin</a></li>
+                        <li><a href="/ablauf#vorher">Vor dem Termin</a></li>
+                        <li><a href="/ablauf#waehrend">Der Termin</a></li>
+                        <li><a href="/ablauf#nachher">Nach dem Termin</a></li>
+                        <li><a href="/ablauf#notfaelle">Notfälle</a></li>
+                        <li><a href="/ablauf#senioren">Hausbesuche & Senioren</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Kontakt & Termin</h3>
+                    <ul>
+                        <li><a href="/kontakt">Kontaktdaten & Anfahrt</a></li>
+                        <li><a href="/termin">Online-Terminbuchung</a></li>
+                        <li><a href="/kontakt#formular">Kontaktformular</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-section">
+                    <h3>Rechtliches</h3>
+                    <ul>
+                        <li><a href="/impressum">Impressum</a></li>
+                        <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // Navigation scroll behavior
+        // ========================================
+        const nav = document.querySelector('.nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // ========================================
+        // Fade-in on scroll (Intersection Observer)
+        // ========================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger animation for grid items
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Observe leistung cards with stagger
+        document.querySelectorAll('.leistung-card').forEach((el, i) => {
+            el.dataset.delay = i;
+            observer.observe(el);
+        });
+
+        // Observe team members with stagger
+        document.querySelectorAll('.team-member').forEach((el, i) => {
+            el.dataset.delay = i;
+            observer.observe(el);
+        });
+
+        // Observe einblicke items with stagger
+        document.querySelectorAll('.einblicke-item').forEach((el, i) => {
+            el.dataset.delay = i * 2;
+            observer.observe(el);
+        });
+
+        // ========================================
+        // Cookie banner
+        // ========================================
+        const cookieBanner = document.getElementById('cookie-banner');
+        const cookieAccept = document.getElementById('cookie-accept');
+
+        cookieAccept.addEventListener('click', () => {
+            cookieBanner.style.opacity = '0';
+            cookieBanner.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400);
+        });
+
+        // ========================================
+        // Sitemap overlay
+        // ========================================
+        const sitemapTrigger = document.getElementById('sitemap-trigger');
+        const sitemapOverlay = document.getElementById('sitemap-overlay');
+        const sitemapClose = document.getElementById('sitemap-close');
+
+        sitemapTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            sitemapOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        sitemapClose.addEventListener('click', () => {
+            sitemapOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sitemapOverlay.classList.contains('active')) {
+                sitemapOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ========================================
+        // Mobile menu toggle (placeholder)
+        // ========================================
+        const mobileToggle = document.querySelector('.nav-mobile-toggle');
+        mobileToggle.addEventListener('click', () => {
+            const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+            mobileToggle.setAttribute('aria-expanded', !expanded);
+        });
+    </script>
+</body>
+</html>
