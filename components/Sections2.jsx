@@ -28,12 +28,6 @@ const ScanVisual = () => (
           C 94 74, 88 68, 78 68
           Z
         " fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
-        {/* Decorative notch/sparkle on upper-left crown */}
-        <path d="
-          M 78 68
-          C 78 68, 72 58, 66 62
-          C 58 68, 62 80, 68 84
-        " fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
       </svg>
       <div className="scan-line"></div>
     </div>
@@ -346,7 +340,7 @@ const TerminCTA = ({ onOpenTermin }) => {
                   </a>
                   <div className="notfall-box">
                     <Icon name="alert" size={20}/>
-                    <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong>01805 908008</strong> (14 Ct/Min.)</span>
+                    <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong><a href="tel:01805908008">01805 908008</a></strong> (14 Ct/Min.)</span>
                   </div>
                 </div>
               )}
@@ -521,7 +515,7 @@ const Footer = () => (
           <ul>
             <li><a href="#ueber">Über uns</a></li>
             <li><a href="team.html">Team</a></li>
-            <li><a href="#">Praxis-Tour</a></li>
+            <li><a href="praxistour.html">Praxis-Tour</a></li>
             <li><a href="neupatienten.html">Neupatienten</a></li>
           </ul>
         </div>
@@ -543,7 +537,7 @@ const Footer = () => (
             <li><a href="tel:+498938808687" className="font-mono">089 38 80 86 87</a></li>
             <li><a href="tel:+498938889500" className="font-mono">089 38 88 95 00</a></li>
             <li><a href="mailto:empfang@zahnarztpraxis-schwabing.de">E-Mail</a></li>
-            <li><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>Notdienst: 01805 908008</a></li>
+            <li><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>Notdienst: www.notdienst-zahn.de / 01805 908008</a></li>
           </ul>
         </div>
       </div>
@@ -601,7 +595,7 @@ const TerminModal = ({ open, onClose }) => {
               </a>
               <div className="notfall-box">
                 <Icon name="alert" size={20}/>
-                <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong>01805 908008</strong> (14 Ct/Min.)</span>
+                <span>Außerhalb der Sprechzeiten: <strong><a href="https://www.notdienst-zahn.de" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent-warning)'}}>www.notdienst-zahn.de</a></strong> oder <strong><a href="tel:01805908008">01805 908008</a></strong> (14 Ct/Min.)</span>
               </div>
             </div>
           )}

@@ -28,7 +28,7 @@
 
 .logo-link { display: flex; align-items: center; gap: 12px; }
 .logo-mark {
-  width: 56px; height: 56px;
+  width: 80px; height: 80px;
   background-image: url('../assets/logo.png');
   background-size: contain;
   background-repeat: no-repeat;
