@@ -214,7 +214,7 @@
 
 .lightbox-content img {
   max-width: 100%;
-  max-height: calc(90vh - 100px);
+  max-height: calc(90vh - 220px);
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
@@ -253,6 +253,8 @@
   margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 10002;
 }
 
 /* Lightbox Navigation Buttons */
@@ -439,6 +441,10 @@
 
   .lightbox-caption p {
     font-size: 14px;
+  }
+
+  .lightbox-content img {
+    max-height: calc(90vh - 280px);
   }
 }
 
