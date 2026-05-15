@@ -29,6 +29,7 @@ const App = () => {
         <Werte/>
         <Team onOpenTermin={() => setTerminOpen(true)}/>
         <TechSpotlight/>
+        <DekoSection/>
         <Testimonials/>
         <TerminCTA/>
         <Standort/>

@@ -1,36 +1,94 @@
-const { useS3, useE3 } = React;
+const { useState: useS3, useEffect: useE3 } = React;
 
 // Praxis-Bilder mit Beschreibungen
 const praxisImages = [
-  { src: "assets/praxis-empfang.jpg", title: "Empfang", desc: "Herzlich willkommen in unserer Praxis" },
-  { src: "assets/praxis-empfang-portrait.jpg", title: "Empfangsbereich", desc: "Unser freundliches Team erwartet Sie" },
-  { src: "assets/praxis-wartebereich.jpg", title: "Wartebereich", desc: "Entspannte Atmosphäre zum Wohlfühlen" },
-  { src: "assets/praxis-blumen.jpg", title: "Praxisdetails", desc: "Gepflegte Details für Ihr Wohlbefinden" },
-  { src: "assets/praxis-blumen-wide.jpg", title: "Blumenarrangement", desc: "Frische und Eleganz in unseren Räumen" },
-  { src: "assets/praxis-flur.jpg", title: "Flurbereich", desc: "Helle und moderne Räumlichkeiten" },
-  { src: "assets/praxis-behandlung.jpg", title: "Behandlungsraum", desc: "Modernste Ausstattung für Ihre Behandlung" },
-  { src: "assets/praxis-behandlung-detail.jpg", title: "Behandlungseinheit", desc: "Hochwertige Technologie für präzise Ergebnisse" },
-  { src: "assets/praxis-behandlung-schild.jpg", title: "Behandlungsraum-Eingang", desc: "Diskrete und ruhige Behandlungsräume" },
-  { src: "assets/praxis-roentgen.jpg", title: "Röntgenbereich", desc: "Moderne digitale Röntgentechnik" },
-  { src: "assets/praxis-anmeldung.jpg", title: "Anmeldung", desc: "Ihr erster Anlaufpunkt in unserer Praxis" },
-  { src: "assets/praxis-kisses.jpg", title: "Praxisatmosphäre", desc: "Kleine Details mit großer Wirkung" },
-  { src: "assets/praxis-schild.jpg", title: "Praxisschild", desc: "Willkommen in Schwabing" },
-  { src: "assets/praxis-zahnmodelle.jpg", title: "Zahnmodelle", desc: "Anschauliche Patientenaufklärung" },
-  { src: "assets/praxis-team-member.jpg", title: "Unser Team", desc: "Freundlich und kompetent für Sie da" },
+  {
+    src: "assets/aussenansicht.jpg",
+    title: "Außenansicht",
+    desc: "Die Praxis befindet sich gegenüber der St. Ursula Kirche, Friedrichstraße, Ecke Kaiserstraße. Parkplätze gibt es gegen eine geringe Parkgebühr."
+  },
+  {
+    src: "assets/eingang.jpg",
+    title: "Eingang",
+    desc: "Der Eingang: Friedrichstrasse 33"
+  },
+  {
+    src: "assets/erster_stock.jpg",
+    title: "Treppenaufgang",
+    desc: "Flache Stufen mit Zwischenabsatz führen zum ersten Stock."
+  },
+  {
+    src: "assets/anmeldung.jpg",
+    title: "Anmeldung",
+    desc: "An der Anmeldung empfangen wir Sie freundlich und beraten Sie gern."
+  },
+  {
+    src: "assets/warteraum.jpg",
+    title: "Warteraum",
+    desc: "Warteraum im Erker mit Blick auf die Kirche."
+  },
+  {
+    src: "assets/platz_fuer_kunst.jpg",
+    title: "Kunstgalerie",
+    desc: "Der Altbau bietet Platz für Kunst und ist angenehm von Licht durchflutet."
+  },
+  {
+    src: "assets/zimmer-jahn-2019-01.jpg",
+    title: "Behandlungszimmer Dr. Jahn",
+    desc: "Das Behandlungszimmer von Dr. Irene Jahn."
+  },
+  {
+    src: "assets/zimmer-jahn-02.jpg",
+    title: "Behandlung Dr. Jahn",
+    desc: "Behandlung Dr. Irene Jahn."
+  },
+  {
+    src: "assets/zimmer-hancock-2019-01.jpg",
+    title: "Behandlungszimmer Dr. Hancock-Diener",
+    desc: "Das Behandlungszimmer von Dr. B. Hancock-Diener."
+  },
+  {
+    src: "assets/zimmer-hancock-02.jpg",
+    title: "Behandlung Dr. Hancock-Diener",
+    desc: "Behandlung Dr. B. Hancock-Diener."
+  },
+  {
+    src: "assets/hinterer_trakt.jpg",
+    title: "Hinterer Trakt",
+    desc: "Im hinteren Trakt befindet sich der Röntgenraum, der Sterilisationsraum und das zahntechnische Praxislabor."
+  },
+  {
+    src: "assets/roentgen-ii.jpg",
+    title: "Röntgenbereich",
+    desc: "Digitales Panorama-Röntgengerät zusätzlich zum digitalen Kleinbild-Röntgengerät."
+  },
+  {
+    src: "assets/tour-wir-freuen-uns.jpg",
+    title: "Willkommen",
+    desc: "Wir freuen uns auf Ihren Besuch!"
+  }
 ];
 
-// Lightbox-Komponente
-const Lightbox = ({ image, onClose }) => {
+// Lightbox-Komponente mit Navigation
+const Lightbox = ({ image, onClose, onNext, onPrev, currentIndex, totalImages }) => {
   useE3(() => {
     const handleEsc = (e) => { if (e.key === "Escape") onClose(); };
+    const handleArrowLeft = (e) => { if (e.key === "ArrowLeft") onPrev(); };
+    const handleArrowRight = (e) => { if (e.key === "ArrowRight") onNext(); };
     const handleClick = (e) => { if (e.target.classList.contains("lightbox-overlay")) onClose(); };
+
     document.addEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleArrowLeft);
+    document.addEventListener("keydown", handleArrowRight);
     document.addEventListener("click", handleClick);
+
     return () => {
       document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener("keydown", handleArrowLeft);
+      document.removeEventListener("keydown", handleArrowRight);
       document.removeEventListener("click", handleClick);
     };
-  }, [onClose]);
+  }, [onClose, onNext, onPrev]);
 
   if (!image) return null;
 
@@ -39,11 +97,36 @@ const Lightbox = ({ image, onClose }) => {
       <button className="lightbox-close" onClick={onClose} aria-label="Schließen">
         <Icon name="x" size={32} />
       </button>
+
       <div className="lightbox-content">
         <img src={image.src} alt={image.title} loading="lazy" />
         <div className="lightbox-caption">
           <h3>{image.title}</h3>
           <p>{image.desc}</p>
+          <span className="lightbox-counter">{currentIndex + 1} / {totalImages}</span>
+        </div>
+
+        {/* Navigation Buttons unter dem Bild */}
+        <div className="lightbox-nav-container">
+          <button
+            className="lightbox-nav lightbox-nav-prev"
+            onClick={onPrev}
+            disabled={currentIndex === 0}
+            aria-label="Vorheriges Bild"
+          >
+            <Icon name="arrow-left" size={24} />
+            <span>Zurück</span>
+          </button>
+
+          <button
+            className="lightbox-nav lightbox-nav-next"
+            onClick={onNext}
+            disabled={currentIndex === totalImages - 1}
+            aria-label="Nächstes Bild"
+          >
+            <span>Weiter</span>
+            <Icon name="arrow-right" size={24} />
+          </button>
         </div>
       </div>
     </div>
@@ -53,10 +136,33 @@ const Lightbox = ({ image, onClose }) => {
 // Hauptseite
 const PraxistourPage = () => {
   const [lightboxImage, setLightboxImage] = useS3(null);
+  const [lightboxIndex, setLightboxIndex] = useS3(0);
+  const [terminOpen, setTerminOpen] = useS3(false);
+
+  const openLightbox = (index) => {
+    setLightboxIndex(index);
+    setLightboxImage(praxisImages[index]);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
+  const showNext = () => {
+    const nextIndex = (lightboxIndex + 1) % praxisImages.length;
+    setLightboxIndex(nextIndex);
+    setLightboxImage(praxisImages[nextIndex]);
+  };
+
+  const showPrev = () => {
+    const prevIndex = (lightboxIndex - 1 + praxisImages.length) % praxisImages.length;
+    setLightboxIndex(prevIndex);
+    setLightboxImage(praxisImages[prevIndex]);
+  };
 
   return (
     <>
-      <Header />
+      <Header onOpenTermin={() => setTerminOpen(true)} />
       <main className="praxistour-page">
         {/* Hero-Bereich */}
         <section className="praxistour-hero">
@@ -84,7 +190,7 @@ const PraxistourPage = () => {
                 <div
                   key={idx}
                   className="gallery-item"
-                  onClick={() => setLightboxImage(img)}
+                  onClick={() => openLightbox(idx)}
                 >
                   <img src={img.src} alt={img.title} loading="lazy" />
                   <div className="gallery-overlay">
@@ -100,12 +206,20 @@ const PraxistourPage = () => {
 
         {/* CTA */}
         <section className="praxistour-cta">
-          <div className="container">
-            <h2>Überzeugt?</h2>
-            <p>Vereinbaren Sie jetzt einen Termin und erleben Sie unsere Praxis persönlich.</p>
-            <a href="index.html#termin" className="btn btn-primary">
-              Termin vereinbaren
-            </a>
+          <div className="container praxistour-cta-grid">
+            <div className="praxistour-cta-content">
+              <h2>Überzeugt?</h2>
+              <p>Vereinbaren Sie jetzt einen Termin und erleben Sie unsere Praxis persönlich.</p>
+              <a href="index.html#termin" className="btn btn-primary">
+                Termin vereinbaren
+              </a>
+            </div>
+            <div className="praxistour-cta-image">
+              <img
+                src="assets/keramik-zahn-tulpen-deko.jpg"
+                alt="Willkommen in unserer Praxis"
+              />
+            </div>
           </div>
         </section>
       </main>
@@ -113,11 +227,18 @@ const PraxistourPage = () => {
       <Footer />
       <CookieBanner />
 
+      {/* TerminModal */}
+      <TerminModal open={terminOpen} onClose={() => setTerminOpen(false)} />
+
       {/* Lightbox */}
       {lightboxImage && (
         <Lightbox
           image={lightboxImage}
-          onClose={() => setLightboxImage(null)}
+          onClose={closeLightbox}
+          onNext={showNext}
+          onPrev={showPrev}
+          currentIndex={lightboxIndex}
+          totalImages={praxisImages.length}
         />
       )}
     </>

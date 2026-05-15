@@ -167,9 +167,22 @@
   transition: filter 800ms ease, transform 1200ms ease;
   display: block;
 }
-.doctor-photo img.color-reveal {
+.doctor-photo img.color-reveal:not([src*="dr-jahn"]) {
   filter: grayscale(0%) contrast(1);
   transform: scale(1.03);
+}
+
+/* Dr. Jahn's color-reveal Zustand separat */
+.doctor-photo img[src*="dr-jahn"].color-reveal {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.08) !important;
+  transform-origin: center 42% !important;
+}
+
+/* Angleichung: Dr. Jahn's Bild vergrößern auf Team-Seite (wurde weiter weg fotografiert) */
+.doctor-photo img[src*="dr-jahn"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 42% !important;
 }
 .doctor-photo-meta {
   position: absolute;
@@ -373,6 +386,69 @@
 }
 .staff-card:hover .staff-photo img {
   transform: scale(1.05);
+}
+
+/* ===== TEAM-MITARBEITER GESICHTSGRÖSSEN-ANGLEICHUNG ===== */
+/* Moderate Anpassungen für einheitliche, gut sichtbare Gesichter */
+
+/* Team Bianca - Größe angleichen */
+.staff-photo img[src*="team-bianca"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 45% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-bianca"] {
+  transform: scale(1.13) !important;
+  transform-origin: center 45% !important;
+}
+
+/* Team Cerovina - leichte Vergrößerung */
+.staff-photo img[src*="team-cerovina"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 45% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-cerovina"] {
+  transform: scale(1.13) !important;
+  transform-origin: center 45% !important;
+}
+
+/* Team Klaudia - Querformat, leichte Vergrößerung */
+.staff-photo img[src*="team-klaudia"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 42% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-klaudia"] {
+  transform: scale(1.13) !important;
+  transform-origin: center 42% !important;
+}
+
+/* Team Leopold - Querformat, moderate Vergrößerung */
+.staff-photo img[src*="team-leopold"] {
+  transform: scale(1.15) !important;
+  transform-origin: center 40% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-leopold"] {
+  transform: scale(1.20) !important;
+  transform-origin: center 40% !important;
+}
+
+/* Team Michaela - Größe und Zentrierung korrigiert */
+.staff-photo img[src*="team-michaela"] {
+  transform: scale(1.10) !important;
+  transform-origin: 50% 42% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-michaela"] {
+  transform: scale(1.15) !important;
+  transform-origin: 50% 42% !important;
+}
+
+/* Team Yodit - Größe angleichen */
+.staff-photo img[src*="team-yodit"] {
+  transform: scale(1.12) !important;
+  transform-origin: center 45% !important;
+}
+.staff-card:hover .staff-photo img[src*="team-yodit"] {
+  transform: scale(1.17) !important;
+  transform-origin: center 45% !important;
 }
 .staff-photo::after {
   content: "";
@@ -648,6 +724,54 @@
 .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 450ms; }
 .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 600ms; }
 .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 750ms; }
+
+/* ==========================================
+   TEAM DEKO-BILD
+   ========================================== */
+
+/* Parent muss position: relative haben! */
+.team-hero-content {
+  position: relative;
+}
+
+.team-deko-image {
+  position: absolute;
+  bottom: -40px;
+  right: -60px;
+  width: 28%;
+  max-width: 360px;
+  z-index: 5;
+  opacity: 0.88;
+  transition: transform 400ms ease-out;
+}
+
+.team-deko-image:hover {
+  transform: translateY(-8px) rotate(2deg);
+}
+
+.team-deko-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  border: 8px solid white;
+}
+
+/* Tablet: Position anpassen */
+@media (max-width: 1024px) {
+  .team-deko-image {
+    bottom: -30px;
+    right: -40px;
+    width: 32%;
+  }
+}
+
+/* Mobile: ausblenden (zu viele Elemente) */
+@media (max-width: 768px) {
+  .team-deko-image {
+    display: none;
+  }
+}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 640px) {

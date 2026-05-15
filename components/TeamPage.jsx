@@ -137,6 +137,14 @@ const TeamApp = () => {
                 <div className="caption">Unser Empfang</div>
               </div>
             </div>
+
+            {/* Deko-Bild neben Polaroid-Stack */}
+            <div className="team-deko-image">
+              <img
+                src="assets/keramik-zahn-tulpen-deko.jpg"
+                alt="Zahnmedizin mit Lebensfreude"
+              />
+            </div>
           </div>
         </div>
       </section>

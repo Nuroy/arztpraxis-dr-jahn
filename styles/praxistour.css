@@ -1,14 +1,14 @@
 /* ===== PRAXISTOUR PAGE ===== */
 
 .praxistour-page {
-  background: var(--bg-primary);
+  background: var(--bg-canvas);
   min-height: 100vh;
 }
 
 /* Hero-Bereich */
 .praxistour-hero {
   padding: 120px 0 60px;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg-canvas) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -71,13 +71,13 @@
 }
 
 .breadcrumb a {
-  color: var(--accent-primary);
+  color: var(--brand-primary);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .breadcrumb a:hover {
-  color: var(--accent-dark);
+  color: var(--brand-primary-hover);
 }
 
 .breadcrumb span:not(:last-child) {
@@ -237,14 +237,118 @@
   opacity: 0.8;
 }
 
+/* Lightbox Counter */
+.lightbox-counter {
+  display: block;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+}
+
+/* Lightbox Navigation Container */
+.lightbox-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Lightbox Navigation Buttons */
+.lightbox-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--brand-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.lightbox-nav:hover:not(:disabled) {
+  background: var(--brand-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(58, 157, 80, 0.3);
+}
+
+.lightbox-nav:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.lightbox-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255,255,255,0.2);
+}
+
+.lightbox-nav svg {
+  flex-shrink: 0;
+}
+
+/* Mobile Anpassungen für Navigation */
+@media (max-width: 640px) {
+  .lightbox-nav-container {
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .lightbox-nav {
+    padding: 10px 16px;
+    font-size: 14px;
+    min-width: 100px;
+  }
+
+  .lightbox-nav span {
+    display: inline;
+  }
+}
+
+@media (max-width: 480px) {
+  .lightbox-nav {
+    padding: 10px 12px;
+    min-width: 80px;
+    gap: 6px;
+  }
+
+  .lightbox-nav span {
+    font-size: 13px;
+  }
+
+  .lightbox-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 /* CTA-Bereich */
 .praxistour-cta {
   padding: 80px 0;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg-canvas) 100%);
+}
+
+/* CTA Grid mit Bild */
+.praxistour-cta-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.praxistour-cta-content {
   text-align: center;
 }
 
-.praxistour-cta h2 {
+.praxistour-cta h2,
+.praxistour-cta-content h2 {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 36px;
   font-weight: 500;
@@ -252,10 +356,28 @@
   margin-bottom: 16px;
 }
 
-.praxistour-cta p {
+.praxistour-cta p,
+.praxistour-cta-content p {
   font-size: 18px;
   color: var(--text-secondary);
   margin-bottom: 32px;
+}
+
+.praxistour-cta-image {
+  width: 100%;
+  opacity: 0.9;
+}
+
+.praxistour-cta-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 350ms ease-out;
+}
+
+.praxistour-cta-image:hover img {
+  transform: scale(1.05) rotate(-1deg);
 }
 
 /* Responsive */
@@ -267,6 +389,12 @@
 
   .praxistour-hero h1 {
     font-size: 40px;
+  }
+
+  /* Tablet: kleineres Grid */
+  .praxistour-cta-grid {
+    grid-template-columns: 1fr 0.7fr;
+    gap: 48px;
   }
 }
 
@@ -288,8 +416,21 @@
     font-size: 16px;
   }
 
-  .praxistour-cta h2 {
+  .praxistour-cta h2,
+  .praxistour-cta-content h2 {
     font-size: 28px;
+  }
+
+  /* Mobile: Stack vertikal */
+  .praxistour-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .praxistour-cta-image {
+    order: -1; /* Bild über Text */
+    width: 70%;
+    margin: 0 auto;
   }
 
   .lightbox-caption h3 {

@@ -518,6 +518,24 @@
 }
 .team-card.pop .team-photo img { filter: grayscale(0%) contrast(1); }
 .team-card:hover .team-photo img { transform: scale(1.02); }
+
+/* Angleichung: Dr. Jahn's Bild vergrößern (wurde weiter weg fotografiert) */
+.team-photo img[src*="dr-jahn"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 42% !important;
+}
+
+/* Hover-Zustand für Dr. Jahn */
+.team-card:hover .team-photo img[src*="dr-jahn"] {
+  transform: scale(1.10) !important;
+  transform-origin: center 42% !important;
+}
+
+/* Pop-Zustand (wenn sichtbar wird) für Dr. Jahn */
+.team-card.pop .team-photo img[src*="dr-jahn"] {
+  transform: scale(1.08) !important;
+  transform-origin: center 42% !important;
+}
 .team-content { padding: 32px; }
 .team-name { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 28px; line-height: 1.25; margin: 0 0 4px; }
 .team-role { color: var(--brand-primary); font-size: 16px; margin: 0 0 20px; }
@@ -1351,4 +1369,49 @@
 /* Termin CTA */
 @media (max-width: 480px) {
   .termin-cta { padding: 48px 20px; }
+}
+
+/* ==========================================
+   DEKO-BILDER (Keramik-Zahn-Tulpen)
+   ========================================== */
+
+/* Deko-Sektion zwischen Sektionen */
+.deko-section {
+  padding: 64px 0;
+  overflow: hidden;
+}
+
+.deko-image {
+  width: 30%; /* 25-35% wie gewünscht */
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  opacity: 0.92;
+  transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+
+.deko-image:hover {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.deko-image-float-right {
+  float: right;
+  margin-left: 48px;
+  margin-bottom: 24px;
+}
+
+/* Mobile: volle Breite, zentriert */
+@media (max-width: 768px) {
+  .deko-image {
+    width: 60%;
+    float: none;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .deko-section {
+    padding: 48px 0;
+  }
 }

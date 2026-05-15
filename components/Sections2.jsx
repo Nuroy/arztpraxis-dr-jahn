@@ -55,6 +55,19 @@ const TechSpotlight = () => (
   </section>
 );
 
+// ----- Deko-Bild: Zahn & Tulpen -----
+const DekoSection = () => (
+  <div className="deko-section">
+    <div className="container">
+      <img
+        src="assets/keramik-zahn-tulpen-deko.jpg"
+        alt="Zahnmedizin mit Herz - Keramik-Zahn und Tulpen"
+        className="deko-image deko-image-float-right"
+      />
+    </div>
+  </div>
+);
+
 // ----- Testimonials -----
 const TESTI = [
   { quote: "Endlich eine Praxis, in der man sich wirklich Zeit nimmt. Frau Dr. Jahn hat mir alles geduldig erklärt, ich gehe zum ersten Mal gerne zum Zahnarzt.", author: "Sabine M.", meta: "Patientin seit 2019" },
@@ -633,6 +646,7 @@ const CookieBanner = () => {
 };
 
 window.TechSpotlight = TechSpotlight;
+window.DekoSection = DekoSection;
 window.Testimonials = Testimonials;
 window.TerminCTA = TerminCTA;
 window.Standort = Standort;

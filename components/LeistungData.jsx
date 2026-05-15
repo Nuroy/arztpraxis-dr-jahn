@@ -6,7 +6,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "Prophylaxe",
     eyebrow: "Vorsorge",
     lede: "Die professionelle Zahnreinigung ist die Basis Ihrer Zahngesundheit. Wir entfernen Beläge dort, wo die häusliche Pflege nicht hinkommt, sanft, gründlich und mit Zeit.",
-    image: "assets/praxis-behandlung.jpg",
+    image: "assets/prophylaxe-interdental-demo.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "45–60 Min." },
       { label: "Häufigkeit", value: "1 – 2× pro Jahr" },
@@ -42,7 +43,17 @@ window.LEISTUNG_DATA = {
     titleAccent: "gesundem Zahnfleisch",
     eyebrow: "Gegen Zahnfleischentzündung",
     lede: "Parodontitis ist die häufigste Ursache für Zahnverlust im Erwachsenenalter und entwickelt sich oft unbemerkt. Wir behandeln sie in zwei Phasen: gründlich, gezielt und schonend.",
-    image: "assets/praxis-behandlung.jpg",
+    imageComparison: {
+      images: [
+        "assets/parodontitis-gesund.jpg",
+        "assets/parodontitis-krank.jpg"
+      ],
+      labels: [
+        "Gesundes Zahnfleisch",
+        "Parodontitis"
+      ]
+    },
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60 – 90 Min." },
       { label: "Sitzungen", value: "4 – 10 innerhalb 2 Jahren" },
@@ -78,7 +89,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "eigenen Zahn erhalten",
     eyebrow: "Wurzelbehandlung",
     lede: "Wurzelbehandlung hat einen schlechten Ruf, doch zu Unrecht. Mit modernen Verfahren ist sie heute fast immer schmerzfrei oder schmerzarm und in den meisten Fällen erfolgreich.",
-    image: "assets/praxis-behandlung.jpg",
+    image: "assets/endodontie-endopilot.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60–90 Min." },
       { label: "Sitzungen", value: "1–2 Termine" },
@@ -114,7 +126,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Lächeln",
     eyebrow: "Form trifft Funktion",
     lede: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen: natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
-    image: "assets/frontzaehne-aesthetik.jpg",
+    image: "assets/keramik-kronen-inlays.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60–180 Min." },
@@ -150,7 +162,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "helleres Lächeln",
     eyebrow: "Sanfte Aufhellung",
     lede: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause.",
-    image: "assets/laecheln-weisse-zaehne.jpg",
+    image: "assets/opalescence-bleaching-system.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "90–120 Min." },
@@ -186,8 +198,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "feste Zähne wie eigene",
     eyebrow: "Hochwertiger Zahnersatz",
     lede: "Implantate ersetzen Zähne wie eigene. Aus Titan (oder bei Unverträglichkeit aus Keramik), mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
-    image: "assets/implantat-aufbau.jpg",
-    imageFormat: "portrait",
+    image: "assets/implantate-camlog-system.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer OP", value: "30–60 Min." },
       { label: "Einheilzeit", value: "3–6 Monate" },
@@ -224,7 +236,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "schonende Eingriffe",
     eyebrow: "Mikrochirurgie",
     lede: "Weisheitszähne, Wurzelspitzenresektion, Knochenaufbau: schonende Verfahren mit kurzer Heilungszeit, geplant mit moderner digitaler Diagnostik.",
-    image: "assets/praxis-behandlung-detail.jpg",
+    image: "assets/chirurgie-instrumente.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "30–90 Min." },
       { label: "Heilung", value: "1–2 Wochen" },
@@ -259,7 +272,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "ruhigem Kiefergelenk",
     eyebrow: "Knirsch-Schiene",
     lede: "Bruxismus, das nächtliche Knirschen, schadet Zähnen und Kiefergelenk. Eine individuell angepasste Knirsch-Schiene schützt zuverlässig und entlastet die Muskulatur.",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/gebiss-gipsmodell.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "2 Termine" },
       { label: "Tragezeit", value: "Nachts" },
@@ -367,7 +381,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "geraderem Lächeln",
     eyebrow: "Unsichtbare Aligner",
     lede: "Unsichtbare Aligner für sanfte Zahnkorrektur: herausnehmbar, transparent, alltagstauglich.",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=80&auto=format&fit=crop",
+    image: "assets/aligner-schiene-transparent.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "6–18 Monate" },
       { label: "Tragezeit", value: "22h/Tag" },
@@ -439,8 +454,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Tempo",
     eyebrow: "Mit Verständnis",
     lede: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
-    image: "assets/vertrauen-hand.jpg",
-    imageFormat: "portrait",
+    image: "assets/gipsvoegel-wanddeko.jpg",
+    imageFormat: "landscape",
     meta: [
       { label: "Erstgespräch", value: "Ohne Behandlung" },
       { label: "Pausen-Signal", value: "Jederzeit" },

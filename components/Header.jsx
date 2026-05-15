@@ -61,7 +61,10 @@ const Header = ({ onOpenTermin }) => {
   const closeTimer = useRef(null);
   const [kontaktOpen, setKontaktOpen] = useState(false);
   const kontaktTimer = useRef(null);
+  const [ueberOpen, setUeberOpen] = useState(false);
+  const ueberTimer = useRef(null);
   const [mobileKontaktOpen, setMobileKontaktOpen] = useState(false);
+  const [mobileUeberOpen, setMobileUeberOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -72,19 +75,25 @@ const Header = ({ onOpenTermin }) => {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    if (!mobileOpen) setMobileKontaktOpen(false);
+    if (!mobileOpen) {
+      setMobileKontaktOpen(false);
+      setMobileUeberOpen(false);
+    }
   }, [mobileOpen]);
 
   const openDrop = () => { clearTimeout(closeTimer.current); setDropdownOpen(true); };
   const closeDrop = () => { closeTimer.current = setTimeout(() => setDropdownOpen(false), 150); };
   const openKontakt = () => { clearTimeout(kontaktTimer.current); setKontaktOpen(true); };
   const closeKontakt = () => { kontaktTimer.current = setTimeout(() => setKontaktOpen(false), 150); };
+  const openUeber = () => { clearTimeout(ueberTimer.current); setUeberOpen(true); };
+  const closeUeber = () => { ueberTimer.current = setTimeout(() => setUeberOpen(false), 150); };
 
   const smooth = (id) => (e) => {
     e.preventDefault();
     setMobileOpen(false);
     setDropdownOpen(false);
     setKontaktOpen(false);
+    setUeberOpen(false);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -129,8 +138,27 @@ const Header = ({ onOpenTermin }) => {
               </div>
             </div>
             <a href="team.html" className="nav-item">Team</a>
-            <a href="praxistour.html" className="nav-item">Praxis-Tour</a>
-            <a href="#ueber" className="nav-item" onClick={smooth("ueber")}>Über uns</a>
+            <div onMouseEnter={openUeber} onMouseLeave={closeUeber} style={{ position: "relative" }}>
+              <a href="#ueber" className={`nav-item ${ueberOpen ? "open" : ""}`} aria-expanded={ueberOpen} onClick={smooth("ueber")}>
+                Über uns <Icon name="chevron-down" size={16} className="chev" />
+              </a>
+              <div className={`dropdown dropdown-contact ${ueberOpen ? "open" : ""}`} role="menu">
+                <a href="#ueber" className="dropdown-item" onClick={smooth("ueber")}>
+                  <div className="icon-box"><Icon name="heart" size={20} /></div>
+                  <div>
+                    <div className="item-title">Über unsere Praxis</div>
+                    <div className="item-desc">Unsere Geschichte & Philosophie</div>
+                  </div>
+                </a>
+                <a href="praxistour.html" className="dropdown-item">
+                  <div className="icon-box"><Icon name="search" size={20} /></div>
+                  <div>
+                    <div className="item-title">Praxis-Tour</div>
+                    <div className="item-desc">Virtueller Rundgang durch unsere Praxis</div>
+                  </div>
+                </a>
+              </div>
+            </div>
             <div onMouseEnter={openKontakt} onMouseLeave={closeKontakt} style={{ position: "relative" }}>
               <a href="#standort" className={`nav-item ${kontaktOpen ? "open" : ""}`} aria-expanded={kontaktOpen} onClick={smooth("standort")}>
                 Kontakt <Icon name="chevron-down" size={16} className="chev" />
@@ -190,8 +218,17 @@ const Header = ({ onOpenTermin }) => {
       <div className={`mobile-menu ${mobileOpen ? "open" : ""}`} aria-hidden={!mobileOpen}>
         <a href="leistungen.html">Leistungen</a>
         <a href="team.html">Team</a>
-        <a href="praxistour.html">Praxis-Tour</a>
-        <a href="#ueber" onClick={smooth("ueber")}>Über uns</a>
+        <div className="mobile-dropdown-group">
+          <button className="mobile-dropdown-trigger" onClick={() => setMobileUeberOpen(!mobileUeberOpen)}>
+            Über uns <Icon name="chevron-down" size={20} className={`chev ${mobileUeberOpen ? "open" : ""}`} />
+          </button>
+          {mobileUeberOpen && (
+            <div className="mobile-sub-links">
+              <a href="#ueber" onClick={smooth("ueber")}>Über unsere Praxis</a>
+              <a href="praxistour.html">Praxis-Tour</a>
+            </div>
+          )}
+        </div>
         <div className="mobile-dropdown-group">
           <button className="mobile-dropdown-trigger" onClick={() => setMobileKontaktOpen(!mobileKontaktOpen)}>
             Kontakt <Icon name="chevron-down" size={20} className={`chev ${mobileKontaktOpen ? "open" : ""}`} />

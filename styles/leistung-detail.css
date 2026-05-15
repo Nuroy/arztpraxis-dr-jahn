@@ -47,6 +47,9 @@
 /* Bild bleibt contain, damit es nicht abgeschnitten wird */
 .detail-hero-image img { width:100%; height:100%; object-fit: contain; }
 
+/* Landscape-Bilder sollen den Frame ausfüllen */
+.detail-hero-image.landscape img { object-fit: cover; }
+
 /* Responsive: Auf Mobile weniger extrem */
 @media (max-width: 768px) {
   .detail-hero-image.landscape {

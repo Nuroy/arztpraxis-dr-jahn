@@ -98,7 +98,18 @@ const LeistungDetailApp = () => {
               </div>
             </div>
             <div className={`detail-hero-image ${data.imageFormat || 'portrait'}`}>
-              <img src={data.image} alt={data.title} loading="lazy"/>
+              {data.imageComparison ? (
+                <div className="image-comparison">
+                  {data.imageComparison.images.map((img, idx) => (
+                    <div key={idx} className="comparison-item">
+                      <img src={img} alt={data.imageComparison.labels[idx]} loading="lazy"/>
+                      <span className="comparison-label">{data.imageComparison.labels[idx]}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <img src={data.image} alt={data.title} loading="lazy"/>
+              )}
             </div>
           </div>
         </div>
