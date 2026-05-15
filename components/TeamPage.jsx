@@ -125,15 +125,15 @@ const TeamApp = () => {
             </div>
             <div className="team-hero-stack reveal">
               <div className="team-hero-card team-hero-card-1">
-                <img src="assets/praxis-blumen.jpg" alt="Unsere Praxis"/>
+                <img src="assets/praxis-blumen.jpg" alt="Unsere Praxis" loading="lazy"/>
                 <div className="caption">Unsere Praxis</div>
               </div>
               <div className="team-hero-card team-hero-card-2">
-                <img src="assets/praxis-kisses.jpg" alt="Praxis-Atmosphäre"/>
+                <img src="assets/praxis-kisses.jpg" alt="Praxis-Atmosphäre" loading="lazy"/>
                 <div className="caption">Praxis-Atmosphäre</div>
               </div>
               <div className="team-hero-card team-hero-card-3">
-                <img src="assets/praxis-empfang.jpg" alt="Unser Empfang"/>
+                <img src="assets/praxis-empfang.jpg" alt="Unser Empfang" loading="lazy"/>
                 <div className="caption">Unser Empfang</div>
               </div>
             </div>
@@ -143,6 +143,7 @@ const TeamApp = () => {
               <img
                 src="assets/keramik-zahn-tulpen-deko.jpg"
                 alt="Zahnmedizin mit Lebensfreude"
+                loading="lazy"
               />
             </div>
           </div>

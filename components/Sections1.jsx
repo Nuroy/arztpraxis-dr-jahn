@@ -65,7 +65,7 @@ const Intro = () => (
     <div className="container">
       <div className="intro-grid">
         <div className="intro-image">
-          <img src="assets/praxis-flur.jpg" alt="Flur der Praxis" />
+          <img src="assets/praxis-flur.jpg" alt="Flur der Praxis" loading="lazy" />
         </div>
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>
@@ -181,7 +181,7 @@ const Team = ({ onOpenTermin }) => {
       <div className="team-grid" ref={teamRef}>
         <div className="team-card">
           <div className="team-photo">
-            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Birte Hancock-Diener" />
+            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Birte Hancock-Diener" loading="lazy" />
           </div>
           <div className="team-content">
             <h3 className="team-name">Dr. Birte Hancock-Diener</h3>
@@ -200,7 +200,7 @@ const Team = ({ onOpenTermin }) => {
         </div>
         <div className="team-card">
           <div className="team-photo">
-            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" />
+            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
           </div>
           <div className="team-content">
             <h3 className="team-name">Dr. Irene Jahn</h3>

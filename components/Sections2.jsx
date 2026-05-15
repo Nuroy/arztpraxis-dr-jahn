@@ -63,6 +63,7 @@ const DekoSection = () => (
         src="assets/keramik-zahn-tulpen-deko.jpg"
         alt="Zahnmedizin mit Herz - Keramik-Zahn und Tulpen"
         className="deko-image deko-image-float-right"
+        loading="lazy"
       />
     </div>
   </div>
@@ -336,7 +337,7 @@ const TerminCTA = ({ onOpenTermin }) => {
               ) : (
                 <div className="call-cards">
                   <a href="tel:+498938808687" className="call-card">
-                    <div className="call-avatar"><img src="assets/dr-jahn.jpg" alt=""/></div>
+                    <div className="call-avatar"><img src="assets/dr-jahn.jpg" alt="" loading="lazy"/></div>
                     <div>
                       <p className="call-name">Dr. Irene Jahn</p>
                       <p className="call-number">089 38 80 86 87</p>
@@ -344,7 +345,7 @@ const TerminCTA = ({ onOpenTermin }) => {
                     <Icon name="arrow-right" size={18} className="arrow"/>
                   </a>
                   <a href="tel:+498938889500" className="call-card">
-                    <div className="call-avatar"><img src="assets/dr-hancock-diener.jpg" alt=""/></div>
+                    <div className="call-avatar"><img src="assets/dr-hancock-diener.jpg" alt="" loading="lazy"/></div>
                     <div>
                       <p className="call-name">Dr. Hancock-Diener</p>
                       <p className="call-number">089 38 88 95 00</p>
@@ -594,7 +595,7 @@ const TerminModal = ({ open, onClose }) => {
           {tab === "online" ? <CalendarBooking/> : (
             <div className="call-cards">
               <a href="tel:+498938808687" className="call-card">
-                <div className="call-avatar"><img src="assets/dr-jahn.jpg" alt=""/></div>
+                <div className="call-avatar"><img src="assets/dr-jahn.jpg" alt="" loading="lazy"/></div>
                 <div>
                   <p className="call-name">Dr. Irene Jahn</p>
                   <p className="call-number">089 38 80 86 87</p>
@@ -602,7 +603,7 @@ const TerminModal = ({ open, onClose }) => {
                 <Icon name="arrow-right" size={18} className="arrow"/>
               </a>
               <a href="tel:+498938889500" className="call-card">
-                <div className="call-avatar"><img src="assets/dr-hancock-diener.jpg" alt=""/></div>
+                <div className="call-avatar"><img src="assets/dr-hancock-diener.jpg" alt="" loading="lazy"/></div>
                 <div>
                   <p className="call-name">Dr. Hancock-Diener</p>
                   <p className="call-number">089 38 88 95 00</p>

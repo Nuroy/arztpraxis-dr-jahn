@@ -218,6 +218,7 @@ const PraxistourPage = () => {
               <img
                 src="assets/keramik-zahn-tulpen-deko.jpg"
                 alt="Willkommen in unserer Praxis"
+                loading="lazy"
               />
             </div>
           </div>

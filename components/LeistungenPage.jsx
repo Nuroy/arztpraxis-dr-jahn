@@ -131,7 +131,7 @@ const CATEGORIES = [
     intro: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
     duration: "Erstgespräch ohne Behandlung möglich",
     coverage: "Reguläre Kassenleistung",
-    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1400&q=80&auto=format&fit=crop",
+    image: "assets/gipsvoegel-wanddeko.jpg",
     featured: {
       slug: "zahnarztangst",
       title: "Hilfe bei Zahnarztangst",

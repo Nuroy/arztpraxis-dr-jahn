@@ -766,10 +766,16 @@
   }
 }
 
-/* Mobile: ausblenden (zu viele Elemente) */
+/* Mobile: sichtbar wie auf anderen Seiten */
 @media (max-width: 768px) {
   .team-deko-image {
-    display: none;
+    position: static;
+    width: 70%;
+    max-width: 420px;
+    margin: 40px auto 0;
+    opacity: 1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border: none;
   }
 }
 
