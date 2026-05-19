@@ -29,8 +29,8 @@ const praxisImages = [
   },
   {
     src: "assets/platz_fuer_kunst.jpg",
-    title: "Kunstgalerie",
-    desc: "Der Altbau bietet Platz für Kunst und ist angenehm von Licht durchflutet."
+    title: "Gang",
+    desc: "Der lichtdurchflutete Gang mit Kunstwerken und gemütlicher Sitzgelegenheit."
   },
   {
     src: "assets/zimmer-jahn-2019-01.jpg",
@@ -38,34 +38,14 @@ const praxisImages = [
     desc: "Das Behandlungszimmer von Dr. Irene Jahn."
   },
   {
-    src: "assets/zimmer-jahn-02.jpg",
-    title: "Behandlung Dr. Jahn",
-    desc: "Behandlung Dr. Irene Jahn."
-  },
-  {
     src: "assets/zimmer-hancock-2019-01.jpg",
     title: "Behandlungszimmer Dr. Hancock-Diener",
     desc: "Das Behandlungszimmer von Dr. B. Hancock-Diener."
   },
   {
-    src: "assets/zimmer-hancock-02.jpg",
-    title: "Behandlung Dr. Hancock-Diener",
-    desc: "Behandlung Dr. B. Hancock-Diener."
-  },
-  {
-    src: "assets/hinterer_trakt.jpg",
-    title: "Hinterer Trakt",
-    desc: "Im hinteren Trakt befindet sich der Röntgenraum, der Sterilisationsraum und das zahntechnische Praxislabor."
-  },
-  {
-    src: "assets/roentgen-ii.jpg",
-    title: "Röntgenbereich",
-    desc: "Digitales Panorama-Röntgengerät zusätzlich zum digitalen Kleinbild-Röntgengerät."
-  },
-  {
-    src: "assets/tour-wir-freuen-uns.jpg",
-    title: "Willkommen",
-    desc: "Wir freuen uns auf Ihren Besuch!"
+    src: "assets/roentgenraum-weitwinkel.jpg",
+    title: "Röntgenraum",
+    desc: "Unser moderner Röntgenraum mit digitaler Panorama-Röntgenanlage und Sterilisationsbereich."
   }
 ];
 

@@ -65,7 +65,7 @@ const Intro = () => (
     <div className="container">
       <div className="intro-grid">
         <div className="intro-image">
-          <img src="assets/praxis-flur.jpg" alt="Flur der Praxis" loading="lazy" />
+          <img src="assets/praxis-flur-neu.jpg" alt="Flur der Praxis" loading="lazy" />
         </div>
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>
@@ -82,7 +82,7 @@ const Intro = () => (
 // ----- LEISTUNGEN -----
 const SERVICES = [
   { icon: "shield-tooth", title: "Prophylaxe & Zahnerhaltung", desc: "Zahnerhaltung, professionelle Zahnreinigung, Parodontologie und Endodontologie.  Vorsorge ist die beste Medizin.", items: [{label:"Zahnerhaltung / Prophylaxe", slug:"zahnerhaltung-prophylaxe"}, {label:"Parodontologie", slug:"parodontologie"}, {label:"Endodontologie", slug:"endodontologie"}], anchor: "prophylaxe" },
-  { icon: "sparkle", title: "Ästhetik", desc: "Bleaching und ästhetische Korrektionen, für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
+  { icon: "smile", title: "Ästhetik", desc: "Bleaching und ästhetische Korrekturen, für ein Lächeln, das zu Ihnen passt.", items: [{label:"Ästhetik und Funktion", slug:"aesthetik-funktion"}, {label:"Bleaching", slug:"bleaching"}], anchor: "aesthetik" },
   { icon: "implant", title: "Implantologie & Chirurgie", desc: "Hochwertiger, langlebiger Zahnersatz und schonende oralchirurgische Eingriffe.", items: [{label:"Implantologie", slug:"implantologie"}, {label:"Oralchirurgie / Kieferchirurgie", slug:"oralchirurgie"}], anchor: "chirurgie" },
   { icon: "moon", title: "Schienentherapie", desc: "Knirschen, Schnarchen, Migräne und sanfte Zahnkorrektur mit Alignern.", items: [{label:"Schienentherapie", slug:"schienentherapie"}, {label:"Schnarchschienen", slug:"schnarchschienen"}, {label:"NTI Aufbiss-Schienen", slug:"nti-aufbiss-schienen"}, {label:"Zahnkorrektur Schienen", slug:"zahnkorrektur-schienen"}], anchor: "schienen" },
   { icon: "smile", title: "Kinderzahnheilkunde", desc: "Sanfter, spielerischer Einstieg,  schon ab dem ersten Zahn.", items: [{label:"Kinderzahnheilkunde", slug:"kinderzahnheilkunde"}], anchor: "kinder" },
@@ -140,8 +140,16 @@ const Werte = () => (
         </div>
         <div className="wert-card">
           <span className="wert-num">02</span>
-          <h3 className="heading-lg">Meisterlabor-Qualität</h3>
-          <p>Über 25 bzw. 30 Jahren Zusammenarbeit mit deutschen zahntechnischen Meisterlaboren. Jeder Zahnersatz wird individuell und sorgfältig nach den neuesten Standards hergestellt.</p>
+          <h3 className="heading-lg">Unsere Partner</h3>
+          <p style={{marginBottom:'16px'}}>Über 25 bzw. 30 Jahre Zusammenarbeit mit deutschen zahntechnischen Meisterlaboren und kompetenten Partnerpraxen.</p>
+          <div style={{fontSize:'14px', lineHeight:'1.6'}}>
+            <strong style={{display:'block', marginBottom:'8px', color:'var(--text-primary)'}}>Meisterlabore:</strong>
+            <a href="https://www.oraldesign-chiemsee.de/" target="_blank" rel="noopener noreferrer" style={{display:'block', color:'var(--brand-primary)', textDecoration:'underline', marginBottom:'4px'}}>Oraldesign Chiemsee</a>
+            <a href="https://zahnwerk-dreilinden.de/" target="_blank" rel="noopener noreferrer" style={{display:'block', color:'var(--brand-primary)', textDecoration:'underline', marginBottom:'12px'}}>Zahnwerk Dreilinden</a>
+            <strong style={{display:'block', marginBottom:'8px', color:'var(--text-primary)'}}>Partnerpraxen:</strong>
+            <a href="https://kfo-am-kaiserplatz.de/" target="_blank" rel="noopener noreferrer" style={{display:'block', color:'var(--brand-primary)', textDecoration:'underline', marginBottom:'4px'}}>Kieferorthopädie am Kaiserplatz</a>
+            <a href="https://zahnplanet.de/" target="_blank" rel="noopener noreferrer" style={{display:'block', color:'var(--brand-primary)', textDecoration:'underline'}}>Zahnplanet</a>
+          </div>
         </div>
         <div className="wert-card">
           <span className="wert-num">03</span>

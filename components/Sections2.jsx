@@ -96,20 +96,6 @@ const Testimonials = () => (
           </div>
         ))}
       </div>
-      <div className="testimonials-footer" style={{flexWrap:'wrap'}}>
-        <a href="https://www.google.com/maps?cid=1265538615126076787" target="_blank" rel="noopener noreferrer" className="google-rating-link">
-          <Icon name="google" size={18}/>
-          <span><strong style={{color:'var(--text-primary)'}}>5.0 / 5</strong> · 21 Bewertungen</span>
-          <span style={{color:'var(--text-muted)',fontSize:'13px'}}>Dr. Hancock-Diener</span>
-          <Icon name="arrow-up-right" size={14} style={{color:'var(--brand-primary)'}}/>
-        </a>
-        <a href="https://www.google.com/maps?cid=14794690419727512583" target="_blank" rel="noopener noreferrer" className="google-rating-link">
-          <Icon name="google" size={18}/>
-          <span><strong style={{color:'var(--text-primary)'}}>4.4 / 5</strong> · 7 Bewertungen</span>
-          <span style={{color:'var(--text-muted)',fontSize:'13px'}}>Dr. Jahn</span>
-          <Icon name="arrow-up-right" size={14} style={{color:'var(--brand-primary)'}}/>
-        </a>
-      </div>
     </div>
   </section>
 );

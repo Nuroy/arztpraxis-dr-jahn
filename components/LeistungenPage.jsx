@@ -35,7 +35,7 @@ const CATEGORIES = [
     intro: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen, natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
     duration: "60–180 Min.",
     coverage: "Privatleistung / Eigenanteil",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&q=80&auto=format&fit=crop",
+    image: "assets/aesthetik-mund.jpg",
     featured: {
       slug: "aesthetik-funktion",
       title: "Ästhetik und Funktion",
@@ -59,7 +59,7 @@ const CATEGORIES = [
     intro: "Hochwertiger, langlebiger Zahnersatz auf Implantaten und schonende oralchirurgische Eingriffe, mit digitaler Diagnostik, computer-gestützter Planung und mikrochirurgischen Verfahren.",
     duration: "60 Min. – mehrere Sitzungen",
     coverage: "Privatleistung + Festzuschuss",
-    image: "assets/praxis-behandlung-detail.jpg",
+    image: "assets/implantate-camlog.jpg",
     featured: {
       slug: "implantologie",
       title: "Implantologie",
@@ -131,7 +131,7 @@ const CATEGORIES = [
     intro: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
     duration: "Erstgespräch ohne Behandlung möglich",
     coverage: "Reguläre Kassenleistung",
-    image: "assets/gipsvoegel-wanddeko.jpg",
+    image: "assets/voegel-wanddeko.jpg",
     featured: {
       slug: "zahnarztangst",
       title: "Hilfe bei Zahnarztangst",

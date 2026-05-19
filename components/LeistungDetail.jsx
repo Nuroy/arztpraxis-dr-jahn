@@ -134,7 +134,7 @@ const LeistungDetailApp = () => {
                 <div className="eyebrow">Worum es geht</div>
                 <h2>{data.intro.title}</h2>
                 {data.intro.body.split('\n\n').map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
                 ))}
               </div>
 

@@ -396,7 +396,7 @@
   .intro-grid { grid-template-columns: 1fr 1fr; gap: 96px; }
 }
 .intro-image {
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/2;
   border-radius: var(--radius-xl);
   overflow: hidden;
 }

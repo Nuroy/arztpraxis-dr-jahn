@@ -30,9 +30,9 @@ const DOCTORS = [
 const STAFF = [
   { name: "Margit Leopold", role: "ZFA, Verwaltung, QM", initials: "ML", photo: "assets/team-leopold.jpg" },
   { name: "Nisveta Cerovina", role: "ZMA, ZMP, Prophylaxe (PZR)", initials: "NC", photo: "assets/team-cerovina.jpg" },
-  { name: "Michaela Müller", role: "ZFA", initials: "MM", photo: "assets/team-michaela.jpg" },
-  { name: "Bianca Hannemann", role: "ZFA, Assistenz, Prophylaxe (PZR)", initials: "BH", photo: "assets/team-bianca.jpg" },
-  { name: "Yodit Hadgu", role: "ZFA", initials: "YH", photo: "assets/team-yodit.jpg" },
+  { name: "Michaela Müller", role: "ZFA, Prophylaxe (PZR)", initials: "MM", photo: "assets/team-michaela.jpg" },
+  { name: "Bianca Hannemann", role: "Assistenz, Prophylaxe (PZR)", initials: "BH", photo: "assets/team-bianca.jpg" },
+  { name: "Yodit Hadgu", role: "ZFA, Assistenz", initials: "YH", photo: "assets/team-yodit.jpg" },
   { name: "Klaudia Furtmayr", role: "ZMA, Prophylaxe (PZR), Assistenz", initials: "KF", photo: "assets/team-klaudia.jpg" }
 ];
 

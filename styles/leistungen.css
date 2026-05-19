@@ -147,14 +147,16 @@
 @media (min-width: 1024px) { .subleist-featured { grid-template-columns: 1fr 1fr; margin-bottom: 32px; } }
 .subleist-featured:hover { box-shadow: var(--shadow-md); }
 .subleist-featured-img {
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--bg-subtle);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(28, 35, 30, 0.12);
 }
 @media (min-width: 1024px) { .subleist-featured-img { aspect-ratio: auto; } }
 .subleist-featured-img img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 8s var(--ease-out);
 }
 .subleist-featured:hover .subleist-featured-img img { transform: scale(1.04); }

@@ -6,7 +6,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Prophylaxe",
     eyebrow: "Vorsorge",
     lede: "Die professionelle Zahnreinigung ist die Basis Ihrer Zahngesundheit. Wir entfernen Beläge dort, wo die häusliche Pflege nicht hinkommt, sanft, gründlich und mit Zeit.",
-    image: "assets/prophylaxe-interdental-demo.jpg",
+    image: "assets/zahnerhaltung-gebiss.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "45–60 Min." },
@@ -162,7 +162,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "helleres Lächeln",
     eyebrow: "Sanfte Aufhellung",
     lede: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause.",
-    image: "assets/opalescence-bleaching-system.jpg",
+    image: "assets/bleaching-opalescence.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "90–120 Min." },
@@ -198,8 +198,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "feste Zähne wie eigene",
     eyebrow: "Hochwertiger Zahnersatz",
     lede: "Implantate ersetzen Zähne wie eigene. Aus Titan (oder bei Unverträglichkeit aus Keramik), mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
-    image: "assets/implantate-camlog-system.jpg",
-    imageFormat: "landscape",
+    image: "assets/implantat-querschnitt.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Dauer OP", value: "30–60 Min." },
       { label: "Einheilzeit", value: "3–6 Monate" },
@@ -272,7 +272,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "ruhigem Kiefergelenk",
     eyebrow: "Knirsch-Schiene",
     lede: "Bruxismus, das nächtliche Knirschen, schadet Zähnen und Kiefergelenk. Eine individuell angepasste Knirsch-Schiene schützt zuverlässig und entlastet die Muskulatur.",
-    image: "assets/gebiss-gipsmodell.jpg",
+    image: "assets/knirschschiene.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "2 Termine" },
@@ -381,8 +381,8 @@ window.LEISTUNG_DATA = {
     titleAccent: "geraderem Lächeln",
     eyebrow: "Unsichtbare Aligner",
     lede: "Unsichtbare Aligner für sanfte Zahnkorrektur: herausnehmbar, transparent, alltagstauglich.",
-    image: "assets/aligner-schiene-transparent.jpg",
-    imageFormat: "landscape",
+    image: "assets/aligner-clearcorrect.jpg",
+    imageFormat: "portrait",
     meta: [
       { label: "Dauer", value: "6–18 Monate" },
       { label: "Tragezeit", value: "22h/Tag" },
@@ -428,7 +428,7 @@ window.LEISTUNG_DATA = {
     ],
     intro: {
       title: "Ein guter erster Eindruck wirkt ein Leben lang",
-      body: "Die ersten Zahnarztbesuche prägen oft das ganze Leben. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.\n\nAlles mit Erklären, Zeigen und Anfassen. Kinder dürfen alles anschauen und ausprobieren, bevor irgendetwas passiert. Wir erklären jeden Schritt mit kindgerechter Sprache. Und das Wichtigste: Wir machen keine Behandlung, wenn Ihr Kind nicht bereit ist."
+      body: "Die ersten Zahnarztbesuche prägen oft das ganze Leben. Wir nehmen uns Zeit, erklären spielerisch und schaffen positive Erinnerungen, schon ab dem ersten Zahn.\n\nAlles mit Erklären, Zeigen und Anfassen. Kinder dürfen alles anschauen und ausprobieren, bevor irgendetwas passiert. Wir erklären jeden Schritt mit kindgerechter Sprache. Und das Wichtigste: Wir machen keine Behandlung, wenn Ihr Kind nicht bereit ist.\n\nFür umfangreichere Behandlungen in Narkose arbeiten wir eng mit unserer Partnerpraxis <a href='https://zahnplanet.de/' target='_blank' rel='noopener noreferrer' style='color: var(--brand-primary); text-decoration: underline;'>Zahnplanet</a> zusammen, die auf Kinderbehandlungen spezialisiert ist."
     },
     inclusions: [
       { title: "Kennenlern-Termine", desc: "Erster Besuch oft nur zum Anschauen und Spielen, ohne Untersuchung." },
