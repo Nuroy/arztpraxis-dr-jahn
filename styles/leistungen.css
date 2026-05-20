@@ -265,6 +265,11 @@
     gap: 12px;
   }
 
+  /* Nur das zweite Bild (Parodontitis) auf Mobilgeräten anzeigen */
+  .comparison-item:first-child {
+    display: none;
+  }
+
   .comparison-item img {
     min-height: 250px;
   }
