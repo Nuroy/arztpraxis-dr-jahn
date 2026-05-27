@@ -114,7 +114,12 @@ const CalendarBooking = () => {
   const [selDate, setSelDate] = useS3(null);
   const [slots, setSlots] = useS3([]);
   const [name, setName] = useS3("");
+  const [email, setEmail] = useS3("");
   const [phone, setPhone] = useS3("");
+  const [nachricht, setNachricht] = useS3("");
+  const [consent, setConsent] = useS3(false);
+  const [honeypot, setHoneypot] = useS3("");
+  const [loading, setLoading] = useS3(false);
   const [sent, setSent] = useS3(false);
   const [error, setError] = useS3("");
 
@@ -158,19 +163,55 @@ const CalendarBooking = () => {
     return `${WDAYS[d.getDay()]}, ${d.getDate()}. ${MONTHS_DE[d.getMonth()]} ${d.getFullYear()} · ${s.time} Uhr`;
   };
 
-  const canSubmit = slots.length>0 && name.trim() && phone.trim();
-  const handleSubmit = () => {
+  const canSubmit = slots.length>0 && name.trim() && email.trim() && phone.trim() && consent && !loading;
+
+  const handleSubmit = async () => {
+    setError("");
+
+    // Client-seitige Validierung
     if (slots.length===0) { setError("Bitte wählen Sie mindestens einen Wunschtermin."); return; }
     if (!name.trim()) { setError("Bitte geben Sie Ihren Namen ein."); return; }
+    if (!email.trim()) { setError("Bitte geben Sie Ihre E-Mail-Adresse ein."); return; }
     if (!phone.trim()) { setError("Bitte geben Sie Ihre Telefonnummer ein."); return; }
-    const dn = doctor==="hancock" ? "Dr. Hancock-Diener" : "Dr. Jahn";
-    const lines = slots.map((s,i) => `  Wunschtermin ${i+1}: ${fmtSlot(s)}`).join('\n');
-    const subject = encodeURIComponent(`Terminanfrage von ${name.trim()} bei ${dn}`);
-    const body = encodeURIComponent(
-      `Neue Terminanfrage über die Website\n\nName: ${name.trim()}\nTelefon: ${phone.trim()}\nGewünschte Ärztin: ${dn}\n\n${lines}\n\nBitte kontaktieren Sie den/die Patient:in telefonisch zur Terminbestätigung.`
-    );
-    window.location.href = `mailto:${PRAXIS_EMAIL}?subject=${subject}&body=${body}`;
-    setSent(true);
+    if (!consent) { setError("Bitte stimmen Sie der Datenschutzerklärung zu."); return; }
+
+    // E-Mail Format prüfen
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/termin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          telefon: phone.trim(),
+          arzt: doctor,
+          termine: slots,
+          nachricht: nachricht.trim() || undefined,
+          consent: consent,
+          honeypot: honeypot
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Beim Versenden ist ein Fehler aufgetreten.');
+      }
+
+      setSent(true);
+    } catch (err) {
+      setError(err.message || 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (sent) return (
@@ -178,11 +219,20 @@ const CalendarBooking = () => {
       <div style={{width:'48px',height:'48px',borderRadius:'50%',background:'var(--brand-soft)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 16px'}}>
         <Icon name="check" size={24} style={{color:'var(--brand-primary)'}}/>
       </div>
-      <h4 style={{fontFamily:"'Fraunces',Georgia,serif",fontSize:'20px',marginBottom:'8px'}}>Anfrage vorbereitet</h4>
-      <p style={{color:'var(--text-secondary)',fontSize:'14px',maxWidth:'36ch',margin:'0 auto 16px'}}>
-        Bitte senden Sie die E-Mail in Ihrem E-Mail-Programm ab. Wir melden uns telefonisch bei Ihnen.
+      <h4 style={{fontFamily:"'Fraunces',Georgia,serif",fontSize:'20px',marginBottom:'8px'}}>Anfrage erfolgreich versendet!</h4>
+      <p style={{color:'var(--text-secondary)',fontSize:'14px',maxWidth:'40ch',margin:'0 auto 16px'}}>
+        Vielen Dank für Ihre Terminanfrage. Wir melden uns in Kürze telefonisch bei Ihnen, um einen der Wunschtermine zu bestätigen.
       </p>
-      <button className="btn btn-secondary" onClick={() => { setSent(false); setSlots([]); setName(""); setPhone(""); setError(""); }}>
+      <button className="btn btn-secondary" onClick={() => {
+        setSent(false);
+        setSlots([]);
+        setName("");
+        setEmail("");
+        setPhone("");
+        setNachricht("");
+        setConsent(false);
+        setError("");
+      }}>
         Neue Anfrage
       </button>
     </div>
@@ -277,14 +327,83 @@ const CalendarBooking = () => {
 
       <div className="calendar-step">Schritt 3 · Ihre Kontaktdaten</div>
       <div className="cal-contact">
-        <input type="text" className="cal-input" placeholder="Ihr Name" value={name} onChange={e=>setName(e.target.value)}/>
-        <input type="tel" className="cal-input" placeholder="Telefonnummer für Rückruf" value={phone} onChange={e=>setPhone(e.target.value)}/>
+        <input
+          type="text"
+          className="cal-input"
+          placeholder="Ihr Name *"
+          value={name}
+          onChange={e=>setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          className="cal-input"
+          placeholder="Ihre E-Mail *"
+          value={email}
+          onChange={e=>setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="tel"
+          className="cal-input"
+          placeholder="Telefonnummer für Rückruf *"
+          value={phone}
+          onChange={e=>setPhone(e.target.value)}
+          required
+        />
+        <textarea
+          className="cal-input"
+          placeholder="Nachricht (optional)"
+          value={nachricht}
+          onChange={e=>setNachricht(e.target.value)}
+          maxLength={500}
+          rows={3}
+          style={{resize:'vertical',fontFamily:'inherit'}}
+        />
+        <p style={{fontSize:'12px',color:'var(--text-secondary)',margin:'-4px 0 12px',lineHeight:'1.4'}}>
+          <Icon name="info" size={12} style={{verticalAlign:'text-top'}}/> Bitte keine medizinischen Details oder Beschwerden hier eintragen — diese besprechen wir telefonisch oder vor Ort.
+        </p>
+
+        {/* Honeypot (versteckt für Menschen, sichtbar für Bots) */}
+        <input
+          type="text"
+          name="website"
+          value={honeypot}
+          onChange={e=>setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{position:'absolute',left:'-9999px',width:'1px',height:'1px'}}
+          aria-hidden="true"
+        />
+
+        {/* DSGVO Consent Checkbox */}
+        <label style={{display:'flex',alignItems:'flex-start',gap:'8px',fontSize:'13px',lineHeight:'1.5',color:'var(--text-secondary)',cursor:'pointer',marginTop:'8px'}}>
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={e=>setConsent(e.target.checked)}
+            style={{marginTop:'2px',cursor:'pointer',accentColor:'var(--brand-primary)'}}
+            required
+          />
+          <span>
+            Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer" style={{color:'var(--brand-primary)',textDecoration:'underline'}}>Datenschutzerklärung</a> gelesen und willige in die Verarbeitung meiner Daten zur Bearbeitung meiner Terminanfrage ein. *
+          </span>
+        </label>
       </div>
 
-      {error && <p style={{color:'#c0392b',fontSize:'13px',margin:'8px 0 0'}}>{error}</p>}
+      {error && <p style={{color:'#c0392b',fontSize:'13px',margin:'12px 0 0',padding:'12px',background:'#fee',borderRadius:'6px',border:'1px solid #fcc'}}>{error}</p>}
 
-      <button className="btn btn-primary" style={{marginTop:'8px',width:'100%',justifyContent:'center',opacity:canSubmit?1:0.5}} onClick={handleSubmit}>
-        Wunschtermin{slots.length>1?'e':''} anfragen <Icon name="arrow-right" size={16} className="btn-arrow"/>
+      <button
+        className="btn btn-primary"
+        style={{marginTop:'12px',width:'100%',justifyContent:'center',opacity:canSubmit?1:0.5}}
+        onClick={handleSubmit}
+        disabled={!canSubmit || loading}
+      >
+        {loading ? (
+          <>Wird gesendet...</>
+        ) : (
+          <>Wunschtermin{slots.length>1?'e':''} anfragen <Icon name="arrow-right" size={16} className="btn-arrow"/></>
+        )}
       </button>
       <p className="cal-hint">
         <Icon name="phone" size={14}/> Wir melden uns telefonisch bei Ihnen, um einen der Termine zu bestätigen.
