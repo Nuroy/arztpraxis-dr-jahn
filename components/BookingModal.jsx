@@ -68,6 +68,7 @@ const useBookingFlow = () => {
   };
 
   const submit = async () => {
+    console.log('[BookingModal] Submit started');
     setError("");
     setLoading(true);
 
@@ -105,36 +106,48 @@ const useBookingFlow = () => {
       time: slot.dayTime // Backend bekommt dayTime statt exakter Uhrzeit
     }));
 
+    const payload = {
+      name: contactData.name.trim(),
+      telefon: contactData.phone.trim(),
+      email: contactData.email.trim() || undefined,
+      nachricht: contactData.notes.trim() || undefined,
+      arzt: doctor,
+      termine: termine,
+      consent: contactData.consent,
+      honeypot: contactData.honeypot
+    };
+
+    console.log('[BookingModal] Sending payload:', payload);
+
     try {
       const response = await fetch('/api/termin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: contactData.name.trim(),
-          telefon: contactData.phone.trim(),
-          email: contactData.email.trim() || undefined,
-          nachricht: contactData.notes.trim() || undefined,
-          arzt: doctor,
-          termine: termine,
-          consent: contactData.consent,
-          honeypot: contactData.honeypot
-        })
+        body: JSON.stringify(payload)
       });
 
+      console.log('[BookingModal] Response status:', response.status);
+
       const data = await response.json();
+      console.log('[BookingModal] Response data:', data);
 
       if (!response.ok) {
         if (response.status === 429) {
           throw new Error('Momentan hohe Auslastung. Bitte in wenigen Minuten erneut versuchen oder direkt anrufen: 089 38 80 86 87');
         }
-        throw new Error(data.error || 'Beim Versenden ist ein Fehler aufgetreten.');
+        throw new Error(data.error || data.details?.join(', ') || 'Beim Versenden ist ein Fehler aufgetreten.');
       }
 
+      console.log('[BookingModal] Success! Going to step 4');
       setCurrentStep(4); // Success screen
     } catch (err) {
-      setError(err.message || 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
+      console.error('[BookingModal] Error:', err);
+      const errorMsg = err.message || 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.';
+      setError(errorMsg);
+      alert('Fehler beim Versenden:\n\n' + errorMsg); // Zusätzlich als Alert für Debugging
     } finally {
       setLoading(false);
+      console.log('[BookingModal] Submit finished');
     }
   };
 
