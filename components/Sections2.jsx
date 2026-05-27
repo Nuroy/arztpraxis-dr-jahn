@@ -562,6 +562,654 @@ const CalendarBooking = () => {
   );
 };
 
+// ----- WIZARD BOOKING SYSTEM -----
+const useWizard = () => {
+  const now = new Date();
+  const [currentStep, setCurrentStep] = useS3(1);
+  const [wizardData, setWizardData] = useS3({
+    doctor: "jahn",
+    selectedDates: [],
+    selectedSlots: [],
+    name: "",
+    email: "",
+    phone: "",
+    nachricht: "",
+    consent: false,
+    honeypot: ""
+  });
+
+  const [viewMonth, setViewMonth] = useS3(now.getMonth());
+  const [viewYear, setViewYear] = useS3(now.getFullYear());
+  const [loading, setLoading] = useS3(false);
+  const [error, setError] = useS3("");
+  const [direction, setDirection] = useS3('forward');
+
+  const canProceed = (step) => {
+    switch(step) {
+      case 1: return !!wizardData.doctor;
+      case 2: return wizardData.selectedDates.length > 0;
+      case 3: return wizardData.selectedSlots.length > 0;
+      case 4: return wizardData.name.trim() &&
+                     wizardData.email.trim() &&
+                     wizardData.phone.trim() &&
+                     wizardData.consent;
+      default: return false;
+    }
+  };
+
+  const goNext = () => {
+    if (currentStep < 5 && canProceed(currentStep)) {
+      setDirection('forward');
+      setTimeout(() => setCurrentStep(currentStep + 1), 50);
+    }
+  };
+
+  const goBack = () => {
+    if (currentStep > 1) {
+      setDirection('back');
+      setTimeout(() => setCurrentStep(currentStep - 1), 50);
+    }
+  };
+
+  const updateData = (field, value) => {
+    setWizardData({ ...wizardData, [field]: value });
+  };
+
+  const reset = () => {
+    setCurrentStep(1);
+    setWizardData({
+      doctor: "jahn",
+      selectedDates: [],
+      selectedSlots: [],
+      name: "",
+      email: "",
+      phone: "",
+      nachricht: "",
+      consent: false,
+      honeypot: ""
+    });
+    setError("");
+    setLoading(false);
+  };
+
+  return {
+    currentStep,
+    wizardData,
+    viewMonth,
+    viewYear,
+    loading,
+    error,
+    direction,
+    canProceed,
+    goNext,
+    goBack,
+    updateData,
+    setCurrentStep,
+    setViewMonth,
+    setViewYear,
+    setLoading,
+    setError,
+    reset
+  };
+};
+
+const WizardProgress = ({ currentStep }) => {
+  const totalSteps = 4;
+  const progress = (currentStep / totalSteps) * 100;
+
+  if (currentStep === 5) return null;
+
+  return (
+    <div className="wizard-progress">
+      <div className="wizard-progress-label">
+        Schritt {currentStep} von {totalSteps}
+      </div>
+      <div className="wizard-progress-track">
+        <div className="wizard-progress-fill" style={{width: `${progress}%`}} />
+      </div>
+    </div>
+  );
+};
+
+const WizardFooter = ({ currentStep, canProceed, onBack, onNext, onSubmit, loading }) => {
+  const showBack = currentStep > 1 && currentStep < 5;
+  const showNext = currentStep < 4;
+  const showSubmit = currentStep === 4;
+
+  return (
+    <div className="wizard-footer">
+      {showBack && (
+        <button className="btn btn-secondary wizard-btn-back" onClick={onBack}>
+          <Icon name="arrow-left" size={16}/> Zurück
+        </button>
+      )}
+      <div className="wizard-footer-spacer"></div>
+      {showNext && (
+        <button
+          className="btn btn-primary wizard-btn-next"
+          onClick={onNext}
+          disabled={!canProceed}
+        >
+          Weiter <Icon name="arrow-right" size={16}/>
+        </button>
+      )}
+      {showSubmit && (
+        <button
+          className="btn btn-primary wizard-btn-submit"
+          onClick={onSubmit}
+          disabled={!canProceed || loading}
+        >
+          {loading ? "Wird gesendet..." : "Anfrage senden"}
+        </button>
+      )}
+    </div>
+  );
+};
+
+const WizardStep1DoctorSelect = ({ doctor, onSelect }) => {
+  return (
+    <div className="wizard-content-inner">
+      <h2 className="wizard-step-title">Bei wem möchten Sie einen Termin?</h2>
+      <p className="wizard-step-subtitle">Wählen Sie Ihre bevorzugte Ärztin aus</p>
+      <div className="wizard-doctor-grid">
+        <button
+          className={`wizard-doctor-card ${doctor === "jahn" ? "selected" : ""}`}
+          onClick={() => onSelect("jahn")}
+        >
+          <div className="wizard-doctor-avatar">
+            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy"/>
+          </div>
+          <p className="wizard-doctor-name">Dr. Irene Jahn</p>
+          <div className="wizard-doctor-check">
+            <Icon name="check" size={16}/>
+          </div>
+        </button>
+        <button
+          className={`wizard-doctor-card ${doctor === "hancock" ? "selected" : ""}`}
+          onClick={() => onSelect("hancock")}
+        >
+          <div className="wizard-doctor-avatar">
+            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy"/>
+          </div>
+          <p className="wizard-doctor-name">Dr. Hancock-Diener</p>
+          <div className="wizard-doctor-check">
+            <Icon name="check" size={16}/>
+          </div>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const WizardStep2DatePicker = ({ selectedDates, onToggleDate, viewMonth, viewYear, onPrevMonth, onNextMonth }) => {
+  const now = new Date();
+  const todayStr = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
+  const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+  const WDAYS_SHORT = ["Mo","Di","Mi","Do","Fr","Sa","So"];
+
+  const pad = n => String(n).padStart(2,'0');
+  const dk = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
+  const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+  const firstDow = (new Date(viewYear, viewMonth, 1).getDay() + 6) % 7;
+
+  const isWE = (y,m,d) => { const w = new Date(y,m,d).getDay(); return w===0||w===6; };
+  const isPast = (y,m,d) => dk(y,m,d) < todayStr;
+
+  const canPrev = viewYear > now.getFullYear() || (viewYear === now.getFullYear() && viewMonth > now.getMonth());
+  const maxFuture = new Date(now.getFullYear()+1, now.getMonth(), 1);
+  const canNext = new Date(viewYear, viewMonth+1, 1) < maxFuture;
+
+  const parseLocal = ds => { const [y,m,d] = ds.split('-').map(Number); return new Date(y, m-1, d); };
+  const fmtDate = ds => {
+    const d = parseLocal(ds);
+    const WDAYS = ["So","Mo","Di","Mi","Do","Fr","Sa"];
+    return `${WDAYS[d.getDay()]}, ${d.getDate()}. ${MONTHS_DE[d.getMonth()]}`;
+  };
+
+  return (
+    <div className="wizard-content-inner">
+      <h2 className="wizard-step-title">Wann hätten Sie Zeit?</h2>
+      <p className="wizard-step-subtitle">Wählen Sie bis zu 3 Wunschtermine</p>
+
+      {selectedDates.length > 0 && (
+        <div className="wizard-selected-dates">
+          {selectedDates.map((date, i) => (
+            <div key={i} className="wizard-date-chip">
+              <span>{fmtDate(date)}</span>
+              <button className="wizard-date-chip-remove" onClick={() => onToggleDate(date)} aria-label="Entfernen">
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="wizard-calendar-nav">
+        <button className="cal-nav-btn" onClick={onPrevMonth} disabled={!canPrev} aria-label="Vorheriger Monat">
+          <Icon name="arrow-left" size={16}/>
+        </button>
+        <span className="wizard-calendar-month">{MONTHS_DE[viewMonth]} {viewYear}</span>
+        <button className="cal-nav-btn" onClick={onNextMonth} disabled={!canNext} aria-label="Nächster Monat">
+          <Icon name="arrow-right" size={16}/>
+        </button>
+      </div>
+
+      <div className="calendar-grid">
+        {WDAYS_SHORT.map(d => <div key={d} className="cal-day cal-day-header">{d}</div>)}
+        {Array.from({length:firstDow}, (_,i) => <div key={"e"+i} className="cal-day"></div>)}
+        {Array.from({length:daysInMonth}, (_,i) => {
+          const d = i+1;
+          const we = isWE(viewYear, viewMonth, d);
+          const past = isPast(viewYear, viewMonth, d);
+          const dis = we || past || selectedDates.length >= 3;
+          const key = dk(viewYear, viewMonth, d);
+          const sel = selectedDates.includes(key);
+          return (
+            <button key={d}
+              className={`cal-day ${dis && !sel?"disabled":"available"} ${sel?"selected":""}`}
+              disabled={dis && !sel}
+              onClick={() => onToggleDate(key)}>
+              {d}
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedDates.length > 0 && selectedDates.length < 3 && (
+        <div className="wizard-hint">
+          <Icon name="plus" size={14}/>
+          <span>Noch {3-selectedDates.length} Wunschtermin{3-selectedDates.length>1?'e':''} möglich</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const WizardStep3TimePicker = ({ selectedDates, selectedSlots, onToggleSlot }) => {
+  const [activeDate, setActiveDate] = useS3(selectedDates[0] || null);
+  const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+  const WDAYS = ["So","Mo","Di","Mi","Do","Fr","Sa"];
+
+  const parseLocal = ds => { const [y,m,d] = ds.split('-').map(Number); return new Date(y, m-1, d); };
+  const fmtDate = ds => {
+    const d = parseLocal(ds);
+    return `${WDAYS[d.getDay()]}, ${d.getDate()}. ${MONTHS_DE[d.getMonth()]}`;
+  };
+
+  const timesFor = (ds) => {
+    const [y,m,d] = ds.split('-').map(Number);
+    const dow = new Date(y, m-1, d).getDay();
+    if (dow===0||dow===6) return [];
+    const endH = dow===5 ? 16 : 18;
+    const t = [];
+    const pad = n => String(n).padStart(2,'0');
+    for (let h=8; h<endH; h++) { t.push(pad(h)+':00'); t.push(pad(h)+':30'); }
+    return t;
+  };
+
+  const times = activeDate ? timesFor(activeDate) : [];
+
+  useE3(() => {
+    if (selectedDates.length > 0 && !activeDate) {
+      setActiveDate(selectedDates[0]);
+    }
+  }, [selectedDates]);
+
+  return (
+    <div className="wizard-content-inner">
+      <h2 className="wizard-step-title">Welche Uhrzeit passt am besten?</h2>
+      <p className="wizard-step-subtitle">Wählen Sie für jeden Tag eine bevorzugte Zeit</p>
+
+      {selectedDates.length > 1 && (
+        <div className="wizard-date-tabs">
+          {selectedDates.map(date => (
+            <button
+              key={date}
+              className={`wizard-date-tab ${activeDate === date ? "active" : ""}`}
+              onClick={() => setActiveDate(date)}
+            >
+              {fmtDate(date)}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {selectedDates.length === 1 && (
+        <div style={{marginBottom:'20px', textAlign:'center', fontSize:'15px', color:'var(--text-primary)', fontWeight:'500'}}>
+          {fmtDate(activeDate)}
+        </div>
+      )}
+
+      <div className="wizard-time-grid">
+        {times.map(t => {
+          const picked = selectedSlots.some(s => s.date===activeDate && s.time===t);
+          const disabled = selectedSlots.some(s => s.date===activeDate && s.time===t);
+          return (
+            <button key={t}
+              className={`wizard-time-slot ${picked?"selected":""}`}
+              disabled={disabled && !picked}
+              onClick={() => onToggleSlot(activeDate, t)}>
+              {t}
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedSlots.length > 0 && (
+        <div className="wizard-time-summary">
+          <div className="wizard-time-summary-title">Gewählte Zeiten ({selectedSlots.length})</div>
+          <div className="wizard-time-summary-list">
+            {selectedSlots.map((s, i) => (
+              <div key={i} className="wizard-time-summary-item">
+                <Icon name="check" size={14}/>
+                <span>{fmtDate(s.date)} · {s.time} Uhr</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const WizardStep4ContactForm = ({ wizardData, onUpdate, error }) => {
+  const doctorName = wizardData.doctor === "jahn" ? "Dr. Jahn" : "Dr. Hancock-Diener";
+
+  return (
+    <div className="wizard-content-inner">
+      <h2 className="wizard-step-title">Ihre Kontaktdaten</h2>
+      <p className="wizard-step-subtitle">Damit wir Sie erreichen können</p>
+
+      <div className="wizard-contact-summary">
+        <div className="wizard-contact-summary-title">Ihre Auswahl</div>
+        <div className="wizard-contact-summary-text">
+          Termin bei {doctorName} · {wizardData.selectedSlots.length} Wunschtermin{wizardData.selectedSlots.length>1?'e':''}
+        </div>
+      </div>
+
+      <div className="wizard-form">
+        <div className="wizard-form-grid">
+          <input
+            type="text"
+            className="wizard-input"
+            placeholder="Ihr Name *"
+            value={wizardData.name}
+            onChange={e => onUpdate('name', e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            className="wizard-input"
+            placeholder="Ihre E-Mail *"
+            value={wizardData.email}
+            onChange={e => onUpdate('email', e.target.value)}
+            required
+          />
+        </div>
+        <input
+          type="tel"
+          className="wizard-input"
+          placeholder="Telefonnummer für Rückruf *"
+          value={wizardData.phone}
+          onChange={e => onUpdate('phone', e.target.value)}
+          required
+        />
+        <textarea
+          className="wizard-input wizard-textarea"
+          placeholder="Nachricht (optional)"
+          value={wizardData.nachricht}
+          onChange={e => onUpdate('nachricht', e.target.value)}
+          maxLength={500}
+        />
+        <div className="wizard-hint-text">
+          <Icon name="info" size={12}/>
+          <span>Bitte keine medizinischen Details oder Beschwerden hier eintragen — diese besprechen wir telefonisch oder vor Ort.</span>
+        </div>
+
+        {/* Honeypot */}
+        <input
+          type="text"
+          name="website"
+          value={wizardData.honeypot}
+          onChange={e => onUpdate('honeypot', e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{position:'absolute',left:'-9999px',width:'1px',height:'1px'}}
+          aria-hidden="true"
+        />
+
+        <label className="wizard-consent">
+          <input
+            type="checkbox"
+            checked={wizardData.consent}
+            onChange={e => onUpdate('consent', e.target.checked)}
+            required
+          />
+          <span>
+            Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und willige in die Verarbeitung meiner Daten zur Bearbeitung meiner Terminanfrage ein. *
+          </span>
+        </label>
+      </div>
+
+      {error && <div className="wizard-error">{error}</div>}
+    </div>
+  );
+};
+
+const WizardStep5Success = ({ onClose, onNewRequest }) => {
+  return (
+    <div className="wizard-success">
+      <div className="wizard-success-icon">
+        <Icon name="check" size={40}/>
+      </div>
+      <h2 className="wizard-success-title">Anfrage erfolgreich versendet!</h2>
+      <p className="wizard-success-text">
+        Vielen Dank für Ihre Terminanfrage. Wir melden uns in Kürze telefonisch bei Ihnen, um einen der Wunschtermine zu bestätigen.
+      </p>
+      <div className="wizard-success-buttons">
+        <button className="btn btn-secondary" onClick={onNewRequest}>
+          Neue Anfrage
+        </button>
+        <button className="btn btn-primary" onClick={onClose}>
+          Schließen
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const CalendarWizard = ({ onClose }) => {
+  const wizard = useWizard();
+
+  const handleDoctorSelect = (doctor) => {
+    wizard.updateData('doctor', doctor);
+    setTimeout(() => wizard.goNext(), 300);
+  };
+
+  const handleToggleDate = (date) => {
+    const dates = wizard.wizardData.selectedDates;
+    if (dates.includes(date)) {
+      wizard.updateData('selectedDates', dates.filter(d => d !== date));
+      wizard.updateData('selectedSlots', wizard.wizardData.selectedSlots.filter(s => s.date !== date));
+    } else if (dates.length < 3) {
+      wizard.updateData('selectedDates', [...dates, date]);
+    }
+  };
+
+  const handlePrevMonth = () => {
+    if (wizard.viewMonth === 0) {
+      wizard.setViewYear(wizard.viewYear - 1);
+      wizard.setViewMonth(11);
+    } else {
+      wizard.setViewMonth(wizard.viewMonth - 1);
+    }
+  };
+
+  const handleNextMonth = () => {
+    if (wizard.viewMonth === 11) {
+      wizard.setViewYear(wizard.viewYear + 1);
+      wizard.setViewMonth(0);
+    } else {
+      wizard.setViewMonth(wizard.viewMonth + 1);
+    }
+  };
+
+  const handleToggleSlot = (date, time) => {
+    const slots = wizard.wizardData.selectedSlots;
+    const exists = slots.find(s => s.date === date && s.time === time);
+    if (exists) {
+      wizard.updateData('selectedSlots', slots.filter(s => !(s.date === date && s.time === time)));
+    } else {
+      const dateSlots = slots.filter(s => s.date === date);
+      if (dateSlots.length === 0) {
+        wizard.updateData('selectedSlots', [...slots, {date, time}]);
+      } else {
+        wizard.updateData('selectedSlots', slots.map(s => s.date === date ? {date, time} : s));
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    wizard.setError("");
+
+    if (wizard.wizardData.selectedSlots.length === 0) {
+      wizard.setError("Bitte wählen Sie mindestens einen Wunschtermin.");
+      return;
+    }
+    if (!wizard.wizardData.name.trim()) {
+      wizard.setError("Bitte geben Sie Ihren Namen ein.");
+      return;
+    }
+    if (!wizard.wizardData.email.trim()) {
+      wizard.setError("Bitte geben Sie Ihre E-Mail-Adresse ein.");
+      return;
+    }
+    if (!wizard.wizardData.phone.trim()) {
+      wizard.setError("Bitte geben Sie Ihre Telefonnummer ein.");
+      return;
+    }
+    if (!wizard.wizardData.consent) {
+      wizard.setError("Bitte stimmen Sie der Datenschutzerklärung zu.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(wizard.wizardData.email.trim())) {
+      wizard.setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+
+    wizard.setLoading(true);
+
+    try {
+      const response = await fetch('/api/termin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: wizard.wizardData.name.trim(),
+          email: wizard.wizardData.email.trim(),
+          telefon: wizard.wizardData.phone.trim(),
+          arzt: wizard.wizardData.doctor,
+          termine: wizard.wizardData.selectedSlots,
+          nachricht: wizard.wizardData.nachricht.trim() || undefined,
+          consent: wizard.wizardData.consent,
+          honeypot: wizard.wizardData.honeypot
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('Momentan hohe Auslastung. Bitte in wenigen Minuten erneut versuchen oder direkt anrufen: 089 38 80 86 87');
+        }
+        throw new Error(data.error || 'Beim Versenden ist ein Fehler aufgetreten.');
+      }
+
+      wizard.setCurrentStep(5);
+    } catch (err) {
+      wizard.setError(err.message || 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.');
+    } finally {
+      wizard.setLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    if (wizard.currentStep > 1 && wizard.currentStep < 5) {
+      const confirmed = window.confirm(
+        'Möchten Sie die Terminanfrage wirklich abbrechen? Ihre Eingaben gehen verloren.'
+      );
+      if (confirmed) {
+        wizard.reset();
+        if (onClose) onClose();
+      }
+    } else {
+      if (onClose) onClose();
+    }
+  };
+
+  const handleNewRequest = () => {
+    wizard.reset();
+  };
+
+  const renderStep = () => {
+    switch(wizard.currentStep) {
+      case 1:
+        return <WizardStep1DoctorSelect doctor={wizard.wizardData.doctor} onSelect={handleDoctorSelect} />;
+      case 2:
+        return (
+          <WizardStep2DatePicker
+            selectedDates={wizard.wizardData.selectedDates}
+            onToggleDate={handleToggleDate}
+            viewMonth={wizard.viewMonth}
+            viewYear={wizard.viewYear}
+            onPrevMonth={handlePrevMonth}
+            onNextMonth={handleNextMonth}
+          />
+        );
+      case 3:
+        return (
+          <WizardStep3TimePicker
+            selectedDates={wizard.wizardData.selectedDates}
+            selectedSlots={wizard.wizardData.selectedSlots}
+            onToggleSlot={handleToggleSlot}
+          />
+        );
+      case 4:
+        return (
+          <WizardStep4ContactForm
+            wizardData={wizard.wizardData}
+            onUpdate={wizard.updateData}
+            error={wizard.error}
+          />
+        );
+      case 5:
+        return <WizardStep5Success onClose={handleClose} onNewRequest={handleNewRequest} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="wizard-container">
+      <WizardProgress currentStep={wizard.currentStep} />
+      <div className="wizard-content">
+        {renderStep()}
+      </div>
+      {wizard.currentStep < 5 && (
+        <WizardFooter
+          currentStep={wizard.currentStep}
+          canProceed={wizard.canProceed(wizard.currentStep)}
+          onBack={wizard.goBack}
+          onNext={wizard.goNext}
+          onSubmit={handleSubmit}
+          loading={wizard.loading}
+        />
+      )}
+    </div>
+  );
+};
+
 const TerminCTA = ({ onOpenTermin }) => {
   const [tab, setTab] = useS3("online");
   return (
@@ -588,7 +1236,7 @@ const TerminCTA = ({ onOpenTermin }) => {
                 <button className={`booking-tab ${tab === "call" ? "active" : ""}`} onClick={() => setTab("call")}>Anrufen</button>
               </div>
               {tab === "online" ? (
-                <CalendarBooking/>
+                <CalendarWizard/>
               ) : (
                 <div className="call-cards">
                   <a href="tel:+498938808687" className="call-card">
@@ -847,7 +1495,7 @@ const TerminModal = ({ open, onClose }) => {
           </div>
         </div>
         <div className="modal-body">
-          {tab === "online" ? <CalendarBooking/> : (
+          {tab === "online" ? <CalendarWizard onClose={onClose}/> : (
             <div className="call-cards">
               <a href="tel:+498938808687" className="call-card">
                 <div className="call-avatar"><img src="assets/dr-jahn.jpg" alt="" loading="lazy"/></div>

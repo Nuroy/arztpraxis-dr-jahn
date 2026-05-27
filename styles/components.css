@@ -1716,6 +1716,693 @@
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ============ WIZARD BOOKING SYSTEM ============ */
+
+/* Wizard Container - Mobile: Fullscreen, Desktop: Fixed Modal */
+.wizard-container {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-canvas);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 300;
+}
+
+@media (min-width: 768px) {
+  .wizard-container {
+    position: relative;
+    inset: auto;
+    width: 560px;
+    height: 640px;
+    max-height: 90vh;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    margin: 0 auto;
+  }
+}
+
+/* Wizard Header */
+.wizard-header {
+  flex-shrink: 0;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.wizard-header h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  margin: 0 0 4px;
+  color: var(--text-primary);
+}
+
+.wizard-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Progress Bar */
+.wizard-progress {
+  flex-shrink: 0;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-subtle);
+}
+
+.wizard-progress-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.wizard-progress-track {
+  height: 4px;
+  background: var(--bg-canvas);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.wizard-progress-fill {
+  height: 100%;
+  background: var(--brand-primary);
+  transition: width 300ms var(--ease-out);
+  border-radius: 2px;
+}
+
+/* Wizard Content Area */
+.wizard-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wizard-content-inner {
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+
+.wizard-content-inner.transitioning-forward {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.wizard-content-inner.transitioning-back {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wizard-content-inner.transitioning-forward,
+  .wizard-content-inner.transitioning-back {
+    transform: none;
+  }
+}
+
+/* Wizard Footer */
+.wizard-footer {
+  flex-shrink: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  display: grid;
+  grid-template-columns: 1fr 8px 1fr;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.wizard-btn-back {
+  grid-column: 1;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.wizard-btn-next,
+.wizard-btn-submit {
+  grid-column: 3;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.wizard-footer-spacer {
+  grid-column: 2;
+}
+
+@media (min-width: 768px) {
+  .wizard-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-bottom: 16px;
+  }
+
+  .wizard-footer-spacer {
+    display: none;
+  }
+
+  .wizard-btn-back,
+  .wizard-btn-next,
+  .wizard-btn-submit {
+    min-height: auto;
+    padding: 12px 24px;
+    grid-column: auto;
+  }
+}
+
+/* Step 1: Doctor Selection */
+.wizard-doctor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .wizard-doctor-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.wizard-doctor-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 200ms var(--ease-out);
+  min-height: 180px;
+}
+
+.wizard-doctor-card:hover {
+  border-color: var(--brand-primary);
+  background: var(--brand-soft);
+  transform: translateY(-2px);
+}
+
+.wizard-doctor-card.selected {
+  border-color: var(--brand-primary);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 3px rgba(76, 111, 68, 0.1);
+}
+
+.wizard-doctor-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  flex-shrink: 0;
+}
+
+.wizard-doctor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+}
+
+.wizard-doctor-card.selected .wizard-doctor-avatar img {
+  filter: grayscale(0%);
+}
+
+.wizard-doctor-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+.wizard-doctor-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 200ms var(--ease-out);
+}
+
+.wizard-doctor-card.selected .wizard-doctor-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Step Title */
+.wizard-step-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.wizard-step-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+/* Step 2: Date Picker */
+.wizard-selected-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-height: 36px;
+}
+
+.wizard-date-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.2);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.wizard-date-chip-remove {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(76, 111, 68, 0.15);
+  color: var(--brand-primary);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: all 150ms;
+  flex-shrink: 0;
+}
+
+.wizard-date-chip-remove:hover {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+/* Calendar styling (reuse existing with modifications) */
+.wizard-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.wizard-calendar-month {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.wizard-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+}
+
+/* Step 3: Time Picker */
+.wizard-date-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wizard-date-tab {
+  padding: 10px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 150ms var(--ease-out);
+  flex-shrink: 0;
+}
+
+.wizard-date-tab:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.wizard-date-tab.active {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-color: var(--brand-primary);
+}
+
+.wizard-time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .wizard-time-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wizard-time-slot {
+  padding: 12px 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  cursor: pointer;
+  text-align: center;
+  transition: all 150ms var(--ease-out);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wizard-time-slot:hover:not(:disabled) {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.wizard-time-slot.selected {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-color: var(--brand-primary);
+}
+
+.wizard-time-slot:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.wizard-time-summary {
+  padding: 16px;
+  background: var(--brand-soft);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(76, 111, 68, 0.15);
+}
+
+.wizard-time-summary-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.wizard-time-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wizard-time-summary-item {
+  font-size: 13px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wizard-time-summary-item svg {
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+
+/* Step 4: Contact Form */
+.wizard-contact-summary {
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.15);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.wizard-contact-summary-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.wizard-contact-summary-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.wizard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wizard-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .wizard-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wizard-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 150ms ease;
+  box-sizing: border-box;
+}
+
+.wizard-input:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(76, 111, 68, 0.1);
+}
+
+.wizard-input::placeholder {
+  color: var(--text-muted);
+}
+
+.wizard-textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.wizard-hint-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-top: -4px;
+}
+
+.wizard-hint-text svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wizard-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.wizard-consent input[type="checkbox"] {
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: var(--brand-primary);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.wizard-consent a {
+  color: var(--brand-primary);
+  text-decoration: underline;
+}
+
+.wizard-error {
+  color: #c0392b;
+  font-size: 13px;
+  margin: 12px 0 0;
+  padding: 12px;
+  background: #fee;
+  border-radius: var(--radius-sm);
+  border: 1px solid #fcc;
+}
+
+/* Step 5: Success */
+.wizard-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 300px;
+}
+
+.wizard-success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  animation: success-pop 400ms var(--ease-out);
+}
+
+.wizard-success-icon svg {
+  color: var(--brand-primary);
+  animation: success-check 600ms var(--ease-out) 200ms both;
+}
+
+@keyframes success-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes success-check {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+.wizard-success-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.wizard-success-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 40ch;
+  margin: 0 0 32px;
+  line-height: 1.6;
+}
+
+.wizard-success-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .wizard-header {
+    padding: 16px 20px;
+  }
+
+  .wizard-progress {
+    padding: 12px 20px;
+  }
+
+  .wizard-content {
+    padding: 20px;
+  }
+
+  .wizard-footer {
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .wizard-step-title {
+    font-size: 20px;
+  }
+
+  .wizard-doctor-grid {
+    gap: 12px;
+  }
+
+  .wizard-doctor-card {
+    padding: 20px;
+    min-height: 160px;
+  }
+
+  .wizard-success {
+    padding: 20px;
+  }
+
+  .wizard-success-title {
+    font-size: 20px;
+  }
+}
+
 /* ============ RESPONSIVE — Landing Page (320–480px) ============ */
 
 /* Hero */
