@@ -586,10 +586,7 @@ const Step3ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots }) =
 
   return (
     <div className="booking-step">
-      <h2 className="booking-step-title">Ihre Kontaktdaten</h2>
-      <p className="booking-step-subtitle">Damit wir Sie erreichen können</p>
-
-      {/* Mini-Summary */}
+      {/* Mini-Summary (statt Headline) */}
       <div className="contact-summary">
         {doctorName} · {filledSlotsCount} Wunschtermin{filledSlotsCount > 1 ? 'e' : ''}
       </div>
