@@ -235,16 +235,58 @@ const BookingFooter = ({ currentStep, canProceed, onBack, onNext, onSubmit, load
   );
 };
 
-// ========== PLACEHOLDER STEPS (werden in nächsten Phasen ersetzt) ==========
-const Step1DoctorSelect = ({ doctor, onSelect }) => (
-  <div className="booking-step">
-    <h2 className="booking-step-title">Bei wem möchten Sie einen Termin?</h2>
-    <p className="booking-step-subtitle">Wählen Sie Ihre bevorzugte Ärztin aus</p>
-    <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-      Step 1 - Doctor Select (wird in Phase 2 implementiert)
+// ========== STEP 1: DOCTOR SELECT ==========
+const Step1DoctorSelect = ({ doctor, onSelect }) => {
+  const [showCheckmark, setShowCheckmark] = React.useState(null);
+
+  const handleSelect = (doctorId) => {
+    setShowCheckmark(doctorId);
+    setTimeout(() => {
+      onSelect(doctorId);
+    }, 400);
+  };
+
+  return (
+    <div className="booking-step">
+      <h2 className="booking-step-title">Bei wem möchten Sie einen Termin?</h2>
+      <p className="booking-step-subtitle">Wählen Sie Ihre bevorzugte Ärztin aus</p>
+
+      <div className="doctor-cards">
+        <button
+          className={`doctor-card ${doctor === "jahn" || showCheckmark === "jahn" ? "selected" : ""}`}
+          onClick={() => handleSelect("jahn")}
+          disabled={showCheckmark !== null}
+        >
+          <div className="doctor-avatar">
+            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
+          </div>
+          <div className="doctor-name">Dr. Irene Jahn</div>
+          {showCheckmark === "jahn" && (
+            <div className="doctor-checkmark">
+              <Icon name="check" size={24} />
+            </div>
+          )}
+        </button>
+
+        <button
+          className={`doctor-card ${doctor === "hancock" || showCheckmark === "hancock" ? "selected" : ""}`}
+          onClick={() => handleSelect("hancock")}
+          disabled={showCheckmark !== null}
+        >
+          <div className="doctor-avatar">
+            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy" />
+          </div>
+          <div className="doctor-name">Dr. Hancock-Diener</div>
+          {showCheckmark === "hancock" && (
+            <div className="doctor-checkmark">
+              <Icon name="check" size={24} />
+            </div>
+          )}
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => (
   <div className="booking-step">
