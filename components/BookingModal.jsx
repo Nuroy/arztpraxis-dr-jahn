@@ -5,7 +5,8 @@ const { useState: useS, useEffect: useE } = React;
 
 // ========== CUSTOM HOOK: Booking Flow State Management ==========
 const useBookingFlow = () => {
-  const [currentStep, setCurrentStep] = useS(1); // 1-4
+  const [currentStep, setCurrentStep] = useS(0); // 0=Methode wählen, 1=Arzt, 2=Slots, 3=Kontakt, 4=Success, 5=Call
+  const [bookingMethod, setBookingMethod] = useS(null); // "online" | "call"
   const [doctor, setDoctor] = useS(null); // "jahn" | "hancock"
   const [wishSlots, setWishSlots] = useS([null, null, null]); // max 3 slots
   const [contactData, setContactData] = useS({
@@ -20,6 +21,15 @@ const useBookingFlow = () => {
   const [error, setError] = useS("");
 
   // Slot structure: { date: "2026-05-28", dayTime: "morning" | "noon" | "afternoon" }
+
+  const selectMethod = (method) => {
+    setBookingMethod(method);
+    if (method === "call") {
+      setCurrentStep(5); // Call-Screen
+    } else {
+      setCurrentStep(1); // Arzt auswählen
+    }
+  };
 
   const selectDoctor = (doctorId) => {
     setDoctor(doctorId);
@@ -45,6 +55,7 @@ const useBookingFlow = () => {
 
   const canProceed = (step) => {
     switch (step) {
+      case 0: return !!bookingMethod;
       case 1: return !!doctor;
       case 2: return wishSlots[0] !== null; // mindestens Slot 1 gefüllt
       case 3:
@@ -62,7 +73,16 @@ const useBookingFlow = () => {
   };
 
   const goBack = () => {
-    if (currentStep > 1) {
+    if (currentStep === 5) {
+      // Von Call-Screen zurück zu Step 0
+      setCurrentStep(0);
+      setBookingMethod(null);
+    } else if (currentStep === 1) {
+      // Von Arzt-Auswahl zurück zu Step 0
+      setCurrentStep(0);
+      setBookingMethod(null);
+      setDoctor(null);
+    } else if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
@@ -152,7 +172,8 @@ const useBookingFlow = () => {
   };
 
   const reset = () => {
-    setCurrentStep(1);
+    setCurrentStep(0);
+    setBookingMethod(null);
     setDoctor(null);
     setWishSlots([null, null, null]);
     setContactData({
@@ -169,11 +190,13 @@ const useBookingFlow = () => {
 
   return {
     currentStep,
+    bookingMethod,
     doctor,
     wishSlots,
     contactData,
     loading,
     error,
+    selectMethod,
     selectDoctor,
     updateSlot,
     removeSlot,
@@ -188,9 +211,10 @@ const useBookingFlow = () => {
 
 // ========== PROGRESS BAR ==========
 const ProgressBar = ({ currentStep }) => {
-  const totalSteps = 3; // 1=Doctor, 2=Slots, 3=Contact (Success hat keine Progress)
-  if (currentStep === 4) return null;
+  // Keine Progress für Step 0 (Methode wählen), Step 4 (Success), Step 5 (Call)
+  if (currentStep === 0 || currentStep === 4 || currentStep === 5) return null;
 
+  const totalSteps = 3; // 1=Doctor, 2=Slots, 3=Contact
   const progress = (currentStep / totalSteps) * 100;
 
   return (
@@ -215,9 +239,83 @@ const BookingHeader = ({ onClose }) => (
   </div>
 );
 
+// ========== STEP 0: METHOD SELECTION ==========
+const Step0MethodSelect = ({ onSelectMethod }) => {
+  return (
+    <div className="booking-step">
+      <h2 className="booking-step-title">Wie möchten Sie einen Termin vereinbaren?</h2>
+      <p className="booking-step-subtitle">Wählen Sie Ihre bevorzugte Kontaktmethode</p>
+
+      <div className="method-cards">
+        <button className="method-card" onClick={() => onSelectMethod('online')}>
+          <div className="method-card-icon">
+            <Icon name="calendar" size={32} />
+          </div>
+          <div className="method-card-title">Online anfragen</div>
+          <div className="method-card-subtitle">Wunschtermine auswählen</div>
+        </button>
+
+        <button className="method-card" onClick={() => onSelectMethod('call')}>
+          <div className="method-card-icon">
+            <Icon name="phone" size={32} />
+          </div>
+          <div className="method-card-title">Jetzt anrufen</div>
+          <div className="method-card-subtitle">Direkt Termin vereinbaren</div>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// ========== STEP 5: CALL SCREEN ==========
+const Step5CallScreen = ({ onBack }) => {
+  return (
+    <div className="booking-step call-screen">
+      <h2 className="booking-step-title">Rufen Sie uns an</h2>
+      <p className="booking-step-subtitle">Wir vereinbaren gerne telefonisch einen Termin mit Ihnen</p>
+
+      <div className="call-cards">
+        <a href="tel:+498938889500" className="call-card">
+          <div className="call-card-doctor">
+            <div className="call-card-avatar">
+              <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
+            </div>
+            <div className="call-card-name">Dr. Irene Jahn</div>
+          </div>
+          <div className="call-card-phone">
+            <Icon name="phone" size={20} />
+            <span>089 38 88 95 00</span>
+          </div>
+        </a>
+
+        <a href="tel:+498938808687" className="call-card">
+          <div className="call-card-doctor">
+            <div className="call-card-avatar">
+              <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy" />
+            </div>
+            <div className="call-card-name">Dr. Hancock-Diener</div>
+          </div>
+          <div className="call-card-phone">
+            <Icon name="phone" size={20} />
+            <span>089 38 80 86 87</span>
+          </div>
+        </a>
+      </div>
+
+      <div className="call-hours">
+        <Icon name="clock" size={16} />
+        <span>Mo–Do: 8–18 Uhr · Fr: 8–16 Uhr</span>
+      </div>
+    </div>
+  );
+};
+
 // ========== MODAL FOOTER ==========
 const BookingFooter = ({ currentStep, canProceed, onBack, onNext, onSubmit, loading }) => {
-  const showBack = currentStep > 1 && currentStep < 4;
+  // Kein Footer für Step 0 (Methode wählen), Step 4 (Success), Step 5 (Call)
+  if (currentStep === 0 || currentStep === 4) return null;
+
+  const showBack = (currentStep > 1 && currentStep < 4) || currentStep === 5;
   const showNext = currentStep === 2;
   const showSubmit = currentStep === 3;
 
@@ -744,6 +842,8 @@ const BookingModal = ({ open, onClose }) => {
 
   const renderStep = () => {
     switch (flow.currentStep) {
+      case 0:
+        return <Step0MethodSelect onSelectMethod={flow.selectMethod} />;
       case 1:
         return <Step1DoctorSelect doctor={flow.doctor} onSelect={flow.selectDoctor} />;
       case 2:
@@ -766,6 +866,8 @@ const BookingModal = ({ open, onClose }) => {
         );
       case 4:
         return <Step4Success onClose={handleClose} onNew={handleNewRequest} />;
+      case 5:
+        return <Step5CallScreen onBack={flow.goBack} />;
       default:
         return null;
     }
@@ -781,16 +883,14 @@ const BookingModal = ({ open, onClose }) => {
         <div className="booking-content">
           {renderStep()}
         </div>
-        {flow.currentStep < 4 && (
-          <BookingFooter
-            currentStep={flow.currentStep}
-            canProceed={flow.canProceed(flow.currentStep)}
-            onBack={flow.goBack}
-            onNext={flow.goNext}
-            onSubmit={flow.submit}
-            loading={flow.loading}
-          />
-        )}
+        <BookingFooter
+          currentStep={flow.currentStep}
+          canProceed={flow.canProceed(flow.currentStep)}
+          onBack={flow.goBack}
+          onNext={flow.goNext}
+          onSubmit={flow.submit}
+          loading={flow.loading}
+        />
       </div>
     </div>
   );
