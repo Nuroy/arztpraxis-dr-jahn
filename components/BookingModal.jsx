@@ -12,6 +12,7 @@ const useBookingFlow = () => {
     name: "",
     phone: "",
     email: "",
+    notes: "",
     consent: false,
     honeypot: ""
   });
@@ -112,6 +113,7 @@ const useBookingFlow = () => {
           name: contactData.name.trim(),
           telefon: contactData.phone.trim(),
           email: contactData.email.trim() || undefined,
+          nachricht: contactData.notes.trim() || undefined,
           arzt: doctor,
           termine: termine,
           consent: contactData.consent,
@@ -144,6 +146,7 @@ const useBookingFlow = () => {
       name: "",
       phone: "",
       email: "",
+      notes: "",
       consent: false,
       honeypot: ""
     });
@@ -617,6 +620,15 @@ const Step3ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots }) =
           placeholder="E-Mail (optional)"
           value={contactData.email}
           onChange={(e) => onUpdate('email', e.target.value)}
+        />
+
+        <textarea
+          className="contact-input contact-textarea"
+          placeholder="Anmerkungen (optional)"
+          value={contactData.notes}
+          onChange={(e) => onUpdate('notes', e.target.value)}
+          rows={3}
+          maxLength={500}
         />
 
         {/* Honeypot */}

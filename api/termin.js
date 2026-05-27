@@ -13,7 +13,7 @@ const terminSchema = z.object({
   termine: z.array(
     z.object({
       date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-      time: z.string().regex(/^\d{2}:\d{2}$/)
+      time: z.enum(['morning', 'noon', 'afternoon']) // Tageszeit statt exakte Uhrzeit
     })
   ).min(1, 'Mindestens ein Termin erforderlich').max(3, 'Maximal 3 Termine möglich'),
   nachricht: z.string().max(500).optional(),
@@ -80,10 +80,19 @@ function formatDate(dateStr) {
   return `${days[date.getDay()]}, ${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
 }
 
+function formatDayTime(dayTime) {
+  const map = {
+    morning: 'Vormittag (8-12 Uhr)',
+    noon: 'Mittag (12-14 Uhr)',
+    afternoon: 'Nachmittag (14-18 Uhr)'
+  };
+  return map[dayTime] || dayTime;
+}
+
 function generateEmailHTML(data) {
   const arztName = data.arzt === 'hancock' ? 'Dr. Hancock-Diener' : 'Dr. Jahn';
   const termineList = data.termine.map((t, i) =>
-    `<li><strong>Wunschtermin ${i + 1}:</strong> ${formatDate(t.date)}, ${t.time} Uhr</li>`
+    `<li><strong>Wunschtermin ${i + 1}:</strong> ${formatDate(t.date)}, ${formatDayTime(t.time)}</li>`
   ).join('');
 
   return `
@@ -192,7 +201,7 @@ function generateEmailHTML(data) {
 function generateEmailPlain(data) {
   const arztName = data.arzt === 'hancock' ? 'Dr. Hancock-Diener' : 'Dr. Jahn';
   const termineList = data.termine.map((t, i) =>
-    `  Wunschtermin ${i + 1}: ${formatDate(t.date)}, ${t.time} Uhr`
+    `  Wunschtermin ${i + 1}: ${formatDate(t.date)}, ${formatDayTime(t.time)}`
   ).join('\n');
 
   return `
