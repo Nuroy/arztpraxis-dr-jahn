@@ -113,7 +113,7 @@ function generateEmailHTML(data) {
           <tr>
             <td style="background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); padding: 32px; text-align: center;">
               <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">
-                📅 Neue Terminanfrage
+                Neue Terminanfrage
               </h1>
               <p style="margin: 8px 0 0; color: rgba(255, 255, 255, 0.9); font-size: 14px;">
                 Eingegangen über die Website
@@ -168,7 +168,7 @@ function generateEmailHTML(data) {
               <!-- Action -->
               <div style="background-color: #fef3c7; border: 1px solid #fbbf24; padding: 16px; border-radius: 6px; margin-top: 24px;">
                 <p style="margin: 0; font-size: 14px; color: #92400e; line-height: 1.6;">
-                  ⚡ <strong>Bitte kontaktieren Sie den/die Patient:in telefonisch</strong>, um einen der Wunschtermine zu bestätigen.
+                  <strong>Bitte kontaktieren Sie den/die Patient:in telefonisch</strong>, um einen der Wunschtermine zu bestätigen.
                 </p>
               </div>
 
