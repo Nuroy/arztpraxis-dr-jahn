@@ -36,7 +36,7 @@ const App = () => {
         <FAQ/>
       </main>
       <Footer/>
-      <TerminModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
+      <BookingModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
       <CookieBanner/>
     </>
   );
