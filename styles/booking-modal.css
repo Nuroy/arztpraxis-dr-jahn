@@ -47,13 +47,13 @@
 @media (min-width: 768px) {
   .booking-modal {
     width: 520px;
-    height: 680px;
+    height: 740px; /* Erhöht von 680px auf 740px für mehr Platz */
     max-height: 90vh;
   }
 
   /* Wenn Sub-Picker offen, sanfte Höhen-Erweiterung */
   .booking-modal.picker-open {
-    height: 720px;
+    height: 780px; /* Angepasst von 720px auf 780px */
     transition: height 200ms ease-in-out, transform 250ms ease-out, opacity 250ms ease-out;
   }
 }
