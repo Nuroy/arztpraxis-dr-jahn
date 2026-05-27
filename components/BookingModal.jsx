@@ -288,15 +288,293 @@ const Step1DoctorSelect = ({ doctor, onSelect }) => {
   );
 };
 
-const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => (
-  <div className="booking-step">
-    <h2 className="booking-step-title">Ihre Wunschtermine</h2>
-    <p className="booking-step-subtitle">Wählen Sie 1 bis 3 Termine, an denen Sie Zeit hätten</p>
-    <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-      Step 2 - Wish Slots (wird in Phase 3 implementiert)
+// ========== STEP 2: WISH SLOTS + SUB-PICKER ==========
+
+// Helper: Format date to German display
+const formatDate = (dateStr) => {
+  if (!dateStr) return "";
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  const WDAYS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+  const MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+  return `${WDAYS[date.getDay()]}, ${day}. ${MONTHS[date.getMonth()]}`;
+};
+
+// Helper: Format dayTime to German
+const formatDayTime = (dayTime) => {
+  const map = {
+    morning: "Vormittag",
+    noon: "Mittag",
+    afternoon: "Nachmittag"
+  };
+  return map[dayTime] || dayTime;
+};
+
+// Sub-Component: Wish Slot Card
+const WishSlotCard = ({ index, slot, onClick, onRemove, isFirst }) => {
+  const isEmpty = !slot;
+  const isOptional = index > 0;
+
+  if (isEmpty) {
+    return (
+      <button
+        className={`wish-slot-card empty ${isOptional ? "optional" : "required"}`}
+        onClick={onClick}
+      >
+        <Icon name="plus" size={20} />
+        <span className="wish-slot-text">
+          {isFirst ? "+ Wunschtermin wählen" : "+ Weiteren Termin hinzufügen (optional)"}
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <div className="wish-slot-card filled">
+      <button className="wish-slot-main" onClick={onClick}>
+        <div className="wish-slot-info">
+          <div className="wish-slot-date">{formatDate(slot.date)}</div>
+          <div className="wish-slot-badge">{formatDayTime(slot.dayTime)}</div>
+        </div>
+      </button>
+      <button
+        className="wish-slot-remove"
+        onClick={(e) => {
+          e.stopPropagation();
+          onRemove();
+        }}
+        aria-label="Entfernen"
+      >
+        <Icon name="x" size={16} />
+      </button>
     </div>
-  </div>
-);
+  );
+};
+
+// Sub-Component: Mini Calendar
+const MiniCalendar = ({ selectedDate, onSelectDate }) => {
+  const now = new Date();
+  const [viewMonth, setViewMonth] = React.useState(now.getMonth());
+  const [viewYear, setViewYear] = React.useState(now.getFullYear());
+
+  const MONTHS_DE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const WDAYS_SHORT = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const firstDow = (new Date(viewYear, viewMonth, 1).getDay() + 6) % 7; // Monday = 0
+
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+  const isWeekend = (y, m, d) => {
+    const dow = new Date(y, m, d).getDay();
+    return dow === 0 || dow === 6;
+  };
+
+  const isPast = (y, m, d) => {
+    const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    return dateStr < todayStr;
+  };
+
+  const canPrev = viewYear > now.getFullYear() || (viewYear === now.getFullYear() && viewMonth > now.getMonth());
+  const maxFuture = new Date(now.getFullYear() + 1, now.getMonth(), 1);
+  const canNext = new Date(viewYear, viewMonth + 1, 1) < maxFuture;
+
+  const goPrev = () => {
+    if (!canPrev) return;
+    if (viewMonth === 0) {
+      setViewYear(viewYear - 1);
+      setViewMonth(11);
+    } else {
+      setViewMonth(viewMonth - 1);
+    }
+  };
+
+  const goNext = () => {
+    if (!canNext) return;
+    if (viewMonth === 11) {
+      setViewYear(viewYear + 1);
+      setViewMonth(0);
+    } else {
+      setViewMonth(viewMonth + 1);
+    }
+  };
+
+  const handleDayClick = (day) => {
+    const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    onSelectDate(dateStr);
+  };
+
+  return (
+    <div className="mini-calendar">
+      <div className="mini-calendar-nav">
+        <button
+          className="mini-calendar-nav-btn"
+          onClick={goPrev}
+          disabled={!canPrev}
+          aria-label="Vorheriger Monat"
+        >
+          <Icon name="arrow-left" size={14} />
+        </button>
+        <div className="mini-calendar-month">
+          {MONTHS_DE[viewMonth]} {viewYear}
+        </div>
+        <button
+          className="mini-calendar-nav-btn"
+          onClick={goNext}
+          disabled={!canNext}
+          aria-label="Nächster Monat"
+        >
+          <Icon name="arrow-right" size={14} />
+        </button>
+      </div>
+
+      <div className="mini-calendar-grid">
+        {WDAYS_SHORT.map(wd => (
+          <div key={wd} className="mini-calendar-day header">{wd}</div>
+        ))}
+        {Array.from({ length: firstDow }, (_, i) => (
+          <div key={`empty-${i}`} className="mini-calendar-day"></div>
+        ))}
+        {Array.from({ length: daysInMonth }, (_, i) => {
+          const day = i + 1;
+          const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const isDisabled = isWeekend(viewYear, viewMonth, day) || isPast(viewYear, viewMonth, day);
+          const isSelected = dateStr === selectedDate;
+          const isToday = dateStr === todayStr;
+
+          return (
+            <button
+              key={day}
+              className={`mini-calendar-day ${isDisabled ? 'disabled' : 'available'} ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''}`}
+              disabled={isDisabled}
+              onClick={() => handleDayClick(day)}
+            >
+              {day}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// Sub-Component: DayTime Pills
+const DayTimePills = ({ selectedDayTime, onSelect }) => {
+  const dayTimes = [
+    { id: "morning", label: "🌅 Vormittag", subLabel: "8–12 Uhr" },
+    { id: "noon", label: "☀️ Mittag", subLabel: "12–14 Uhr" },
+    { id: "afternoon", label: "🌇 Nachmittag", subLabel: "14–18 Uhr" }
+  ];
+
+  return (
+    <div className="daytime-pills">
+      {dayTimes.map(dt => (
+        <button
+          key={dt.id}
+          className={`daytime-pill ${selectedDayTime === dt.id ? 'selected' : ''}`}
+          onClick={() => onSelect(dt.id)}
+        >
+          <div className="daytime-pill-label">{dt.label}</div>
+          <div className="daytime-pill-sublabel">{dt.subLabel}</div>
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Sub-Component: Slot Picker (Sub-Picker Overlay)
+const SlotPicker = ({ onSubmit, onCancel }) => {
+  const [selectedDate, setSelectedDate] = React.useState(null);
+  const [selectedDayTime, setSelectedDayTime] = React.useState(null);
+
+  const canSubmit = selectedDate && selectedDayTime;
+
+  const handleSubmit = () => {
+    if (canSubmit) {
+      onSubmit({ date: selectedDate, dayTime: selectedDayTime });
+    }
+  };
+
+  return (
+    <div className="slot-picker">
+      <div className="slot-picker-header">
+        <h3 className="slot-picker-title">Termin wählen</h3>
+      </div>
+
+      <div className="slot-picker-body">
+        <MiniCalendar selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+        <DayTimePills selectedDayTime={selectedDayTime} onSelect={setSelectedDayTime} />
+      </div>
+
+      <div className="slot-picker-footer">
+        <button className="btn-text" onClick={onCancel}>
+          Abbrechen
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+        >
+          Übernehmen
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Main Step 2 Component
+const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
+  const [pickerOpen, setPickerOpen] = React.useState(null); // null | 0 | 1 | 2 (slot index)
+
+  const handleSlotClick = (index) => {
+    setPickerOpen(index);
+  };
+
+  const handlePickerSubmit = (slotData) => {
+    if (pickerOpen !== null) {
+      onUpdate(pickerOpen, slotData);
+      setPickerOpen(null);
+    }
+  };
+
+  const handlePickerCancel = () => {
+    setPickerOpen(null);
+  };
+
+  const handleRemove = (index) => {
+    onRemove(index);
+  };
+
+  return (
+    <div className="booking-step">
+      <h2 className="booking-step-title">Ihre Wunschtermine</h2>
+      <p className="booking-step-subtitle">Wählen Sie 1 bis 3 Termine, an denen Sie Zeit hätten</p>
+
+      <div className="wish-slots">
+        {wishSlots.map((slot, index) => (
+          <WishSlotCard
+            key={index}
+            index={index}
+            slot={slot}
+            onClick={() => handleSlotClick(index)}
+            onRemove={() => handleRemove(index)}
+            isFirst={index === 0}
+          />
+        ))}
+      </div>
+
+      {pickerOpen !== null && (
+        <>
+          <div className="slot-picker-backdrop" onClick={handlePickerCancel}></div>
+          <SlotPicker
+            onSubmit={handlePickerSubmit}
+            onCancel={handlePickerCancel}
+          />
+        </>
+      )}
+    </div>
+  );
+};
 
 const Step3ContactForm = ({ contactData, onUpdate, error }) => (
   <div className="booking-step">
