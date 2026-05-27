@@ -888,6 +888,134 @@
   }
 }
 
+/* ========== STEP 3: CONTACT FORM ========== */
+.contact-summary {
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 20px 0 24px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  box-sizing: border-box;
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(76, 111, 68, 0.1);
+}
+
+.contact-input::placeholder {
+  color: var(--text-muted);
+}
+
+.contact-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 12px 16px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+  margin-top: 8px;
+}
+
+.contact-hint svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-muted);
+}
+
+.contact-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.contact-consent input[type="checkbox"] {
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--brand-primary);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.contact-consent a {
+  color: var(--brand-primary);
+  text-decoration: underline;
+}
+
+.contact-consent a:hover {
+  text-decoration: none;
+}
+
+.contact-error {
+  padding: 12px 16px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: var(--radius-sm);
+  color: #c0392b;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  .contact-summary {
+    font-size: 13px;
+    padding: 10px 14px;
+    margin: 16px 0 20px;
+  }
+
+  .contact-input {
+    padding: 12px 14px;
+    font-size: 16px; /* Important: iOS zooms if < 16px */
+  }
+
+  .contact-hint {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .contact-consent {
+    font-size: 12px;
+  }
+
+  .contact-error {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+
 /* ========== ANIMATIONS ========== */
 
 /* Screen-Wechsel (wird später für Steps genutzt) */

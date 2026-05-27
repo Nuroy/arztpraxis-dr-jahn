@@ -461,9 +461,9 @@ const MiniCalendar = ({ selectedDate, onSelectDate }) => {
 // Sub-Component: DayTime Pills
 const DayTimePills = ({ selectedDayTime, onSelect }) => {
   const dayTimes = [
-    { id: "morning", label: "🌅 Vormittag", subLabel: "8–12 Uhr" },
-    { id: "noon", label: "☀️ Mittag", subLabel: "12–14 Uhr" },
-    { id: "afternoon", label: "🌇 Nachmittag", subLabel: "14–18 Uhr" }
+    { id: "morning", label: "Vormittag", subLabel: "8–12 Uhr" },
+    { id: "noon", label: "Mittag", subLabel: "12–14 Uhr" },
+    { id: "afternoon", label: "Nachmittag", subLabel: "14–18 Uhr" }
   ];
 
   return (
@@ -576,14 +576,86 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
   );
 };
 
-const Step3ContactForm = ({ contactData, onUpdate, error }) => (
-  <div className="booking-step">
-    <h2 className="booking-step-title">Ihre Kontaktdaten</h2>
-    <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-      Step 3 - Contact Form (wird in Phase 4 implementiert)
+// ========== STEP 3: CONTACT FORM ==========
+const Step3ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots }) => {
+  const filledSlotsCount = wishSlots.filter(s => s !== null).length;
+  const doctorName = doctor === "jahn" ? "Dr. Jahn" : "Dr. Hancock-Diener";
+
+  return (
+    <div className="booking-step">
+      <h2 className="booking-step-title">Ihre Kontaktdaten</h2>
+      <p className="booking-step-subtitle">Damit wir Sie erreichen können</p>
+
+      {/* Mini-Summary */}
+      <div className="contact-summary">
+        {doctorName} · {filledSlotsCount} Wunschtermin{filledSlotsCount > 1 ? 'e' : ''}
+      </div>
+
+      {/* Form Fields */}
+      <div className="contact-form">
+        <input
+          type="text"
+          className="contact-input"
+          placeholder="Ihr Name *"
+          value={contactData.name}
+          onChange={(e) => onUpdate('name', e.target.value)}
+          required
+        />
+
+        <input
+          type="tel"
+          className="contact-input"
+          placeholder="Telefonnummer für Rückruf *"
+          value={contactData.phone}
+          onChange={(e) => onUpdate('phone', e.target.value)}
+          required
+        />
+
+        <input
+          type="email"
+          className="contact-input"
+          placeholder="E-Mail (optional)"
+          value={contactData.email}
+          onChange={(e) => onUpdate('email', e.target.value)}
+        />
+
+        {/* Honeypot */}
+        <input
+          type="text"
+          name="website"
+          value={contactData.honeypot}
+          onChange={(e) => onUpdate('honeypot', e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px' }}
+          aria-hidden="true"
+        />
+
+        {/* Hinweistext */}
+        <div className="contact-hint">
+          <Icon name="info" size={14} />
+          <span>Bitte keine medizinischen Details per Formular — wir besprechen alles persönlich am Telefon.</span>
+        </div>
+
+        {/* DSGVO Checkbox */}
+        <label className="contact-consent">
+          <input
+            type="checkbox"
+            checked={contactData.consent}
+            onChange={(e) => onUpdate('consent', e.target.checked)}
+            required
+          />
+          <span>
+            Ich willige in die Verarbeitung meiner Daten zur Bearbeitung meiner Terminanfrage ein. <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> *
+          </span>
+        </label>
+
+        {/* Error Message */}
+        {error && <div className="contact-error">{error}</div>}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Step4Success = ({ onClose, onNew }) => (
   <div className="booking-step booking-success">
@@ -652,6 +724,8 @@ const BookingModal = ({ open, onClose }) => {
             contactData={flow.contactData}
             onUpdate={flow.updateContact}
             error={flow.error}
+            doctor={flow.doctor}
+            wishSlots={flow.wishSlots}
           />
         );
       case 4:
