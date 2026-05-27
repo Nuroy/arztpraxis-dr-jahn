@@ -637,7 +637,7 @@
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
   z-index: 51;
   animation: slide-up-picker 200ms ease-out;
-  max-height: 70%;
+  max-height: 85%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -653,14 +653,14 @@
 }
 
 .slot-picker-header {
-  padding: 20px 24px 16px;
+  padding: 16px 24px 12px;
   border-bottom: 1px solid var(--border-subtle);
   flex-shrink: 0;
 }
 
 .slot-picker-title {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--text-primary);
   margin: 0;
@@ -668,15 +668,13 @@
 
 .slot-picker-body {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 20px 24px;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden; /* KEIN SCROLL! */
+  padding: 16px 24px 12px;
 }
 
 .slot-picker-footer {
   flex-shrink: 0;
-  padding: 16px 24px;
+  padding: 12px 24px;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
@@ -701,20 +699,20 @@
 
 @media (max-width: 767px) {
   .slot-picker-header {
-    padding: 16px 20px 12px;
+    padding: 12px 20px 10px;
   }
 
   .slot-picker-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .slot-picker-body {
-    padding: 16px 20px;
+    padding: 12px 20px 10px;
   }
 
   .slot-picker-footer {
-    padding: 12px 20px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    padding: 10px 20px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
   }
 
   .slot-picker-footer .btn {
@@ -724,7 +722,7 @@
 
 /* ========== MINI CALENDAR ========== */
 .mini-calendar {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .mini-calendar-nav {
@@ -779,11 +777,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 150ms ease;
   color: var(--text-primary);
-  min-height: 36px;
+  min-height: 32px;
 }
 
 .mini-calendar-day.header {
@@ -819,9 +817,25 @@
 }
 
 @media (max-width: 767px) {
+  .mini-calendar {
+    margin-bottom: 12px;
+  }
+
+  .mini-calendar-nav {
+    margin-bottom: 12px;
+  }
+
+  .mini-calendar-month {
+    font-size: 14px;
+  }
+
   .mini-calendar-day {
-    font-size: 13px;
-    min-height: 32px;
+    font-size: 12px;
+    min-height: 28px;
+  }
+
+  .mini-calendar-grid {
+    gap: 3px;
   }
 }
 
@@ -829,7 +843,7 @@
 .daytime-pills {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .daytime-pill {
@@ -837,14 +851,14 @@
   background: var(--bg-surface);
   border: 2px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 12px 8px;
+  padding: 10px 8px;
   cursor: pointer;
   transition: all 150ms ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  min-height: 72px;
+  gap: 2px;
+  min-height: 60px;
 }
 
 .daytime-pill:hover {
@@ -859,32 +873,32 @@
 }
 
 .daytime-pill-label {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text-primary);
 }
 
 .daytime-pill-sublabel {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-secondary);
 }
 
 @media (max-width: 767px) {
   .daytime-pills {
-    flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .daytime-pill {
-    min-height: 60px;
+    min-height: 56px;
+    padding: 8px 6px;
   }
 
   .daytime-pill-label {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .daytime-pill-sublabel {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
