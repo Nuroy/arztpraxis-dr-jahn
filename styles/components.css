@@ -1618,6 +1618,10 @@
 .modal-header p { margin: 0 0 24px; color: var(--text-secondary); font-size: 15px; }
 
 .modal-body { padding: 0 32px 32px; }
+.modal-body .wizard-container {
+  margin: 0 -32px -32px -32px;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
 
 /* Cookie banner */
 .cookie-banner {
@@ -1718,28 +1722,15 @@
 
 /* ============ WIZARD BOOKING SYSTEM ============ */
 
-/* Wizard Container - Mobile: Fullscreen, Desktop: Fixed Modal */
+/* Wizard Container - Adapts to parent container */
 .wizard-container {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-canvas);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 300;
-}
-
-@media (min-width: 768px) {
-  .wizard-container {
-    position: relative;
-    inset: auto;
-    width: 560px;
-    height: 640px;
-    max-height: 90vh;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    margin: 0 auto;
-  }
+  min-height: 500px;
+  max-height: 640px;
+  background: var(--bg-canvas);
+  border-radius: var(--radius-md);
 }
 
 /* Wizard Header */
