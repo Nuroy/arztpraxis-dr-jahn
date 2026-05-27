@@ -741,7 +741,7 @@ const WizardStep1DoctorSelect = ({ doctor, onSelect }) => {
   );
 };
 
-const WizardStep2DatePicker = ({ selectedDates, onToggleDate, viewMonth, viewYear, onPrevMonth, onNextMonth }) => {
+const WizardStep2DatePicker = ({ selectedDates, onToggleDate, viewMonth, viewYear, onPrevMonth, onNextMonth, onNext }) => {
   const now = new Date();
   const todayStr = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
   const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
@@ -821,11 +821,23 @@ const WizardStep2DatePicker = ({ selectedDates, onToggleDate, viewMonth, viewYea
           <span>Noch {3-selectedDates.length} Wunschtermin{3-selectedDates.length>1?'e':''} möglich</span>
         </div>
       )}
+
+      {selectedDates.length > 0 && (
+        <div className="wizard-inline-proceed">
+          <div className="wizard-inline-proceed-message">
+            <Icon name="check" size={18}/>
+            <span>{selectedDates.length} {selectedDates.length === 1 ? 'Tag' : 'Tage'} gewählt</span>
+          </div>
+          <button className="btn btn-primary btn-sm wizard-inline-btn" onClick={onNext}>
+            Weiter <Icon name="arrow-right" size={14}/>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-const WizardStep3TimePicker = ({ selectedDates, selectedSlots, onToggleSlot }) => {
+const WizardStep3TimePicker = ({ selectedDates, selectedSlots, onToggleSlot, onNext }) => {
   const [activeDate, setActiveDate] = useS3(selectedDates[0] || null);
   const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
   const WDAYS = ["So","Mo","Di","Mi","Do","Fr","Sa"];
@@ -857,8 +869,10 @@ const WizardStep3TimePicker = ({ selectedDates, selectedSlots, onToggleSlot }) =
 
   return (
     <div className="wizard-content-inner">
-      <h2 className="wizard-step-title">Welche Uhrzeit passt am besten?</h2>
-      <p className="wizard-step-subtitle">Wählen Sie für jeden Tag eine bevorzugte Zeit</p>
+      <h2 className="wizard-step-title">Wählen Sie EINE Uhrzeit</h2>
+      <p className="wizard-step-subtitle">
+        Sie können aus allen {selectedDates.length} {selectedDates.length === 1 ? 'Tag' : 'Tagen'} wählen
+      </p>
 
       {selectedDates.length > 1 && (
         <div className="wizard-date-tabs">
@@ -906,6 +920,18 @@ const WizardStep3TimePicker = ({ selectedDates, selectedSlots, onToggleSlot }) =
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {selectedSlots.length > 0 && (
+        <div className="wizard-inline-proceed">
+          <div className="wizard-inline-proceed-message">
+            <Icon name="check" size={18}/>
+            <span>Zeit gewählt</span>
+          </div>
+          <button className="btn btn-primary btn-sm wizard-inline-btn" onClick={onNext}>
+            Weiter <Icon name="arrow-right" size={14}/>
+          </button>
         </div>
       )}
     </div>
@@ -1165,6 +1191,7 @@ const CalendarWizard = ({ onClose }) => {
             viewYear={wizard.viewYear}
             onPrevMonth={handlePrevMonth}
             onNextMonth={handleNextMonth}
+            onNext={wizard.goNext}
           />
         );
       case 3:
@@ -1173,6 +1200,7 @@ const CalendarWizard = ({ onClose }) => {
             selectedDates={wizard.wizardData.selectedDates}
             selectedSlots={wizard.wizardData.selectedSlots}
             onToggleSlot={handleToggleSlot}
+            onNext={wizard.goNext}
           />
         );
       case 4:
