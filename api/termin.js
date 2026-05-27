@@ -23,9 +23,10 @@ const terminSchema = z.object({
 
 // ----- RATE LIMITING (In-Memory Token Bucket) -----
 // Für Serverless: Wird pro Instanz sein, aber für kleine Praxis ausreichend
+// Bewusst großzügig gesetzt, damit echte Patienten nicht blockiert werden
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW = 10 * 60 * 1000; // 10 Minuten
-const MAX_REQUESTS = 3;
+const MAX_REQUESTS = 20; // Erhöht von 3 auf 20 - mehrere Patienten können parallel buchen
 
 function isRateLimited(ip) {
   const now = Date.now();
@@ -248,7 +249,7 @@ module.exports = async (req, res) => {
     if (isRateLimited(ip)) {
       console.log(`Rate limit exceeded for IP: ${ip.substring(0, 8)}...`);
       return res.status(429).json({
-        error: 'Zu viele Anfragen. Bitte versuchen Sie es in einigen Minuten erneut.'
+        error: 'Entschuldigung, momentan besteht eine hohe Auslastung. Bitte versuchen Sie es in wenigen Minuten erneut oder rufen Sie uns direkt an: 089 38 80 86 87 oder 089 38 88 95 00'
       });
     }
 
