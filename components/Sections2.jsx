@@ -105,6 +105,94 @@ const PRAXIS_EMAIL = "empfang@zahnarztpraxis-schwabing.de";
 const MONTHS_DE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const WDAYS = ["So","Mo","Di","Mi","Do","Fr","Sa"];
 
+// ----- Sub-Components for UX Improvements -----
+const CalProgressDots = ({ currentStep }) => (
+  <div className="cal-progress-dots">
+    <div className={`cal-progress-dot ${currentStep >= 1 ? 'active' : ''}`}></div>
+    <div className="cal-progress-line"></div>
+    <div className={`cal-progress-dot ${currentStep >= 2 ? 'active' : ''}`}></div>
+    <div className="cal-progress-line"></div>
+    <div className={`cal-progress-dot ${currentStep >= 3 ? 'active' : ''}`}></div>
+  </div>
+);
+
+const CalStickyHeader = ({ slots, currentStep, onCallClick }) => {
+  const parseLocal = ds => { const [y,m,d] = ds.split('-').map(Number); return new Date(y, m-1, d); };
+  const fmtCompact = s => {
+    const d = parseLocal(s.date);
+    return `${WDAYS[d.getDay()]} ${d.getDate()}.${d.getMonth()+1}. · ${s.time}`;
+  };
+
+  return (
+    <div className="cal-sticky-header">
+      <CalProgressDots currentStep={currentStep} />
+      {slots.length > 0 && (
+        <div className="cal-compact-slots">
+          {slots.map((s, i) => (
+            <div key={i} className="cal-compact-slot">
+              <span className="cal-compact-num">{i+1}</span>
+              <span className="cal-compact-text">{fmtCompact(s)}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      <button className="cal-quick-call-btn" onClick={onCallClick}>
+        <Icon name="phone" size={14}/>
+        <span>Anrufen?</span>
+      </button>
+    </div>
+  );
+};
+
+const CalPhoneDivider = ({ phoneRef }) => (
+  <div ref={phoneRef} className="cal-phone-divider">
+    <div className="cal-phone-header">
+      <Icon name="phone" size={24}/>
+      <h4>Oder lieber direkt anrufen?</h4>
+    </div>
+    <p className="cal-phone-subtitle">Erreichen Sie uns sofort – keine Wartezeit.</p>
+    <div className="cal-phone-cards">
+      <a href="tel:+498938808687" className="cal-phone-card">
+        <div className="cal-phone-avatar">
+          <img src="assets/dr-jahn.jpg" alt="Dr. Jahn" loading="lazy"/>
+        </div>
+        <div className="cal-phone-info">
+          <p className="cal-phone-name">Dr. Irene Jahn</p>
+          <p className="cal-phone-number font-mono">089 38 80 86 87</p>
+        </div>
+        <Icon name="arrow-right" size={18}/>
+      </a>
+      <a href="tel:+498938889500" className="cal-phone-card">
+        <div className="cal-phone-avatar">
+          <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy"/>
+        </div>
+        <div className="cal-phone-info">
+          <p className="cal-phone-name">Dr. Hancock-Diener</p>
+          <p className="cal-phone-number font-mono">089 38 88 95 00</p>
+        </div>
+        <Icon name="arrow-right" size={18}/>
+      </a>
+    </div>
+  </div>
+);
+
+const CalCollapsedSummary = ({ onExpand }) => (
+  <div className="cal-collapsed-summary">
+    <div className="cal-collapsed-check">
+      <Icon name="check" size={20}/>
+    </div>
+    <div className="cal-collapsed-text">
+      <p className="cal-collapsed-title">3 Wunschtermine ausgewählt</p>
+      <p className="cal-collapsed-sub">Ihre Termine sind gespeichert</p>
+    </div>
+    <button className="cal-collapsed-btn" onClick={onExpand}>
+      Termine ändern
+    </button>
+  </div>
+);
+
+const { useRef: useFR } = React;
+
 const CalendarBooking = () => {
   const now = new Date();
   const todayStr = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
@@ -122,6 +210,10 @@ const CalendarBooking = () => {
   const [loading, setLoading] = useS3(false);
   const [sent, setSent] = useS3(false);
   const [error, setError] = useS3("");
+  const [showCalendar, setShowCalendar] = useS3(true);
+
+  const phoneRef = useFR(null);
+  const calendarRef = useFR(null);
 
   const pad = n => String(n).padStart(2,'0');
   const dk = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
@@ -151,11 +243,40 @@ const CalendarBooking = () => {
   const pickTime = t => {
     if (slots.length>=3) return;
     if (slots.some(s => s.date===selDate && s.time===t)) return;
-    setSlots([...slots, {date:selDate, time:t}]);
+    const newSlots = [...slots, {date:selDate, time:t}];
+    setSlots(newSlots);
     setSelDate(null);
     setError("");
   };
-  const removeSlot = i => setSlots(slots.filter((_,j)=>j!==i));
+  const removeSlot = i => {
+    setSlots(slots.filter((_,j)=>j!==i));
+    setShowCalendar(true);
+  };
+
+  // Auto-scroll when 3 slots are selected
+  useE3(() => {
+    if (slots.length === 3) {
+      setShowCalendar(false);
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion && phoneRef.current) {
+        setTimeout(() => {
+          phoneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      }
+    }
+  }, [slots.length]);
+
+  // Auto-scroll to calendar when doctor is selected
+  useE3(() => {
+    if (doctor && calendarRef.current) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        setTimeout(() => {
+          calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 200);
+      }
+    }
+  }, [doctor]);
 
   const parseLocal = ds => { const [y,m,d] = ds.split('-').map(Number); return new Date(y, m-1, d); };
   const fmtSlot = s => {
@@ -240,17 +361,32 @@ const CalendarBooking = () => {
 
   const times = selDate ? timesFor(selDate) : [];
 
+  // Determine current step
+  let currentStep = 1;
+  if (doctor) currentStep = 2;
+  if (slots.length > 0) currentStep = 2;
+  if (slots.length === 3 || (name && email && phone)) currentStep = 3;
+
+  const scrollToPhone = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion && phoneRef.current) {
+      phoneRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <div className="calendar-mock">
+      <CalStickyHeader slots={slots} currentStep={currentStep} onCallClick={scrollToPhone} />
+
       <div className="calendar-step">Schritt 1 · Ärztin wählen</div>
       <div className="calendar-doctors">
         <button className={`cal-doctor ${doctor==="hancock"?"selected":""}`} onClick={()=>setDoctor("hancock")}>Dr. Hancock-Diener</button>
         <button className={`cal-doctor ${doctor==="jahn"?"selected":""}`} onClick={()=>setDoctor("jahn")}>Dr. Jahn</button>
       </div>
 
-      <div className="calendar-step">Schritt 2 · Bis zu 3 Wunschtermine wählen</div>
+      <div ref={calendarRef} className="calendar-step">Schritt 2 · Bis zu 3 Wunschtermine wählen</div>
 
-      {slots.length > 0 && (
+      {slots.length > 0 && showCalendar && (
         <div className="cal-slots">
           {slots.map((s,i) => (
             <div key={i} className="cal-slot-chip">
@@ -262,60 +398,66 @@ const CalendarBooking = () => {
         </div>
       )}
 
-      {slots.length < 3 && (
+      {slots.length === 3 && !showCalendar ? (
+        <CalCollapsedSummary onExpand={() => setShowCalendar(true)} />
+      ) : slots.length < 3 ? (
         <>
-          <div className="cal-month-nav">
-            <button className="cal-nav-btn" onClick={goPrev} disabled={!canPrev} aria-label="Vorheriger Monat">
-              <Icon name="arrow-left" size={16}/>
-            </button>
-            <span className="cal-month-label">{MONTHS_DE[vMonth]} {vYear}</span>
-            <button className="cal-nav-btn" onClick={goNext} disabled={!canNext} aria-label="Nächster Monat">
-              <Icon name="arrow-right" size={16}/>
-            </button>
-          </div>
-
-          <div className="calendar-grid">
-            {["Mo","Di","Mi","Do","Fr","Sa","So"].map(d => <div key={d} className="cal-day cal-day-header">{d}</div>)}
-            {Array.from({length:firstDow}, (_,i) => <div key={"e"+i} className="cal-day"></div>)}
-            {Array.from({length:daysInMonth}, (_,i) => {
-              const d = i+1;
-              const we = isWE(vYear, vMonth, d);
-              const past = isPast(vYear, vMonth, d);
-              const dis = we || past;
-              const key = dk(vYear, vMonth, d);
-              const sel = selDate === key;
-              const slotted = slots.some(s => s.date === key);
-              return (
-                <button key={d}
-                  className={`cal-day ${dis?"disabled":"available"} ${sel?"selected":""} ${slotted?"slotted":""}`}
-                  disabled={dis}
-                  onClick={() => !dis && pickDate(d)}>
-                  {d}
+          <div className="cal-booking-grid">
+            <div className="cal-booking-col">
+              <div className="cal-month-nav">
+                <button className="cal-nav-btn" onClick={goPrev} disabled={!canPrev} aria-label="Vorheriger Monat">
+                  <Icon name="arrow-left" size={16}/>
                 </button>
-              );
-            })}
-          </div>
-
-          {selDate && times.length > 0 && (
-            <>
-              <div className="calendar-step" style={{marginTop:'4px'}}>
-                Uhrzeit wählen · {WDAYS[parseLocal(selDate).getDay()]}, {parseLocal(selDate).getDate()}. {MONTHS_DE[parseLocal(selDate).getMonth()]}
+                <span className="cal-month-label">{MONTHS_DE[vMonth]} {vYear}</span>
+                <button className="cal-nav-btn" onClick={goNext} disabled={!canNext} aria-label="Nächster Monat">
+                  <Icon name="arrow-right" size={16}/>
+                </button>
               </div>
-              <div className="cal-times">
-                {times.map(t => {
-                  const picked = slots.some(s => s.date===selDate && s.time===t);
+
+              <div className="calendar-grid">
+                {["Mo","Di","Mi","Do","Fr","Sa","So"].map(d => <div key={d} className="cal-day cal-day-header">{d}</div>)}
+                {Array.from({length:firstDow}, (_,i) => <div key={"e"+i} className="cal-day"></div>)}
+                {Array.from({length:daysInMonth}, (_,i) => {
+                  const d = i+1;
+                  const we = isWE(vYear, vMonth, d);
+                  const past = isPast(vYear, vMonth, d);
+                  const dis = we || past;
+                  const key = dk(vYear, vMonth, d);
+                  const sel = selDate === key;
+                  const slotted = slots.some(s => s.date === key);
                   return (
-                    <button key={t}
-                      className={`cal-time ${picked?"taken":""}`}
-                      disabled={picked}
-                      onClick={() => !picked && pickTime(t)}>
-                      {t}
+                    <button key={d}
+                      className={`cal-day ${dis?"disabled":"available"} ${sel?"selected":""} ${slotted?"slotted":""}`}
+                      disabled={dis}
+                      onClick={() => !dis && pickDate(d)}>
+                      {d}
                     </button>
                   );
                 })}
               </div>
-            </>
-          )}
+            </div>
+
+            {selDate && times.length > 0 && (
+              <div className="cal-booking-col">
+                <div className="calendar-step" style={{marginTop:'0px'}}>
+                  Uhrzeit wählen · {WDAYS[parseLocal(selDate).getDay()]}, {parseLocal(selDate).getDate()}. {MONTHS_DE[parseLocal(selDate).getMonth()]}
+                </div>
+                <div className="cal-times">
+                  {times.map(t => {
+                    const picked = slots.some(s => s.date===selDate && s.time===t);
+                    return (
+                      <button key={t}
+                        className={`cal-time ${picked?"taken":""}`}
+                        disabled={picked}
+                        onClick={() => !picked && pickTime(t)}>
+                        {t}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
 
           {slots.length > 0 && slots.length < 3 && !selDate && (
             <p className="cal-hint" style={{color:'var(--brand-primary)'}}>
@@ -323,7 +465,9 @@ const CalendarBooking = () => {
             </p>
           )}
         </>
-      )}
+      ) : null}
+
+      {slots.length > 0 && <CalPhoneDivider phoneRef={phoneRef} />}
 
       <div className="calendar-step">Schritt 3 · Ihre Kontaktdaten</div>
       <div className="cal-contact">

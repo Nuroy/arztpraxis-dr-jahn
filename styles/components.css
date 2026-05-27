@@ -979,6 +979,419 @@
   line-height: 1.4;
 }
 
+/* ===== STICKY HEADER ===== */
+.cal-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  margin: -16px -16px 16px -16px;
+}
+
+.cal-progress-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cal-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: all 300ms var(--ease-out);
+}
+
+.cal-progress-dot.active {
+  background: var(--brand-primary);
+  width: 12px;
+  height: 12px;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.cal-progress-line {
+  width: 16px;
+  height: 2px;
+  background: var(--border-strong);
+}
+
+.cal-compact-slots {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.cal-compact-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.15);
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.cal-compact-num {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cal-compact-text {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-quick-call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--brand-primary);
+  cursor: pointer;
+  transition: all 150ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.cal-quick-call-btn:hover {
+  background: var(--brand-soft);
+  border-color: var(--brand-primary);
+}
+
+/* ===== BOOKING GRID (SIDE-BY-SIDE) ===== */
+.cal-booking-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+@media (min-width: 640px) {
+  .cal-booking-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.cal-booking-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== PHONE DIVIDER ===== */
+.cal-phone-divider {
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.15);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.cal-phone-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cal-phone-header svg {
+  color: var(--brand-primary);
+}
+
+.cal-phone-header h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cal-phone-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+}
+
+.cal-phone-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cal-phone-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 200ms var(--ease-out);
+  text-decoration: none;
+  min-height: 68px;
+}
+
+.cal-phone-card:hover {
+  border-color: var(--brand-primary);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.cal-phone-card:active {
+  transform: translateY(0);
+}
+
+.cal-phone-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-subtle);
+}
+
+.cal-phone-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cal-phone-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal-phone-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.cal-phone-number {
+  font-size: 16px;
+  color: var(--brand-primary);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.cal-phone-card svg {
+  color: var(--brand-primary);
+  transition: transform 200ms var(--ease-out);
+  flex-shrink: 0;
+}
+
+.cal-phone-card:hover svg {
+  transform: translateX(4px);
+}
+
+/* ===== COLLAPSED SUMMARY ===== */
+.cal-collapsed-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--brand-soft);
+  border: 1px solid rgba(76, 111, 68, 0.2);
+  border-radius: var(--radius-md);
+  margin: 12px 0;
+}
+
+.cal-collapsed-check {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cal-collapsed-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal-collapsed-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 2px 0;
+}
+
+.cal-collapsed-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.cal-collapsed-btn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--brand-primary);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brand-primary);
+  cursor: pointer;
+  transition: all 150ms var(--ease-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cal-collapsed-btn:hover {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+/* ===== MOBILE OVERRIDES ===== */
+@media (max-width: 640px) {
+  .cal-sticky-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .cal-progress-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .cal-progress-dot.active {
+    width: 10px;
+    height: 10px;
+  }
+
+  .cal-progress-line {
+    width: 12px;
+  }
+
+  .cal-compact-slot {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .cal-compact-num {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+  }
+
+  .cal-compact-text {
+    max-width: 120px;
+  }
+
+  .cal-quick-call-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .cal-phone-divider {
+    padding: 20px 16px;
+  }
+
+  .cal-phone-header h4 {
+    font-size: 18px;
+  }
+
+  .cal-phone-card {
+    min-height: 64px;
+    padding: 12px;
+  }
+
+  .cal-phone-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cal-phone-number {
+    font-size: 15px;
+  }
+
+  .cal-collapsed-summary {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .cal-collapsed-check {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cal-collapsed-title {
+    font-size: 14px;
+  }
+
+  .cal-collapsed-sub {
+    font-size: 12px;
+  }
+
+  .cal-collapsed-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cal-compact-slots {
+    max-width: 180px;
+  }
+
+  .cal-compact-text {
+    max-width: 100px;
+  }
+
+  .cal-quick-call-btn span {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .cal-sticky-header {
+    padding: 8px 10px;
+  }
+
+  .cal-phone-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
 /* ============ STANDORT ============ */
 .standort-grid {
   display: grid;
