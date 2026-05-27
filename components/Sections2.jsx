@@ -214,6 +214,7 @@ const CalendarBooking = () => {
 
   const phoneRef = useFR(null);
   const calendarRef = useFR(null);
+  const isInitialMount = useFR(true);
 
   const pad = n => String(n).padStart(2,'0');
   const dk = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
@@ -266,8 +267,13 @@ const CalendarBooking = () => {
     }
   }, [slots.length]);
 
-  // Auto-scroll to calendar when doctor is selected
+  // Auto-scroll to calendar when doctor is selected (but not on initial mount)
   useE3(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     if (doctor && calendarRef.current) {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!prefersReducedMotion) {
