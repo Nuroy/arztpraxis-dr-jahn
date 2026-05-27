@@ -485,40 +485,54 @@ const DayTimePills = ({ selectedDayTime, onSelect }) => {
   );
 };
 
-// Sub-Component: Slot Picker (Sub-Picker Overlay)
+// Sub-Component: Slot Picker (2-Step: Datum → Tageszeit)
 const SlotPicker = ({ onSubmit, onCancel }) => {
+  const [step, setStep] = React.useState(1); // 1=Datum, 2=Tageszeit
   const [selectedDate, setSelectedDate] = React.useState(null);
   const [selectedDayTime, setSelectedDayTime] = React.useState(null);
 
-  const canSubmit = selectedDate && selectedDayTime;
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+    // Auto-advance zu Step 2 nach kurzer Verzögerung
+    setTimeout(() => setStep(2), 100);
+  };
 
-  const handleSubmit = () => {
-    if (canSubmit) {
-      onSubmit({ date: selectedDate, dayTime: selectedDayTime });
+  const handleDayTimeSelect = (dayTime) => {
+    setSelectedDayTime(dayTime);
+    // Auto-submit nach Auswahl
+    setTimeout(() => {
+      onSubmit({ date: selectedDate, dayTime: dayTime });
+    }, 100);
+  };
+
+  const handleBack = () => {
+    if (step === 2) {
+      setStep(1);
+      setSelectedDayTime(null);
+    } else {
+      onCancel();
     }
   };
 
   return (
     <div className="slot-picker">
       <div className="slot-picker-header">
-        <h3 className="slot-picker-title">Termin wählen</h3>
+        <h3 className="slot-picker-title">
+          {step === 1 ? 'Datum wählen' : 'Tageszeit wählen'}
+        </h3>
       </div>
 
       <div className="slot-picker-body">
-        <MiniCalendar selectedDate={selectedDate} onSelectDate={setSelectedDate} />
-        <DayTimePills selectedDayTime={selectedDayTime} onSelect={setSelectedDayTime} />
+        {step === 1 ? (
+          <MiniCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
+        ) : (
+          <DayTimePills selectedDayTime={selectedDayTime} onSelect={handleDayTimeSelect} />
+        )}
       </div>
 
       <div className="slot-picker-footer">
-        <button className="btn-text" onClick={onCancel}>
-          Abbrechen
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={!canSubmit}
-        >
-          Übernehmen
+        <button className="btn-text" onClick={handleBack}>
+          {step === 1 ? 'Abbrechen' : 'Zurück'}
         </button>
       </div>
     </div>
