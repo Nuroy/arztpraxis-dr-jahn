@@ -12,6 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function findMarkdownMirrors(siteRoot) {
   const mirrors = [];
+  const skipPaths = ['node_modules', 'api', 'app', 'dashboard', 'login'];
 
   function scanDir(dir) {
     const files = fs.readdirSync(dir);
@@ -20,10 +21,17 @@ function findMarkdownMirrors(siteRoot) {
       const stat = fs.statSync(filePath);
 
       if (stat.isDirectory()) {
-        scanDir(filePath);
+        // Skip unwanted directories
+        if (!skipPaths.includes(file)) {
+          scanDir(filePath);
+        }
       } else if (file.endsWith('.md')) {
         const relPath = path.relative(siteRoot, filePath);
-        mirrors.push(relPath);
+
+        // Skip if path contains unwanted directories
+        if (!skipPaths.some(skip => relPath.includes(skip + '/'))) {
+          mirrors.push(relPath);
+        }
       }
     }
   }
