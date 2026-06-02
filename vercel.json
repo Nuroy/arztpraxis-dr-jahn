@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:all",
+  "buildCommand": "pip3 install beautifulsoup4 markdownify && npm run build:all",
   "outputDirectory": ".output",
   "rewrites": [
     {
