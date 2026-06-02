@@ -22,12 +22,12 @@ const PRIORITY_MAP = {
   'datenschutz.html': 0.3
 };
 
-// Changefreq mapping
+// Changefreq mapping (only valid values: always, hourly, daily, weekly, monthly, yearly, never)
 const CHANGEFREQ_MAP = {
   'index.html': 'weekly',
   'leistungen.html': 'monthly',
   'leistung.html': 'monthly',
-  'team.html': 'quarterly',
+  'team.html': 'monthly',
   'neupatienten.html': 'monthly',
   'praxistour.html': 'yearly',
   'impressum.html': 'yearly',
