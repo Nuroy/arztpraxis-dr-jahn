@@ -2,3 +2,16 @@
 .env
 .env.local
 node_modules/
+package-lock.json
+
+# Build output
+.output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

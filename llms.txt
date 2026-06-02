@@ -1,0 +1,87 @@
+# Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn
+
+## Über uns
+Zahnarztpraxis in München-Schwabing mit über 20 Jahren Erfahrung. Wir bieten moderne Zahnmedizin mit Zeit, Kompetenz und Einfühlungsvermögen. Zwei erfahrene Zahnärztinnen mit Schwerpunkten in Ästhetischer Zahnmedizin, Implantologie, Parodontologie und Angstpatienten-Betreuung.
+
+## Leistungen
+Wir bieten folgende zahnmedizinische Leistungen:
+- Zahnerhaltung & Prophylaxe
+- Parodontologie (Zahnfleischbehandlung)
+- Endodontologie (Wurzelkanalbehandlung)
+- Ästhetik & Funktion (Veneers, Vollkeramik, Inlays)
+- Bleaching (Zahnaufhellung)
+- Implantologie (Zahnimplantate)
+- Oralchirurgie (Weisheitszähne, Knochenaufbau)
+- Schienentherapie (CMD, Knirschen)
+- Schnarchschienen
+- NTI-Aufbiss-Schienen (Migräne, Spannungskopfschmerzen)
+- Zahnkorrektur-Schienen (Aligner)
+- Kinderzahnheilkunde
+- Zahnarztangst-Betreuung
+
+## Kontakt
+- Website: https://zahnarztpraxis-schwabing.de
+- Telefon Dr. Hancock-Diener: +49 89 38889500
+- Telefon Dr. Jahn: +49 89 38808687
+- E-Mail: empfang@zahnarztpraxis-schwabing.de
+- Adresse: Friedrichstraße 33, 80801 München
+
+## Zielgruppe
+Patienten in München und Umgebung (Schwabing, Bogenhausen, Lehel, Maxvorstadt), die Wert legen auf:
+- Individuelle Beratung und Zeit
+- Moderne Behandlungsmethoden
+- Ästhetische Zahnmedizin
+- Einfühlsame Betreuung bei Zahnarztangst
+- Hochwertige Materialien und Verfahren
+
+## Service Area
+München (Schwabing, Bogenhausen, Lehel, Maxvorstadt, Schwabing-West, Schwabing-Ost)
+
+## Was uns anders macht
+- Über 20 Jahre Praxis-Erfahrung
+- Zwei erfahrene Zahnärztinnen mit unterschiedlichen Schwerpunkten
+- Modernste Technik (Digitales Röntgen, CAD/CAM, 3D-Diagnostik)
+- Einfühlsame Betreuung von Angstpatienten
+- Individuelle Prophylaxe-Konzepte
+- Ästhetische Zahnmedizin auf höchstem Niveau
+- Eigenes Praxislabor für schnelle Versorgung
+
+## Key Facts
+- Standort: München-Schwabing, Friedrichstraße 33
+- Gründung: 2002
+- Praxisleitung: Dr. Birte Hancock-Diener & Dr. Irene Jahn
+- Öffnungszeiten: Mo-Do 8-18 Uhr, Fr 8-16 Uhr
+- Sprachen: Deutsch, Englisch
+- Barrierefreier Zugang
+
+## Häufig gestellte Fragen
+
+**Wie oft sollte ich zur Prophylaxe kommen?**
+In der Regel empfehlen wir eine professionelle Zahnreinigung alle 6 Monate. Bei erhöhtem Karies- oder Parodontitis-Risiko kann ein kürzerer Intervall von 3-4 Monaten sinnvoll sein.
+
+**Übernimmt die Krankenkasse die Kosten für Bleaching?**
+Bleaching ist eine rein ästhetische Maßnahme und wird nicht von den gesetzlichen Krankenkassen übernommen. Wir erstellen Ihnen gerne einen individuellen Kostenvoranschlag.
+
+**Wie läuft die Implantation ab?**
+Nach ausführlicher Diagnostik (3D-Röntgen) wird das Implantat in lokaler Betäubung eingesetzt. Nach einer Einheilphase von 3-6 Monaten erfolgt die endgültige Versorgung mit Krone oder Brücke.
+
+**Was kann ich gegen Zahnarztangst tun?**
+Wir sind spezialisiert auf die einfühlsame Betreuung von Angstpatienten. Sprechen Sie offen mit uns über Ihre Ängste. Wir nehmen uns Zeit, erklären jeden Schritt und gehen in Ihrem Tempo vor.
+
+**Wie lange dauert eine Wurzelbehandlung?**
+Eine Wurzelbehandlung erfolgt meist in 2-3 Sitzungen. Jede Sitzung dauert ca. 45-90 Minuten, abhängig von der Komplexität des Zahnes.
+
+**Ab welchem Alter sollten Kinder zum Zahnarzt?**
+Wir empfehlen den ersten Zahnarztbesuch ab dem ersten Milchzahn (ca. 6-12 Monate). So gewöhnen sich Kinder spielerisch an die Praxis.
+
+## Markdown Mirrors
+Alle Seiten dieser Website sind auch als saubere Markdown-Version verfügbar, optimiert für AI-Crawler. Hängen Sie einfach `/index.md` an jede URL an.
+
+<!-- BEGIN:AUTO_MIRROR_LIST -->
+<!-- END:AUTO_MIRROR_LIST -->
+
+## Unsere Leistungs-Seiten
+Detaillierte Informationen zu allen 13 zahnmedizinischen Leistungen:
+
+<!-- BEGIN:AUTO_SUBPAGE_LIST -->
+<!-- END:AUTO_SUBPAGE_LIST -->

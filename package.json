@@ -1,0 +1,25 @@
+{
+  "name": "zahnarztpraxis-schwabing",
+  "version": "1.0.0",
+  "description": "Dental practice website with SSG",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:mirrors": "python3 scripts/generate_markdown_mirrors.py --site-root ./.output --base-url https://zahnarztpraxis-schwabing.de",
+    "build:llms": "python3 scripts/generate_llms_txt.py --site-root ./.output --llms-path ./.output/llms.txt --base-url https://zahnarztpraxis-schwabing.de",
+    "build:sitemap": "python3 scripts/generate_sitemap.py --site-root ./.output --base-url https://zahnarztpraxis-schwabing.de --output ./.output/sitemap.xml",
+    "build:all": "npm run build && cp llms.txt .output/llms.txt && npm run build:mirrors && npm run build:llms && npm run build:sitemap",
+    "dev": "npm run build:all && vercel dev",
+    "preview": "npm run build:all && python3 -m http.server 3000 --directory .output"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/register": "^7.23.3",
+    "jsdom": "^22.1.0"
+  }
+}
