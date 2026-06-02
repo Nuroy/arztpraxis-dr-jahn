@@ -71,12 +71,28 @@
   padding: 24px 0;
   border-right: 1px solid var(--border-subtle);
   padding-left: 24px;
+  margin: 0; /* Reset default dt/dd margins */
 }
 .detail-meta-item:last-child { border-right: none; }
 @media (max-width: 767px) {
-  .detail-meta-item:nth-child(2) { border-right: none; }
+  .detail-meta-item:nth-child(4) { border-right: none; }
   .detail-meta-item:nth-child(1), .detail-meta-item:nth-child(2) { border-bottom: 1px solid var(--border-subtle); }
 }
+.detail-meta-item.label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-primary);
+  margin-bottom: 6px;
+}
+.detail-meta-item.value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+/* Nested .label/.value selectors for backwards compatibility if needed */
 .detail-meta-item .label {
   font-size: 11px;
   font-weight: 600;

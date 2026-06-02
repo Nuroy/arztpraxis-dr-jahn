@@ -128,6 +128,120 @@ const LeistungDetailApp = () => {
     };
   }, [slug]);
 
+  // BreadcrumbList Schema injection
+  useDE(() => {
+    if (!data) return;
+
+    // Remove old breadcrumb schemas
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+      if (s.textContent.includes('BreadcrumbList')) s.remove();
+    });
+
+    const breadcrumbList = [
+      { position: 1, name: "Startseite", url: "https://zahnarztpraxis-schwabing.de/" },
+      { position: 2, name: "Leistungen", url: "https://zahnarztpraxis-schwabing.de/leistungen.html" },
+      { position: 3, name: data.parent.label, url: `https://zahnarztpraxis-schwabing.de/leistungen.html#${data.parent.anchor}` },
+      { position: 4, name: data.title, url: `https://zahnarztpraxis-schwabing.de/leistung.html#${slug}` }
+    ];
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbList.map(item => ({
+        "@type": "ListItem",
+        "position": item.position,
+        "name": item.name,
+        "item": item.url
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+    };
+  }, [slug, data]);
+
+  // Service Schema injection
+  useDE(() => {
+    if (!data) return;
+
+    // Remove old service schemas
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+      if (s.textContent.includes('"@type":"Service"')) s.remove();
+    });
+
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn",
+        "url": "https://zahnarztpraxis-schwabing.de",
+        "telephone": ["+49 89 38889500", "+49 89 38808687"]
+      },
+      "name": data.title,
+      "description": data.lede,
+      "areaServed": {
+        "@type": "City",
+        "name": "München",
+        "addressCountry": "DE"
+      },
+      "url": `https://zahnarztpraxis-schwabing.de/leistung.html#${slug}`,
+      "image": data.image || (data.imageComparison ? data.imageComparison.images[0] : null),
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(serviceSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+    };
+  }, [slug, data]);
+
+  // HowTo Schema injection
+  useDE(() => {
+    if (!data || !data.process) return;
+
+    // Remove old HowTo schemas
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+      if (s.textContent.includes('HowTo')) s.remove();
+    });
+
+    const howToSchema = {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": `${data.title} - Unser Ablauf`,
+      "description": `Schritt-für-Schritt Ablauf der ${data.title} Behandlung`,
+      "image": data.image || (data.imageComparison ? data.imageComparison.images[0] : null),
+      "step": data.process.map((step, index) => ({
+        "@type": "HowToStep",
+        "position": index + 1,
+        "name": step.title,
+        "text": step.desc
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(howToSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+    };
+  }, [slug, data]);
+
   const siblings = (ALL_SIBLINGS[data.parent.anchor] || []).filter(s => s !== slug);
 
   return (
@@ -174,14 +288,14 @@ const LeistungDetailApp = () => {
       </section>
 
       <div className="container">
-        <div className="detail-meta-strip">
+        <dl className="detail-meta-strip">
           {data.meta.map((m, i) => (
-            <div key={i} className="detail-meta-item">
-              <div className="label">{m.label}</div>
-              <div className="value">{m.value}</div>
-            </div>
+            <React.Fragment key={i}>
+              <dt className="detail-meta-item label">{m.label}</dt>
+              <dd className="detail-meta-item value">{m.value}</dd>
+            </React.Fragment>
           ))}
-        </div>
+        </dl>
       </div>
 
       <section className="detail-body">
