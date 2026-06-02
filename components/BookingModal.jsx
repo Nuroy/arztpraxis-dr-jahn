@@ -597,7 +597,7 @@ const DayTimePills = ({ selectedDayTime, onSelect }) => {
 };
 
 // Sub-Component: Slot Picker (2-Step: Datum → Tageszeit)
-const SlotPicker = ({ onSubmit, onCancel }) => {
+const SlotPicker = ({ onSubmit, onCancel, hasFilledSlots }) => {
   const [step, setStep] = React.useState(1); // 1=Datum, 2=Tageszeit
   const [selectedDate, setSelectedDate] = React.useState(null);
   const [selectedDayTime, setSelectedDayTime] = React.useState(null);
@@ -645,6 +645,11 @@ const SlotPicker = ({ onSubmit, onCancel }) => {
         <button className="btn-text" onClick={handleBack}>
           {step === 1 ? 'Abbrechen' : 'Zurück'}
         </button>
+        {hasFilledSlots && step === 1 && (
+          <button className="btn-text" onClick={onCancel} style={{marginLeft: 'auto', color: 'var(--brand-primary)', fontWeight: 500}}>
+            Fertig (ohne weiteren Termin)
+          </button>
+        )}
       </div>
     </div>
   );
@@ -661,7 +666,20 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
   const handlePickerSubmit = (slotData) => {
     if (pickerOpen !== null) {
       onUpdate(pickerOpen, slotData);
-      setPickerOpen(null);
+
+      // Auto-open next empty slot after short delay
+      setTimeout(() => {
+        const currentIndex = pickerOpen;
+        setPickerOpen(null);
+
+        // Find next empty slot
+        setTimeout(() => {
+          const nextEmptyIndex = wishSlots.findIndex((slot, idx) => idx > currentIndex && slot === null);
+          if (nextEmptyIndex !== -1) {
+            setPickerOpen(nextEmptyIndex);
+          }
+        }, 150);
+      }, 100);
     }
   };
 
@@ -676,7 +694,7 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
   return (
     <div className="booking-step">
       <h2 className="booking-step-title">Ihre Wunschtermine</h2>
-      <p className="booking-step-subtitle">Wählen Sie 1 bis 3 Termine, an denen Sie Zeit hätten</p>
+      <p className="booking-step-subtitle">Wählen Sie nacheinander 1 bis 3 Wunschtermine. Wir rufen Sie zurück und vereinbaren gemeinsam einen passenden Termin.</p>
 
       <div className="wish-slots">
         {wishSlots.map((slot, index) => (
@@ -697,6 +715,7 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
           <SlotPicker
             onSubmit={handlePickerSubmit}
             onCancel={handlePickerCancel}
+            hasFilledSlots={wishSlots.some(slot => slot !== null)}
           />
         </>
       )}
