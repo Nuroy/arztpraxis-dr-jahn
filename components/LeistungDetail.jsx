@@ -70,6 +70,64 @@ const LeistungDetailApp = () => {
     document.title = `${data.title} — Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn`;
   }, [slug]);
 
+  // FAQ Schema injection
+  useDE(() => {
+    if (!data || !data.faqs || data.faqs.length === 0) return;
+
+    // Remove old FAQ schemas from previous page
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+      if (s.textContent.includes('FAQPage')) s.remove();
+    });
+
+    const faqPageSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": data.faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    };
+
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.textContent = JSON.stringify(faqPageSchema);
+    document.head.appendChild(schemaScript);
+
+    return () => {
+      if (schemaScript.parentNode) {
+        schemaScript.parentNode.removeChild(schemaScript);
+      }
+    };
+  }, [slug, data]);
+
+  // Date meta tags injection
+  useDE(() => {
+    // Remove old date meta tags
+    document.querySelectorAll('meta[property^="article:"]').forEach(m => m.remove());
+
+    const published = "2024-09-15T00:00:00+02:00";
+    const modified = new Date().toISOString(); // Aktuelles Datum
+
+    const metaPublished = document.createElement('meta');
+    metaPublished.setAttribute('property', 'article:published_time');
+    metaPublished.setAttribute('content', published);
+    document.head.appendChild(metaPublished);
+
+    const metaModified = document.createElement('meta');
+    metaModified.setAttribute('property', 'article:modified_time');
+    metaModified.setAttribute('content', modified);
+    document.head.appendChild(metaModified);
+
+    return () => {
+      metaPublished.remove();
+      metaModified.remove();
+    };
+  }, [slug]);
+
   const siblings = (ALL_SIBLINGS[data.parent.anchor] || []).filter(s => s !== slug);
 
   return (

@@ -104,6 +104,88 @@ const TeamApp = () => {
     return () => { observer.disconnect(); colorObserver.disconnect(); };
   }, []);
 
+  // Person schemas for doctors
+  useTE(() => {
+    const doctorSchemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dr. Birte Hancock-Diener",
+        "jobTitle": "Zahnärztin, Praxis-Inhaberin",
+        "url": "https://zahnarztpraxis-schwabing.de/team.html",
+        "telephone": "+49 89 38889500",
+        "email": "empfang@zahnarztpraxis-schwabing.de",
+        "knowsAbout": [
+          "Ästhetische Zahnmedizin",
+          "Implantologie",
+          "Zahnerhaltung",
+          "Parodontologie",
+          "Endodontologie"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn"
+        },
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Friedrichstraße 33",
+            "addressLocality": "München",
+            "postalCode": "80801",
+            "addressCountry": "DE"
+          }
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dr. Irene Jahn",
+        "jobTitle": "Zahnärztin, Praxis-Inhaberin",
+        "url": "https://zahnarztpraxis-schwabing.de/team.html",
+        "telephone": "+49 89 38808687",
+        "email": "empfang@zahnarztpraxis-schwabing.de",
+        "knowsAbout": [
+          "Ästhetische Zahnmedizin",
+          "Zahnerhaltung",
+          "Angstpatienten-Betreuung",
+          "Parodontologie"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn"
+        },
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Praxisgemeinschaft Dr. Hancock-Diener & Dr. Jahn",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Friedrichstraße 33",
+            "addressLocality": "München",
+            "postalCode": "80801",
+            "addressCountry": "DE"
+          }
+        }
+      }
+    ];
+
+    const scripts = [];
+    doctorSchemas.forEach(schema => {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+      scripts.push(script);
+    });
+
+    return () => {
+      scripts.forEach(s => {
+        if (s.parentNode) s.parentNode.removeChild(s);
+      });
+    };
+  }, []);
+
   return (
     <>
       <Header onOpenTermin={() => setTerminOpen(true)}/>
