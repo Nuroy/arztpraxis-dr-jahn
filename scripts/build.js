@@ -59,6 +59,14 @@ async function main() {
   copyFile(path.join(ROOT, 'sitemap.xml'), path.join(OUTPUT_DIR, 'sitemap.xml'));
   copyFile(path.join(ROOT, 'llms.txt'), path.join(OUTPUT_DIR, 'llms.txt'));
 
+  // Copy IndexNow key file (find .txt file that matches key pattern)
+  const files = fs.readdirSync(ROOT);
+  const keyFile = files.find(f => f.match(/^[a-f0-9]{64}\.txt$/));
+  if (keyFile) {
+    copyFile(path.join(ROOT, keyFile), path.join(OUTPUT_DIR, keyFile));
+    console.log(`Copied IndexNow key: ${keyFile}`);
+  }
+
   console.log('Build complete!');
 }
 
