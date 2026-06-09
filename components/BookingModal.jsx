@@ -3,11 +3,91 @@
 
 const { useState: useS, useEffect: useE } = React;
 
+// ========== DOCTOR HOURS CONFIG ==========
+const DOCTOR_HOURS = {
+  jahn: {
+    1: { start: "9:00", end: "13:00" },   // Mo
+    2: { start: "8:00", end: "17:30" },    // Di
+    3: { start: "8:00", end: "17:30" },    // Mi
+    // Do: kein Eintrag = nicht verfügbar
+    5: { start: "8:00", end: "15:30" },    // Fr
+  },
+  hancock: {
+    1: { start: "8:30", end: "18:00" },    // Mo
+    2: { start: "8:30", end: "18:00" },    // Di
+    3: { start: "8:30", end: "18:00" },    // Mi
+    4: { start: "8:30", end: "18:00" },    // Do
+    5: { start: "8:30", end: "14:00" },    // Fr
+  }
+};
+
+// ========== REASON OPTIONS ==========
+const REASON_OPTIONS = [
+  { id: "schmerzen", label: "Schmerzen", subLabel: "akut" },
+  { id: "kontrolle", label: "Kontrolle", subLabel: "Routine" },
+  { id: "kontrolle_pzr", label: "Kontrolle + PZR", subLabel: "mit Zahnreinigung" },
+  { id: "anderer_grund", label: "Anderer Grund", subLabel: "bitte beschreiben" }
+];
+
+const REASON_LABELS = {
+  schmerzen: "Schmerzen (akut)",
+  kontrolle: "Kontrolle (Routine)",
+  kontrolle_pzr: "Kontrolle + PZR",
+  anderer_grund: "Anderer Grund"
+};
+
+// ========== HELPER: Dynamic Time Pills ==========
+function formatTimeRange(startMin, endMin) {
+  const fmtTime = (m) => {
+    const h = Math.floor(m / 60);
+    const min = m % 60;
+    return min === 0 ? `${h}` : `${h}:${String(min).padStart(2, '0')}`;
+  };
+  return `${fmtTime(startMin)}–${fmtTime(endMin)} Uhr`;
+}
+
+function getDayTimePills(doctor, dateStr) {
+  const dow = new Date(dateStr).getDay(); // 0=So..6=Sa
+  const hours = DOCTOR_HOURS[doctor]?.[dow];
+  if (!hours) return [];
+
+  const pills = [];
+  const [startH, startM] = hours.start.split(':').map(Number);
+  const [endH, endM] = hours.end.split(':').map(Number);
+  const startMin = startH * 60 + (startM || 0);
+  const endMin = endH * 60 + (endM || 0);
+
+  // Vormittag: start bis min(12:00, end)
+  if (startMin < 720) {
+    const vmEnd = Math.min(endMin, 720);
+    pills.push({ id: "morning", label: "Vormittag", subLabel: formatTimeRange(startMin, vmEnd) });
+  }
+
+  // Mittag: max(12:00, start) bis min(14:00, end)
+  if (startMin < 840 && endMin > 720) {
+    const mtStart = Math.max(startMin, 720);
+    const mtEnd = Math.min(endMin, 840);
+    if (mtEnd > mtStart) {
+      pills.push({ id: "noon", label: "Mittag", subLabel: formatTimeRange(mtStart, mtEnd) });
+    }
+  }
+
+  // Nachmittag: max(14:00, start) bis end (wenn > 14:00)
+  if (endMin > 840) {
+    const nmStart = Math.max(startMin, 840);
+    pills.push({ id: "afternoon", label: "Nachmittag", subLabel: formatTimeRange(nmStart, endMin) });
+  }
+
+  return pills;
+}
+
 // ========== CUSTOM HOOK: Booking Flow State Management ==========
 const useBookingFlow = () => {
-  const [currentStep, setCurrentStep] = useS(0); // 0=Methode wählen, 1=Arzt, 2=Slots, 3=Kontakt, 4=Success, 5=Call
+  const [currentStep, setCurrentStep] = useS(0); // 0=Methode, 1=Arzt, 2=Grund, 3=Slots, 4=Kontakt, 5=Success, 6=Call
   const [bookingMethod, setBookingMethod] = useS(null); // "online" | "call"
   const [doctor, setDoctor] = useS(null); // "jahn" | "hancock"
+  const [reason, setReason] = useS(null); // "schmerzen" | "kontrolle" | "kontrolle_pzr" | "anderer_grund"
+  const [reasonText, setReasonText] = useS(""); // Freitext bei "anderer_grund"
   const [wishSlots, setWishSlots] = useS([null, null, null]); // max 3 slots
   const [contactData, setContactData] = useS({
     name: "",
@@ -25,7 +105,7 @@ const useBookingFlow = () => {
   const selectMethod = (method) => {
     setBookingMethod(method);
     if (method === "call") {
-      setCurrentStep(5); // Call-Screen
+      setCurrentStep(6); // Call-Screen
     } else {
       setCurrentStep(1); // Arzt auswählen
     }
@@ -35,6 +115,16 @@ const useBookingFlow = () => {
     setDoctor(doctorId);
     // Auto-advance after 400ms (Häkchen-Animation Zeit)
     setTimeout(() => setCurrentStep(2), 400);
+  };
+
+  const selectReason = (reasonId) => {
+    setReason(reasonId);
+    setReasonText(""); // Reset Freitext bei Wechsel
+    if (reasonId !== "anderer_grund") {
+      // Auto-advance after 400ms
+      setTimeout(() => setCurrentStep(3), 400);
+    }
+    // Bei "anderer_grund": kein auto-advance, Textfeld wird angezeigt
   };
 
   const updateSlot = (index, slotData) => {
@@ -57,8 +147,9 @@ const useBookingFlow = () => {
     switch (step) {
       case 0: return !!bookingMethod;
       case 1: return !!doctor;
-      case 2: return wishSlots[0] !== null; // mindestens Slot 1 gefüllt
-      case 3:
+      case 2: return reason !== null && (reason !== 'anderer_grund' || reasonText.trim().length >= 3);
+      case 3: return wishSlots[0] !== null; // mindestens Slot 1 gefüllt
+      case 4:
         return contactData.name.trim() &&
                contactData.phone.trim() &&
                contactData.consent;
@@ -67,13 +158,13 @@ const useBookingFlow = () => {
   };
 
   const goNext = () => {
-    if (currentStep < 4 && canProceed(currentStep)) {
+    if (currentStep < 5 && canProceed(currentStep)) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const goBack = () => {
-    if (currentStep === 5) {
+    if (currentStep === 6) {
       // Von Call-Screen zurück zu Step 0
       setCurrentStep(0);
       setBookingMethod(null);
@@ -82,7 +173,12 @@ const useBookingFlow = () => {
       setCurrentStep(0);
       setBookingMethod(null);
       setDoctor(null);
-    } else if (currentStep > 1) {
+    } else if (currentStep === 2) {
+      // Von Grund zurück zu Arzt
+      setCurrentStep(1);
+      setReason(null);
+      setReasonText("");
+    } else if (currentStep > 2) {
       setCurrentStep(currentStep - 1);
     }
   };
@@ -132,12 +228,16 @@ const useBookingFlow = () => {
       email: contactData.email.trim() || undefined,
       nachricht: contactData.notes.trim() || undefined,
       arzt: doctor,
+      grund: reason,
+      ...(reason === 'anderer_grund' ? { grundText: reasonText.trim() } : {}),
       termine: termine,
       consent: contactData.consent,
       honeypot: contactData.honeypot
     };
 
     console.log('[BookingModal] Sending payload:', payload);
+
+    const FALLBACK_ERROR = 'Beim Versenden ist leider ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an: 089 38 80 86 87';
 
     try {
       const response = await fetch('/api/termin', {
@@ -148,23 +248,28 @@ const useBookingFlow = () => {
 
       console.log('[BookingModal] Response status:', response.status);
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        // Server hat kein JSON zurückgegeben (z.B. HTML-Fehlerseite)
+        console.error('[BookingModal] JSON parse error:', parseErr);
+        throw new Error(FALLBACK_ERROR);
+      }
       console.log('[BookingModal] Response data:', data);
 
       if (!response.ok) {
         if (response.status === 429) {
           throw new Error('Momentan hohe Auslastung. Bitte in wenigen Minuten erneut versuchen oder direkt anrufen: 089 38 80 86 87');
         }
-        throw new Error(data.error || data.details?.join(', ') || 'Beim Versenden ist ein Fehler aufgetreten.');
+        throw new Error(data.error || FALLBACK_ERROR);
       }
 
-      console.log('[BookingModal] Success! Going to step 4');
-      setCurrentStep(4); // Success screen
+      console.log('[BookingModal] Success! Going to step 5');
+      setCurrentStep(5); // Success screen
     } catch (err) {
       console.error('[BookingModal] Error:', err);
-      const errorMsg = err.message || 'Beim Versenden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.';
-      setError(errorMsg);
-      alert('Fehler beim Versenden:\n\n' + errorMsg); // Zusätzlich als Alert für Debugging
+      setError(err.message || FALLBACK_ERROR);
     } finally {
       setLoading(false);
       console.log('[BookingModal] Submit finished');
@@ -175,6 +280,8 @@ const useBookingFlow = () => {
     setCurrentStep(0);
     setBookingMethod(null);
     setDoctor(null);
+    setReason(null);
+    setReasonText("");
     setWishSlots([null, null, null]);
     setContactData({
       name: "",
@@ -192,12 +299,16 @@ const useBookingFlow = () => {
     currentStep,
     bookingMethod,
     doctor,
+    reason,
+    reasonText,
     wishSlots,
     contactData,
     loading,
     error,
     selectMethod,
     selectDoctor,
+    selectReason,
+    setReasonText,
     updateSlot,
     removeSlot,
     updateContact,
@@ -211,10 +322,10 @@ const useBookingFlow = () => {
 
 // ========== PROGRESS BAR ==========
 const ProgressBar = ({ currentStep }) => {
-  // Keine Progress für Step 0 (Methode wählen), Step 4 (Success), Step 5 (Call)
-  if (currentStep === 0 || currentStep === 4 || currentStep === 5) return null;
+  // Keine Progress für Step 0 (Methode wählen), Step 5 (Success), Step 6 (Call)
+  if (currentStep === 0 || currentStep === 5 || currentStep === 6) return null;
 
-  const totalSteps = 3; // 1=Doctor, 2=Slots, 3=Contact
+  const totalSteps = 4; // 1=Doctor, 2=Reason, 3=Slots, 4=Contact
   const progress = (currentStep / totalSteps) * 100;
 
   return (
@@ -267,8 +378,8 @@ const Step0MethodSelect = ({ onSelectMethod }) => {
   );
 };
 
-// ========== STEP 5: CALL SCREEN ==========
-const Step5CallScreen = ({ onBack }) => {
+// ========== STEP 6: CALL SCREEN ==========
+const Step6CallScreen = ({ onBack }) => {
   return (
     <div className="booking-step call-screen">
       <h2 className="booking-step-title">Rufen Sie uns an</h2>
@@ -312,12 +423,12 @@ const Step5CallScreen = ({ onBack }) => {
 
 // ========== MODAL FOOTER ==========
 const BookingFooter = ({ currentStep, canProceed, onBack, onNext, onSubmit, loading }) => {
-  // Kein Footer für Step 0 (Methode wählen), Step 4 (Success), Step 5 (Call)
-  if (currentStep === 0 || currentStep === 4) return null;
+  // Kein Footer für Step 0 (Methode wählen), Step 5 (Success)
+  if (currentStep === 0 || currentStep === 5) return null;
 
-  const showBack = (currentStep > 1 && currentStep < 4) || currentStep === 5;
-  const showNext = currentStep === 2;
-  const showSubmit = currentStep === 3;
+  const showBack = (currentStep > 1 && currentStep < 5) || currentStep === 6;
+  const showNext = currentStep === 2 || currentStep === 3;
+  const showSubmit = currentStep === 4;
 
   return (
     <div className="booking-footer">
@@ -402,7 +513,74 @@ const Step1DoctorSelect = ({ doctor, onSelect }) => {
   );
 };
 
-// ========== STEP 2: WISH SLOTS + SUB-PICKER ==========
+// ========== STEP 2: REASON SELECT (NEU) ==========
+const Step2ReasonSelect = ({ reason, reasonText, onSelectReason, onReasonTextChange }) => {
+  const [showCheckmark, setShowCheckmark] = React.useState(null);
+
+  const handleSelect = (reasonId) => {
+    setShowCheckmark(reasonId);
+    onSelectReason(reasonId);
+    // Auto-advance wird im Hook gesteuert (nicht bei anderer_grund)
+    if (reasonId !== "anderer_grund") {
+      // Checkmark bleibt kurz sichtbar, dann advance
+    }
+  };
+
+  // Reset checkmark wenn reason wechselt (z.B. zurück navigiert)
+  React.useEffect(() => {
+    if (!reason) setShowCheckmark(null);
+  }, [reason]);
+
+  return (
+    <div className="booking-step">
+      <h2 className="booking-step-title">Was ist der Grund Ihres Besuchs?</h2>
+      <p className="booking-step-subtitle">Damit können wir die passende Terminlänge einplanen</p>
+
+      <div className="reason-cards">
+        {REASON_OPTIONS.map(opt => {
+          // Bei "anderer_grund" ausgewählt: nur diese Karte zeigen
+          if (reason === "anderer_grund" && opt.id !== "anderer_grund") return null;
+
+          return (
+            <button
+              key={opt.id}
+              className={`reason-card ${reason === opt.id || showCheckmark === opt.id ? "selected" : ""}`}
+              onClick={() => handleSelect(opt.id)}
+              disabled={showCheckmark !== null && showCheckmark !== "anderer_grund" && reason !== "anderer_grund"}
+            >
+              <div className="reason-card-content">
+                <div className="reason-card-label">{opt.label}</div>
+                <div className="reason-card-sublabel">{opt.subLabel}</div>
+              </div>
+              {showCheckmark === opt.id && opt.id !== "anderer_grund" && (
+                <div className="reason-checkmark">
+                  <Icon name="check" size={18} />
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {reason === "anderer_grund" && (
+        <div className="reason-text-wrapper">
+          <textarea
+            className="reason-text-input"
+            placeholder="Bitte beschreiben Sie kurz Ihr Anliegen"
+            value={reasonText}
+            onChange={(e) => onReasonTextChange(e.target.value)}
+            maxLength={200}
+            rows={3}
+            autoFocus
+          />
+          <div className="reason-text-counter">{reasonText.length}/200</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ========== STEP 3: WISH SLOTS + SUB-PICKER ==========
 
 // Helper: Format date to German display
 const formatDate = (dateStr) => {
@@ -466,7 +644,7 @@ const WishSlotCard = ({ index, slot, onClick, onRemove, isFirst }) => {
 };
 
 // Sub-Component: Mini Calendar
-const MiniCalendar = ({ selectedDate, onSelectDate }) => {
+const MiniCalendar = ({ selectedDate, onSelectDate, doctor }) => {
   const now = new Date();
   const [viewMonth, setViewMonth] = React.useState(now.getMonth());
   const [viewYear, setViewYear] = React.useState(now.getFullYear());
@@ -487,6 +665,12 @@ const MiniCalendar = ({ selectedDate, onSelectDate }) => {
   const isPast = (y, m, d) => {
     const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     return dateStr < todayStr;
+  };
+
+  const isDoctorUnavailable = (y, m, d) => {
+    if (!doctor) return false;
+    const dow = new Date(y, m, d).getDay(); // 0=So..6=Sa
+    return !DOCTOR_HOURS[doctor]?.[dow];
   };
 
   const canPrev = viewYear > now.getFullYear() || (viewYear === now.getFullYear() && viewMonth > now.getMonth());
@@ -552,7 +736,7 @@ const MiniCalendar = ({ selectedDate, onSelectDate }) => {
         {Array.from({ length: daysInMonth }, (_, i) => {
           const day = i + 1;
           const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-          const isDisabled = isWeekend(viewYear, viewMonth, day) || isPast(viewYear, viewMonth, day);
+          const isDisabled = isWeekend(viewYear, viewMonth, day) || isPast(viewYear, viewMonth, day) || isDoctorUnavailable(viewYear, viewMonth, day);
           const isSelected = dateStr === selectedDate;
           const isToday = dateStr === todayStr;
 
@@ -572,17 +756,19 @@ const MiniCalendar = ({ selectedDate, onSelectDate }) => {
   );
 };
 
-// Sub-Component: DayTime Pills
-const DayTimePills = ({ selectedDayTime, onSelect }) => {
-  const dayTimes = [
-    { id: "morning", label: "Vormittag", subLabel: "8–12 Uhr" },
-    { id: "noon", label: "Mittag", subLabel: "12–14 Uhr" },
-    { id: "afternoon", label: "Nachmittag", subLabel: "14–18 Uhr" }
-  ];
+// Sub-Component: DayTime Pills (now dynamic based on doctor + date)
+const DayTimePills = ({ selectedDayTime, onSelect, doctor, selectedDate }) => {
+  const pills = (doctor && selectedDate)
+    ? getDayTimePills(doctor, selectedDate)
+    : [
+        { id: "morning", label: "Vormittag", subLabel: "8–12 Uhr" },
+        { id: "noon", label: "Mittag", subLabel: "12–14 Uhr" },
+        { id: "afternoon", label: "Nachmittag", subLabel: "14–18 Uhr" }
+      ];
 
   return (
     <div className="daytime-pills">
-      {dayTimes.map(dt => (
+      {pills.map(dt => (
         <button
           key={dt.id}
           className={`daytime-pill ${selectedDayTime === dt.id ? 'selected' : ''}`}
@@ -597,7 +783,7 @@ const DayTimePills = ({ selectedDayTime, onSelect }) => {
 };
 
 // Sub-Component: Slot Picker (2-Step: Datum → Tageszeit)
-const SlotPicker = ({ onSubmit, onCancel, hasFilledSlots }) => {
+const SlotPicker = ({ onSubmit, onCancel, hasFilledSlots, doctor }) => {
   const [step, setStep] = React.useState(1); // 1=Datum, 2=Tageszeit
   const [selectedDate, setSelectedDate] = React.useState(null);
   const [selectedDayTime, setSelectedDayTime] = React.useState(null);
@@ -635,9 +821,9 @@ const SlotPicker = ({ onSubmit, onCancel, hasFilledSlots }) => {
 
       <div className="slot-picker-body">
         {step === 1 ? (
-          <MiniCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
+          <MiniCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} doctor={doctor} />
         ) : (
-          <DayTimePills selectedDayTime={selectedDayTime} onSelect={handleDayTimeSelect} />
+          <DayTimePills selectedDayTime={selectedDayTime} onSelect={handleDayTimeSelect} doctor={doctor} selectedDate={selectedDate} />
         )}
       </div>
 
@@ -655,8 +841,8 @@ const SlotPicker = ({ onSubmit, onCancel, hasFilledSlots }) => {
   );
 };
 
-// Main Step 2 Component
-const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
+// Main Step 3 Component (was Step 2)
+const Step3WishSlots = ({ wishSlots, onUpdate, onRemove, doctor }) => {
   const [pickerOpen, setPickerOpen] = React.useState(null); // null | 0 | 1 | 2 (slot index)
 
   const handleSlotClick = (index) => {
@@ -716,6 +902,7 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
             onSubmit={handlePickerSubmit}
             onCancel={handlePickerCancel}
             hasFilledSlots={wishSlots.some(slot => slot !== null)}
+            doctor={doctor}
           />
         </>
       )}
@@ -723,16 +910,20 @@ const Step2WishSlots = ({ wishSlots, onUpdate, onRemove }) => {
   );
 };
 
-// ========== STEP 3: CONTACT FORM ==========
-const Step3ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots }) => {
+// ========== STEP 4: CONTACT FORM (was Step 3) ==========
+const Step4ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots, reason, reasonText }) => {
   const filledSlotsCount = wishSlots.filter(s => s !== null).length;
   const doctorName = doctor === "jahn" ? "Dr. Jahn" : "Dr. Hancock-Diener";
 
+  const reasonDisplay = reason === "anderer_grund"
+    ? reasonText.trim()
+    : (REASON_LABELS[reason] || "");
+
   return (
-    <div className="booking-step">
+    <div className="booking-step step-contact">
       {/* Mini-Summary (statt Headline) */}
       <div className="contact-summary">
-        {doctorName} · {filledSlotsCount} Wunschtermin{filledSlotsCount > 1 ? 'e' : ''}
+        {doctorName} · {reasonDisplay} · {filledSlotsCount} Wunschtermin{filledSlotsCount > 1 ? 'e' : ''}
       </div>
 
       {/* Form Fields */}
@@ -810,7 +1001,7 @@ const Step3ContactForm = ({ contactData, onUpdate, error, doctor, wishSlots }) =
   );
 };
 
-const Step4Success = ({ onClose, onNew }) => (
+const Step5Success = ({ onClose, onNew }) => (
   <div className="booking-step booking-success">
     <div className="booking-success-icon">
       <Icon name="check" size={48} />
@@ -841,7 +1032,7 @@ const BookingModal = ({ open, onClose }) => {
   }, [open, onClose]);
 
   const handleClose = () => {
-    if (flow.currentStep > 1 && flow.currentStep < 4) {
+    if (flow.currentStep > 1 && flow.currentStep < 5) {
       const confirmed = window.confirm(
         'Möchten Sie die Terminanfrage wirklich abbrechen? Ihre Eingaben gehen verloren.'
       );
@@ -867,26 +1058,38 @@ const BookingModal = ({ open, onClose }) => {
         return <Step1DoctorSelect doctor={flow.doctor} onSelect={flow.selectDoctor} />;
       case 2:
         return (
-          <Step2WishSlots
-            wishSlots={flow.wishSlots}
-            onUpdate={flow.updateSlot}
-            onRemove={flow.removeSlot}
+          <Step2ReasonSelect
+            reason={flow.reason}
+            reasonText={flow.reasonText}
+            onSelectReason={flow.selectReason}
+            onReasonTextChange={flow.setReasonText}
           />
         );
       case 3:
         return (
-          <Step3ContactForm
+          <Step3WishSlots
+            wishSlots={flow.wishSlots}
+            onUpdate={flow.updateSlot}
+            onRemove={flow.removeSlot}
+            doctor={flow.doctor}
+          />
+        );
+      case 4:
+        return (
+          <Step4ContactForm
             contactData={flow.contactData}
             onUpdate={flow.updateContact}
             error={flow.error}
             doctor={flow.doctor}
             wishSlots={flow.wishSlots}
+            reason={flow.reason}
+            reasonText={flow.reasonText}
           />
         );
-      case 4:
-        return <Step4Success onClose={handleClose} onNew={handleNewRequest} />;
       case 5:
-        return <Step5CallScreen onBack={flow.goBack} />;
+        return <Step5Success onClose={handleClose} onNew={handleNewRequest} />;
+      case 6:
+        return <Step6CallScreen onBack={flow.goBack} />;
       default:
         return null;
     }

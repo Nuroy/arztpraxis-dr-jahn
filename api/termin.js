@@ -10,6 +10,8 @@ const terminSchema = z.object({
   email: z.string().email('Ungültige E-Mail-Adresse').max(200),
   telefon: z.string().min(5, 'Telefonnummer zu kurz').max(50),
   arzt: z.enum(['hancock', 'jahn']),
+  grund: z.enum(['schmerzen', 'kontrolle', 'kontrolle_pzr', 'anderer_grund']).optional(),
+  grundText: z.string().max(200).optional(),
   termine: z.array(
     z.object({
       date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -19,7 +21,16 @@ const terminSchema = z.object({
   nachricht: z.string().max(500).optional(),
   consent: z.boolean().refine(val => val === true, 'Datenschutz-Zustimmung erforderlich'),
   honeypot: z.string().max(0, 'Bot-Schutz aktiviert') // Muss leer sein!
-});
+}).refine(
+  (data) => {
+    // Wenn grund = anderer_grund, muss grundText mindestens 3 Zeichen haben
+    if (data.grund === 'anderer_grund') {
+      return data.grundText && data.grundText.trim().length >= 3;
+    }
+    return true;
+  },
+  { message: 'Bitte beschreiben Sie Ihr Anliegen (mind. 3 Zeichen)', path: ['grundText'] }
+);
 
 // ----- RATE LIMITING (In-Memory Token Bucket) -----
 // Für Serverless: Wird pro Instanz sein, aber für kleine Praxis ausreichend
@@ -89,11 +100,42 @@ function formatDayTime(dayTime) {
   return map[dayTime] || dayTime;
 }
 
+function formatGrund(grund, grundText) {
+  const map = {
+    schmerzen: 'Schmerzen (akut)',
+    kontrolle: 'Kontrolle (Routine)',
+    kontrolle_pzr: 'Kontrolle + PZR',
+    anderer_grund: grundText ? `Anderer Grund: ${grundText}` : 'Anderer Grund'
+  };
+  return map[grund] || '';
+}
+
+function formatGrundShort(grund) {
+  const map = {
+    schmerzen: 'Schmerzen',
+    kontrolle: 'Kontrolle',
+    kontrolle_pzr: 'Kontrolle+PZR',
+    anderer_grund: 'Anderer Grund'
+  };
+  return map[grund] || '';
+}
+
 function generateEmailHTML(data) {
   const arztName = data.arzt === 'hancock' ? 'Dr. Hancock-Diener' : 'Dr. Jahn';
   const termineList = data.termine.map((t, i) =>
     `<li><strong>Wunschtermin ${i + 1}:</strong> ${formatDate(t.date)}, ${formatDayTime(t.time)}</li>`
   ).join('');
+
+  const grundDisplay = data.grund ? formatGrund(data.grund, data.grundText) : '';
+  const grundHTML = grundDisplay ? `
+              <!-- Termingrund -->
+              <div style="margin-bottom: 24px;">
+                <h2 style="margin: 0 0 12px; font-size: 18px; color: #0f766e;">Termingrund</h2>
+                <p style="margin: 0; font-size: 15px; background-color: ${data.grund === 'schmerzen' ? '#fef3c7' : '#f9fafb'}; padding: 12px; border-radius: 6px; border: 1px solid ${data.grund === 'schmerzen' ? '#fbbf24' : '#e5e7eb'}; ${data.grund === 'schmerzen' ? 'font-weight: 600;' : ''}">
+                  ${grundDisplay}
+                </p>
+              </div>
+  ` : '';
 
   return `
 <!DOCTYPE html>
@@ -146,6 +188,8 @@ function generateEmailHTML(data) {
                   ${arztName}
                 </p>
               </div>
+
+              ${grundHTML}
 
               <!-- Wunschtermine -->
               <div style="margin-bottom: 24px;">
@@ -204,6 +248,9 @@ function generateEmailPlain(data) {
     `  Wunschtermin ${i + 1}: ${formatDate(t.date)}, ${formatDayTime(t.time)}`
   ).join('\n');
 
+  const grundDisplay = data.grund ? formatGrund(data.grund, data.grundText) : '';
+  const grundSection = grundDisplay ? `\nTERMINGRUND:\n${grundDisplay}\n` : '';
+
   return `
 NEUE TERMINANFRAGE ÜBER DIE WEBSITE
 ====================================
@@ -215,7 +262,7 @@ Telefon:  ${data.telefon}
 
 GEWÜNSCHTE ÄRZTIN:
 ${arztName}
-
+${grundSection}
 WUNSCHTERMINE:
 ${termineList}
 
@@ -280,12 +327,13 @@ module.exports = async (req, res) => {
     // E-Mail senden
     const transporter = createTransporter();
     const arztName = data.arzt === 'hancock' ? 'Dr. Hancock-Diener' : 'Dr. Jahn';
+    const grundShort = data.grund ? ` (${formatGrundShort(data.grund)})` : '';
 
     const mailOptions = {
       from: `"Terminanfrage Website" <${process.env.ABSENDER_EMAIL || process.env.SMTP_USER}>`,
       to: process.env.EMPFANG_EMAIL,
       replyTo: `"${data.name}" <${data.email}>`,
-      subject: `Neue Terminanfrage von ${data.name} bei ${arztName}`,
+      subject: `Neue Terminanfrage${grundShort} von ${data.name} bei ${arztName}`,
       text: generateEmailPlain(data),
       html: generateEmailHTML(data)
     };

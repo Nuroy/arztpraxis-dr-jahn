@@ -1376,19 +1376,45 @@ const Standort = () => (
             <div className="info-content">Friedrichstraße 33<br/>80801 München (Schwabing)</div>
           </div>
           <div className="info-block">
-            <div className="info-label">Öffnungszeiten</div>
+            <div className="info-label">Praxisöffnungszeiten</div>
             <div className="info-content">
               <div className="hours-table">
                 <span className="day">Mo – Do</span><span className="time">8 – 18 Uhr</span>
                 <span className="day">Fr</span><span className="time">8 – 16 Uhr</span>
                 <span className="day">Sa, So</span><span className="time" style={{color:'var(--text-muted)'}}>geschlossen</span>
               </div>
+            </div>
+          </div>
+          <div className="info-block">
+            <div className="info-label">Kernzeiten Dr. Jahn</div>
+            <div className="info-content">
+              <div className="hours-table">
+                <span className="day">Mo</span><span className="time">9 – 13 Uhr</span>
+                <span className="day">Di, Mi</span><span className="time">8 – 17:30 Uhr</span>
+                <span className="day">Fr</span><span className="time">8 – 15:30 Uhr</span>
+              </div>
+            </div>
+          </div>
+          <div className="info-block">
+            <div className="info-label">Kernzeiten Dr. Hancock-Diener</div>
+            <div className="info-content">
+              <div className="hours-table">
+                <span className="day">Mo – Do</span><span className="time">8:30 – 18 Uhr</span>
+                <span className="day">Fr</span><span className="time">8:30 – 14 Uhr</span>
+              </div>
               <p style={{fontSize:'13px', color:'var(--text-muted)', marginTop:'8px'}}>Abweichungen im Einzelfall möglich.</p>
             </div>
           </div>
           <div className="info-block">
             <div className="info-label">Anfahrt</div>
-            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>U3/U6 Münchner Freiheit, ca. 7-10 Min. Fußweg.</div>
+            <div className="info-content body-md" style={{color:'var(--text-secondary)'}}>
+              <div>U-Bahn: U3/U6 Münchner Freiheit, ca. 7–10 Min. Fußweg.</div>
+              <div style={{marginTop:'6px'}}>
+                Bus ab Münchner Freiheit:<br/>
+                Linie 53 Ri. Aidenbachstr. / Linie 59 Ri. Ackermannbogen<br/>
+                2 Stationen bis Haltestelle Friedrichstr.
+              </div>
+            </div>
           </div>
           <div className="info-block">
             <div className="info-label">Telefon</div>
