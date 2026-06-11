@@ -384,6 +384,11 @@
 @media (max-width: 1023px) {
   .trust-item { padding: 0 20px; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .trustbar-track {
+    animation: none;
+  }
+}
 
 /* ============ INTRO ============ */
 .intro-grid {
