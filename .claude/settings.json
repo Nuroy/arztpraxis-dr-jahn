@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(kill 77996 77994 77973 77971 77947 77943 77940)",
-      "Bash(rm -f .git/index.lock)"
-    ]
-  }
-}
