@@ -327,6 +327,8 @@
   display: flex; align-items: center; gap: 12px;
   box-shadow: var(--shadow-md);
   animation: float 3s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
   max-width: calc(100% - 48px);
 }
 .hero-badge .check {
@@ -342,8 +344,8 @@
 .hero-badge-sub { font-size: 11px; color: var(--text-muted); }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
 }
 
 /* ============ TRUST BAR ============ */
@@ -386,6 +388,9 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .trustbar-track {
+    animation: none;
+  }
+  .hero-badge {
     animation: none;
   }
 }

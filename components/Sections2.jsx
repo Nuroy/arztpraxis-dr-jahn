@@ -713,18 +713,6 @@ const WizardStep1DoctorSelect = ({ doctor, onSelect }) => {
       <p className="wizard-step-subtitle">Wählen Sie Ihre bevorzugte Ärztin aus</p>
       <div className="wizard-doctor-grid">
         <button
-          className={`wizard-doctor-card ${doctor === "jahn" ? "selected" : ""}`}
-          onClick={() => onSelect("jahn")}
-        >
-          <div className="wizard-doctor-avatar">
-            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy"/>
-          </div>
-          <p className="wizard-doctor-name">Dr. Irene Jahn</p>
-          <div className="wizard-doctor-check">
-            <Icon name="check" size={16}/>
-          </div>
-        </button>
-        <button
           className={`wizard-doctor-card ${doctor === "hancock" ? "selected" : ""}`}
           onClick={() => onSelect("hancock")}
         >
@@ -732,6 +720,18 @@ const WizardStep1DoctorSelect = ({ doctor, onSelect }) => {
             <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy"/>
           </div>
           <p className="wizard-doctor-name">Dr. Hancock-Diener</p>
+          <div className="wizard-doctor-check">
+            <Icon name="check" size={16}/>
+          </div>
+        </button>
+        <button
+          className={`wizard-doctor-card ${doctor === "jahn" ? "selected" : ""}`}
+          onClick={() => onSelect("jahn")}
+        >
+          <div className="wizard-doctor-avatar">
+            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy"/>
+          </div>
+          <p className="wizard-doctor-name">Dr. Irene Jahn</p>
           <div className="wizard-doctor-check">
             <Icon name="check" size={16}/>
           </div>

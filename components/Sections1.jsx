@@ -9,7 +9,7 @@ const Hero = ({ onOpenTermin }) => (
         <div>
           <div className="eyebrow hero-eyebrow">Zahnmedizin in München-Schwabing</div>
           <h1 className="display-xl">Bewährtes und Fortschritt für Ihr <em className="italic-accent">Lächeln</em>.</h1>
-          <p className="body-xl hero-sub">Praxisgemeinschaft Dr. Birte Hancock-Diener und Dr. Irene Jahn. Wir nehmen uns Zeit für Ihre Gesundheit, Ihre Ästhetik, Ihr Wohlbefinden.</p>
+          <p className="body-xl hero-sub">Praxisgemeinschaft Dr. Irene Jahn und Dr. Birte Hancock-Diener. Wir nehmen uns Zeit für Ihre Gesundheit, Ihre Ästhetik, Ihr Wohlbefinden.</p>
           <div className="hero-ctas">
             <button className="btn btn-primary" onClick={onOpenTermin}>
               Termin vereinbaren <Icon name="arrow-right" size={16} className="btn-arrow" />
@@ -25,7 +25,7 @@ const Hero = ({ onOpenTermin }) => (
             <div className="check"><Icon name="check" size={16} /></div>
             <div className="hero-badge-text">
               <div className="hero-badge-title">Meisterlabor-Qualität</div>
-              <div className="hero-badge-sub">Partnerschaft seit 25+ & 30+ Jahren</div>
+              <div className="hero-badge-sub">Partnerschaft seit 25+ Jahren</div>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Intro = () => (
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>
           <h2 className="display-lg">Eine Praxisgemeinschaft, die sich <em className="italic-accent">Zeit</em> nimmt.</h2>
-          <p className="body-lg">Seit über 20 Jahren führen Dr. Birte Hancock-Diener und Dr. Irene Jahn ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
+          <p className="body-lg">Seit über 20 Jahren führen Dr. Irene Jahn und Dr. Birte Hancock-Diener ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
           <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur. Bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
           <a href="team.html" className="btn-tertiary">Mehr über uns erfahren <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
         </div>
@@ -189,25 +189,6 @@ const Team = ({ onOpenTermin }) => {
       <div className="team-grid" ref={teamRef}>
         <div className="team-card">
           <div className="team-photo">
-            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Birte Hancock-Diener" loading="lazy" />
-          </div>
-          <div className="team-content">
-            <h3 className="team-name">Dr. Birte Hancock-Diener</h3>
-            <p className="team-role">Zahnärztin</p>
-            <div className="team-tags">
-              <span className="team-tag">Ästhetik</span>
-              <span className="team-tag">Implantate</span>
-              <span className="team-tag">Zahnerhaltung</span>
-            </div>
-            <p className="team-bio">Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.</p>
-            <div className="team-actions">
-              <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Hancock-Diener</button>
-              <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
-            </div>
-          </div>
-        </div>
-        <div className="team-card">
-          <div className="team-photo">
             <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
           </div>
           <div className="team-content">
@@ -221,6 +202,25 @@ const Team = ({ onOpenTermin }) => {
             <p className="team-bio">Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung,  gerade bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.</p>
             <div className="team-actions">
               <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Jahn</button>
+              <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
+            </div>
+          </div>
+        </div>
+        <div className="team-card">
+          <div className="team-photo">
+            <img src="assets/dr-hancock-diener.jpg" alt="Dr. Birte Hancock-Diener" loading="lazy" />
+          </div>
+          <div className="team-content">
+            <h3 className="team-name">Dr. Birte Hancock-Diener</h3>
+            <p className="team-role">Zahnärztin</p>
+            <div className="team-tags">
+              <span className="team-tag">Ästhetik</span>
+              <span className="team-tag">Implantate</span>
+              <span className="team-tag">Zahnerhaltung</span>
+            </div>
+            <p className="team-bio">Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.</p>
+            <div className="team-actions">
+              <button className="btn btn-primary" onClick={onOpenTermin}>Termin bei Dr. Hancock-Diener</button>
               <a href="team.html" className="btn-tertiary">Unser Team <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
             </div>
           </div>

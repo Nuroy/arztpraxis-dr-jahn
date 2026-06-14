@@ -4,17 +4,6 @@ const { useState: useTS, useEffect: useTE } = React;
 
 const DOCTORS = [
   {
-    slug: "hancock-diener",
-    name: "Dr. Birte Hancock-Diener",
-    role: "Zahnärztin · Inhaberin",
-    photo: "assets/dr-hancock-diener.jpg",
-    seit: "Praxis-Inhaberin seit 2002",
-    tags: ["Ästhetik", "Implantate", "Zahnerhaltung"],
-    bio: "Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.",
-    phone: "089 38 88 95 00",
-    phoneHref: "tel:+498938889500"
-  },
-  {
     slug: "jahn",
     name: "Dr. Irene Jahn",
     role: "Zahnärztin · Inhaberin",
@@ -24,6 +13,17 @@ const DOCTORS = [
     bio: "Ihr Ziel ist es, natürliche Zähne so lange wie möglich zu erhalten. Besonderes Augenmerk legt sie auf einfühlsame Beratung, besonders bei Patient:innen, die den Zahnarztbesuch mit Sorge verbinden.",
     phone: "089 38 80 86 87",
     phoneHref: "tel:+498938808687"
+  },
+  {
+    slug: "hancock-diener",
+    name: "Dr. Birte Hancock-Diener",
+    role: "Zahnärztin · Inhaberin",
+    photo: "assets/dr-hancock-diener.jpg",
+    seit: "Praxis-Inhaberin seit 2002",
+    tags: ["Ästhetik", "Implantate", "Zahnerhaltung"],
+    bio: "Seit über 25 Jahren begleitet sie Patient:innen, von der ersten Beratung bis zur fertigen Versorgung. Ihr Anspruch: individuelle Behandlung, ehrliche Aufklärung und Ergebnisse, die langfristig überzeugen.",
+    phone: "089 38 88 95 00",
+    phoneHref: "tel:+498938889500"
   }
 ];
 
@@ -237,7 +237,7 @@ const TeamApp = () => {
           <div className="section-header reveal">
             <div className="eyebrow">Die Zahnärztinnen</div>
             <h2 className="display-lg">Zwei Schwerpunkte. <em className="italic-accent">Ein Team.</em></h2>
-            <p className="body-lg">Zwei Praxen, ein Team. Seit 2006 führen Dr. B. Hancock-Diener und Dr. I. Jahn nach anderweitiger Selbständigkeit die Praxis in der Friedrichstraße gemeinsam. Durch regelmäßige Fortbildung einerseits, durch ständige Modernisierung und Digitalisierung andererseits bringen sie die Praxis sowohl wissenschaftlich als auch technisch immer auf den neuesten Stand.</p>
+            <p className="body-lg">Zwei Praxen, ein Team. Seit 2006 führen Dr. I. Jahn und Dr. B. Hancock-Diener nach anderweitiger Selbständigkeit die Praxis in der Friedrichstraße gemeinsam. Durch regelmäßige Fortbildung einerseits, durch ständige Modernisierung und Digitalisierung andererseits bringen sie die Praxis sowohl wissenschaftlich als auch technisch immer auf den neuesten Stand.</p>
           </div>
           <div className="doctors-grid">
             {DOCTORS.map((doc) => (
