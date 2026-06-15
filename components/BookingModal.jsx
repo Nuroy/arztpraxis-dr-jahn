@@ -478,22 +478,6 @@ const Step1DoctorSelect = ({ doctor, onSelect }) => {
 
       <div className="doctor-cards">
         <button
-          className={`doctor-card ${doctor === "jahn" || showCheckmark === "jahn" ? "selected" : ""}`}
-          onClick={() => handleSelect("jahn")}
-          disabled={showCheckmark !== null}
-        >
-          <div className="doctor-avatar">
-            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
-          </div>
-          <div className="doctor-name">Dr. Irene Jahn</div>
-          {showCheckmark === "jahn" && (
-            <div className="doctor-checkmark">
-              <Icon name="check" size={24} />
-            </div>
-          )}
-        </button>
-
-        <button
           className={`doctor-card ${doctor === "hancock" || showCheckmark === "hancock" ? "selected" : ""}`}
           onClick={() => handleSelect("hancock")}
           disabled={showCheckmark !== null}
@@ -503,6 +487,22 @@ const Step1DoctorSelect = ({ doctor, onSelect }) => {
           </div>
           <div className="doctor-name">Dr. Hancock-Diener</div>
           {showCheckmark === "hancock" && (
+            <div className="doctor-checkmark">
+              <Icon name="check" size={24} />
+            </div>
+          )}
+        </button>
+
+        <button
+          className={`doctor-card ${doctor === "jahn" || showCheckmark === "jahn" ? "selected" : ""}`}
+          onClick={() => handleSelect("jahn")}
+          disabled={showCheckmark !== null}
+        >
+          <div className="doctor-avatar">
+            <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
+          </div>
+          <div className="doctor-name">Dr. Irene Jahn</div>
+          {showCheckmark === "jahn" && (
             <div className="doctor-checkmark">
               <Icon name="check" size={24} />
             </div>
