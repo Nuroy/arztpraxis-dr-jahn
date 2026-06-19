@@ -351,6 +351,111 @@
   border-color: var(--brand-primary);
 }
 
+/* Sub-headings inside a section */
+.anamnese-subhead {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  margin: 20px 0 10px;
+}
+.anamnese-subhead:first-of-type {
+  margin-top: 0;
+}
+
+/* Notice / legal text blocks */
+.anamnese-notice-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+
+/* Yes/No question rows */
+.anamnese-q {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.anamnese-q:last-child {
+  border-bottom: none;
+}
+.anamnese-q-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.anamnese-q-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.anamnese-q-text.anamnese-strong {
+  display: block;
+  font-weight: 600;
+  margin: 24px 0 8px;
+}
+.anamnese-q-detail {
+  margin-top: 10px;
+}
+.anamnese-q-note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--brand-primary);
+  font-weight: 500;
+}
+
+/* Yes/No toggle */
+.anamnese-yn {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.anamnese-yn-btn {
+  min-width: 52px;
+  padding: 7px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 150ms var(--ease-out);
+}
+.anamnese-yn-btn:hover {
+  border-color: var(--brand-primary);
+}
+.anamnese-yn-btn.selected {
+  border-color: var(--brand-primary);
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+}
+
+/* Disease + heard rows with inline detail field */
+.anamnese-disease-list,
+.anamnese-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+.anamnese-disease-row,
+.anamnese-heard-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.anamnese-disease-row .anamnese-checkbox,
+.anamnese-heard-row .anamnese-checkbox {
+  flex: 1 1 240px;
+}
+.anamnese-year {
+  width: auto;
+  flex: 0 1 200px;
+  max-width: 220px;
+}
+
 /* Actions */
 .anamnese-actions {
   display: flex;
