@@ -70,7 +70,7 @@ const Intro = () => (
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>
           <h2 className="display-lg">Eine Praxisgemeinschaft, die sich <em className="italic-accent">Zeit</em> nimmt.</h2>
-          <p className="body-lg">Seit über 20 Jahren führen Dr. Irene Jahn und Dr. Birte Hancock-Diener ihre Praxis in der Schwabinger Friedrichstraße. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
+          <p className="body-lg">2002 von Dr. Birte Hancock-Diener gegründet, führen Dr. Irene Jahn und Dr. Birte Hancock-Diener die Praxis in der Schwabinger Friedrichstraße heute gemeinsam. Was uns ausmacht: Wir hören zu, bevor wir behandeln. Wir erklären, bevor wir beginnen. Und wir arbeiten Hand in Hand mit hervorragenden deutschen zahntechnischen Meisterlaboren.</p>
           <p className="body-lg">Ob Vorsorge, Implantat, Wurzelbehandlung oder ästhetische Korrektur. Bei uns sind Sie nicht ein Termin im Kalender, sondern ein Mensch mit individuellen Wünschen.</p>
           <a href="team.html" className="btn-tertiary">Mehr über uns erfahren <Icon name="arrow-right" size={14} className="btn-arrow" /></a>
         </div>

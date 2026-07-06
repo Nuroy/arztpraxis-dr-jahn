@@ -196,7 +196,7 @@ const { useRef: useFR } = React;
 const CalendarBooking = () => {
   const now = new Date();
   const todayStr = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
-  const [doctor, setDoctor] = useS3("jahn");
+  const [doctor, setDoctor] = useS3("");
   const [vYear, setVYear] = useS3(now.getFullYear());
   const [vMonth, setVMonth] = useS3(now.getMonth());
   const [selDate, setSelDate] = useS3(null);
@@ -567,7 +567,7 @@ const useWizard = () => {
   const now = new Date();
   const [currentStep, setCurrentStep] = useS3(1);
   const [wizardData, setWizardData] = useS3({
-    doctor: "jahn",
+    doctor: "",
     selectedDates: [],
     selectedSlots: [],
     name: "",
@@ -618,7 +618,7 @@ const useWizard = () => {
   const reset = () => {
     setCurrentStep(1);
     setWizardData({
-      doctor: "jahn",
+      doctor: "",
       selectedDates: [],
       selectedSlots: [],
       name: "",
@@ -1264,7 +1264,14 @@ const TerminCTA = ({ onOpenTermin }) => {
                 <button className={`booking-tab ${tab === "call" ? "active" : ""}`} onClick={() => setTab("call")}>Anrufen</button>
               </div>
               {tab === "online" ? (
-                <CalendarWizard/>
+                <div className="booking-cta-panel">
+                  <div className="booking-cta-icon"><Icon name="calendar" size={32}/></div>
+                  <h3 className="booking-cta-title">Wunschtermin anfragen</h3>
+                  <p className="booking-cta-text">Wählen Sie Ärztin, Anliegen und Wunschtermine bequem im Buchungsfenster — wir rufen Sie zur Bestätigung zurück.</p>
+                  <button className="btn btn-primary" onClick={onOpenTermin}>
+                    Termin vereinbaren <Icon name="arrow-right" size={16} className="btn-arrow"/>
+                  </button>
+                </div>
               ) : (
                 <div className="call-cards">
                   <a href="tel:+498938808687" className="call-card">
@@ -1400,7 +1407,7 @@ const Standort = () => (
             <div className="info-content">
               <div className="hours-table">
                 <span className="day">Mo – Do</span><span className="time">8:30 – 18 Uhr</span>
-                <span className="day">Fr</span><span className="time">8:30 – 14 Uhr</span>
+                <span className="day">Fr</span><span className="time">8:30 – 15 Uhr</span>
               </div>
               <p style={{fontSize:'13px', color:'var(--text-muted)', marginTop:'8px'}}>Abweichungen im Einzelfall möglich.</p>
             </div>

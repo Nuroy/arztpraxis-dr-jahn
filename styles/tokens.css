@@ -1,5 +1,8 @@
 /* Design tokens — Zahnarztpraxis Schwabing */
 :root {
+  /* Fonts */
+  --font-serif: 'Fraunces', Georgia, serif;
+
   /* Backgrounds */
   --bg-canvas: #FFFFFF;
   --bg-surface: #FFFFFF;

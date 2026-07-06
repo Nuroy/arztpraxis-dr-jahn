@@ -203,7 +203,7 @@ const NeupatientenApp = () => {
       )}
 
       <Footer/>
-      <TerminModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
+      <BookingModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
       <CookieBanner/>
     </>
   );

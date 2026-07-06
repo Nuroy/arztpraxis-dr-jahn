@@ -237,7 +237,7 @@ const TeamApp = () => {
           <div className="section-header reveal">
             <div className="eyebrow">Die Zahnärztinnen</div>
             <h2 className="display-lg">Zwei Schwerpunkte. <em className="italic-accent">Ein Team.</em></h2>
-            <p className="body-lg">Zwei Praxen, ein Team. Seit 2006 führen Dr. I. Jahn und Dr. B. Hancock-Diener nach anderweitiger Selbständigkeit die Praxis in der Friedrichstraße gemeinsam. Durch regelmäßige Fortbildung einerseits, durch ständige Modernisierung und Digitalisierung andererseits bringen sie die Praxis sowohl wissenschaftlich als auch technisch immer auf den neuesten Stand.</p>
+            <p className="body-lg">Zwei Praxen, ein Team. Im Jahr 2002 von Dr. B. Hancock-Diener gegründet, wird die Praxis in der Friedrichstraße seit 2006 von Dr. I. Jahn und Dr. B. Hancock-Diener nach anderweitiger Selbständigkeit gemeinsam geführt. Durch regelmäßige Fortbildung einerseits, durch ständige Modernisierung und Digitalisierung andererseits bringen sie die Praxis sowohl wissenschaftlich als auch technisch immer auf den neuesten Stand.</p>
           </div>
           <div className="doctors-grid">
             {DOCTORS.map((doc) => (
@@ -312,7 +312,7 @@ const TeamApp = () => {
       </section>
 
       <Footer/>
-      <TerminModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
+      <BookingModal open={terminOpen} onClose={() => setTerminOpen(false)}/>
       <CookieBanner/>
     </>
   );

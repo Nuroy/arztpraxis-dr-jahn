@@ -31,7 +31,7 @@ const App = () => {
         <TechSpotlight/>
         <DekoSection/>
         <Testimonials/>
-        <TerminCTA/>
+        <TerminCTA onOpenTermin={() => setTerminOpen(true)}/>
         <Standort/>
         <FAQ/>
       </main>

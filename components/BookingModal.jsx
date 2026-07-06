@@ -17,7 +17,7 @@ const DOCTOR_HOURS = {
     2: { start: "8:30", end: "18:00" },    // Di
     3: { start: "8:30", end: "18:00" },    // Mi
     4: { start: "8:30", end: "18:00" },    // Do
-    5: { start: "8:30", end: "14:00" },    // Fr
+    5: { start: "8:30", end: "15:00" },    // Fr
   }
 };
 

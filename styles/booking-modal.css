@@ -432,7 +432,7 @@
 }
 
 /* ========== STEP 1: DOCTOR SELECT ========== */
-.doctor-cards {
+.booking-modal .doctor-cards {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -440,13 +440,13 @@
 }
 
 @media (min-width: 768px) {
-  .doctor-cards {
+  .booking-modal .doctor-cards {
     flex-direction: row;
     gap: 20px;
   }
 }
 
-.doctor-card {
+.booking-modal .doctor-card {
   position: relative;
   background: var(--bg-surface);
   border: 2px solid var(--border-subtle);
@@ -462,25 +462,25 @@
   min-height: 200px;
 }
 
-.doctor-card:hover:not(:disabled) {
+.booking-modal .doctor-card:hover:not(:disabled) {
   border-color: var(--brand-primary);
   background: var(--brand-soft);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(76, 111, 68, 0.1);
 }
 
-.doctor-card:disabled {
+.booking-modal .doctor-card:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.doctor-card.selected {
+.booking-modal .doctor-card.selected {
   border-color: var(--brand-primary);
   background: var(--brand-soft);
   box-shadow: 0 0 0 3px rgba(76, 111, 68, 0.1);
 }
 
-.doctor-avatar {
+.booking-modal .doctor-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -490,7 +490,7 @@
   transition: all 200ms ease-out;
 }
 
-.doctor-avatar img {
+.booking-modal .doctor-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -498,12 +498,12 @@
   transition: filter 200ms ease-out;
 }
 
-.doctor-card:hover .doctor-avatar img,
-.doctor-card.selected .doctor-avatar img {
+.booking-modal .doctor-card:hover .doctor-avatar img,
+.booking-modal .doctor-card.selected .doctor-avatar img {
   filter: grayscale(0%);
 }
 
-.doctor-name {
+.booking-modal .doctor-name {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 20px;
   font-weight: 500;
@@ -511,7 +511,7 @@
   text-align: center;
 }
 
-.doctor-checkmark {
+.booking-modal .doctor-checkmark {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -543,26 +543,26 @@
 }
 
 @media (max-width: 767px) {
-  .doctor-card {
+  .booking-modal .doctor-card {
     padding: 24px 20px;
     min-height: 160px;
   }
 
-  .doctor-avatar {
+  .booking-modal .doctor-avatar {
     width: 64px;
     height: 64px;
   }
 
-  .doctor-name {
+  .booking-modal .doctor-name {
     font-size: 18px;
   }
 
-  .doctor-checkmark {
+  .booking-modal .doctor-checkmark {
     width: 64px;
     height: 64px;
   }
 
-  .doctor-checkmark svg {
+  .booking-modal .doctor-checkmark svg {
     width: 20px;
     height: 20px;
   }
@@ -1317,7 +1317,7 @@
 }
 
 /* ========== STEP 5: CALL SCREEN ========== */
-.call-screen {
+.booking-modal .call-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1325,7 +1325,7 @@
   text-align: center;
 }
 
-.call-cards {
+.booking-modal .call-cards {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1333,7 +1333,7 @@
   margin-top: 24px;
 }
 
-.call-card {
+.booking-modal .call-card {
   background: var(--bg-surface);
   border: 2px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -1346,21 +1346,21 @@
   cursor: pointer;
 }
 
-.call-card:hover {
+.booking-modal .call-card:hover {
   border-color: var(--brand-primary);
   background: var(--brand-soft);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(76, 111, 68, 0.1);
 }
 
-.call-card-doctor {
+.booking-modal .call-card-doctor {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
-.call-card-avatar {
+.booking-modal .call-card-avatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -1368,20 +1368,20 @@
   background: var(--bg-subtle);
 }
 
-.call-card-avatar img {
+.booking-modal .call-card-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.call-card-name {
+.booking-modal .call-card-name {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 18px;
   font-weight: 500;
   color: var(--text-primary);
 }
 
-.call-card-phone {
+.booking-modal .call-card-phone {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1395,12 +1395,12 @@
   transition: all 200ms ease-out;
 }
 
-.call-card:hover .call-card-phone {
+.booking-modal .call-card:hover .call-card-phone {
   background: var(--brand-dark, #0d5f58);
   transform: scale(1.05);
 }
 
-.call-hours {
+.booking-modal .call-hours {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1413,36 +1413,36 @@
   color: var(--text-secondary);
 }
 
-.call-hours svg {
+.booking-modal .call-hours svg {
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
 @media (max-width: 767px) {
-  .call-cards {
+  .booking-modal .call-cards {
     gap: 12px;
     margin-top: 20px;
   }
 
-  .call-card {
+  .booking-modal .call-card {
     padding: 16px;
   }
 
-  .call-card-avatar {
+  .booking-modal .call-card-avatar {
     width: 56px;
     height: 56px;
   }
 
-  .call-card-name {
+  .booking-modal .call-card-name {
     font-size: 16px;
   }
 
-  .call-card-phone {
+  .booking-modal .call-card-phone {
     font-size: 16px;
     padding: 10px 16px;
   }
 
-  .call-hours {
+  .booking-modal .call-hours {
     font-size: 12px;
     margin-top: 20px;
     padding: 10px 12px;

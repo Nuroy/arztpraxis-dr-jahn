@@ -1,7 +1,8 @@
 const ImpressumPage = () => {
+  const [terminOpen, setTerminOpen] = React.useState(false);
   return (
     <React.Fragment>
-      <Header />
+      <Header onOpenTermin={() => setTerminOpen(true)} />
       <main className="legal-page">
         <div className="container">
           <div className="legal-content">
@@ -102,6 +103,7 @@ const ImpressumPage = () => {
         </div>
       </main>
       <Footer />
+      <BookingModal open={terminOpen} onClose={() => setTerminOpen(false)} />
       <CookieBanner />
     </React.Fragment>
   );

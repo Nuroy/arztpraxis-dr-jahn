@@ -787,6 +787,41 @@
   box-shadow: var(--shadow-xs);
 }
 
+/* CTA panel inside booking-card (opens the shared BookingModal) */
+.booking-cta-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 24px 8px 12px;
+}
+.booking-cta-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.booking-cta-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--text-primary);
+  margin: 0;
+}
+.booking-cta-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 16px;
+  max-width: 340px;
+}
+
 .call-cards { display: flex; flex-direction: column; gap: 12px; }
 .call-card {
   display: flex; align-items: center; gap: 16px;

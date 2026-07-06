@@ -209,7 +209,7 @@ const PraxistourPage = () => {
       <CookieBanner />
 
       {/* TerminModal */}
-      <TerminModal open={terminOpen} onClose={() => setTerminOpen(false)} />
+      <BookingModal open={terminOpen} onClose={() => setTerminOpen(false)} />
 
       {/* Lightbox */}
       {lightboxImage && (
