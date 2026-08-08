@@ -386,7 +386,7 @@ const Step6CallScreen = ({ onBack }) => {
       <p className="booking-step-subtitle">Wir vereinbaren gerne telefonisch einen Termin mit Ihnen</p>
 
       <div className="call-cards">
-        <a href="tel:+498938889500" className="call-card">
+        <a href="tel:+498938808687" className="call-card">
           <div className="call-card-doctor">
             <div className="call-card-avatar">
               <img src="assets/dr-jahn.jpg" alt="Dr. Irene Jahn" loading="lazy" />
@@ -395,11 +395,11 @@ const Step6CallScreen = ({ onBack }) => {
           </div>
           <div className="call-card-phone">
             <Icon name="phone" size={20} />
-            <span>089 38 88 95 00</span>
+            <span>089 38 80 86 87</span>
           </div>
         </a>
 
-        <a href="tel:+498938808687" className="call-card">
+        <a href="tel:+498938889500" className="call-card">
           <div className="call-card-doctor">
             <div className="call-card-avatar">
               <img src="assets/dr-hancock-diener.jpg" alt="Dr. Hancock-Diener" loading="lazy" />
@@ -408,7 +408,7 @@ const Step6CallScreen = ({ onBack }) => {
           </div>
           <div className="call-card-phone">
             <Icon name="phone" size={20} />
-            <span>089 38 80 86 87</span>
+            <span>089 38 88 95 00</span>
           </div>
         </a>
       </div>
