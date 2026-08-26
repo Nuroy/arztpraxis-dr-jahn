@@ -1527,6 +1527,9 @@ const Footer = () => (
           <a href="#">Cookie-Einstellungen</a>
         </span>
       </div>
+      <p className="footer-ai-note">
+        Teile der Inhalte dieser Website wurden KI-gestützt erstellt und anschließend fachlich durch unsere Zahnärztinnen geprüft und freigegeben.
+      </p>
     </div>
   </footer>
 );

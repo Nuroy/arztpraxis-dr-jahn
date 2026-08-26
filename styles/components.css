@@ -1604,6 +1604,13 @@
   font-size: 13px;
   color: var(--text-muted);
 }
+.footer-ai-note {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 72ch;
+}
 
 /* ============ MODAL ============ */
 .modal-backdrop {
