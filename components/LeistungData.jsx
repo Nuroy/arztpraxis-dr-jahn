@@ -6,7 +6,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Prophylaxe",
     eyebrow: "Vorsorge",
     lede: "Die professionelle Zahnreinigung ist die Basis Ihrer Zahngesundheit. Wir entfernen Beläge dort, wo die häusliche Pflege nicht hinkommt, sanft, gründlich und mit Zeit.",
-    image: "assets/zahnerhaltung-gebiss.jpg",
+    image: "assets/zahnerhaltung-zahnpflege.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "45–60 Min." },
@@ -45,8 +45,8 @@ window.LEISTUNG_DATA = {
     lede: "Parodontitis ist die häufigste Ursache für Zahnverlust im Erwachsenenalter und entwickelt sich oft unbemerkt. Wir behandeln sie in zwei Phasen: gründlich, gezielt und schonend.",
     imageComparison: {
       images: [
-        "assets/parodontitis-gesund.jpg",
-        "assets/parodontitis-krank.jpg"
+        "assets/parodontitis-gesund-zeichnung.jpg",
+        "assets/parodontitis-krank-zeichnung.jpg"
       ],
       labels: [
         "Gesundes Zahnfleisch",
@@ -89,7 +89,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "eigenen Zahn erhalten",
     eyebrow: "Wurzelbehandlung",
     lede: "Wurzelbehandlung hat einen schlechten Ruf, doch zu Unrecht. Mit modernen Verfahren ist sie heute fast immer schmerzfrei oder schmerzarm und in den meisten Fällen erfolgreich.",
-    image: "assets/endodontie-endopilot.jpg",
+    image: "assets/endopilot-geraet.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60–90 Min." },
@@ -126,7 +126,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Lächeln",
     eyebrow: "Form trifft Funktion",
     lede: "Ein Lächeln, das zu Ihnen passt. Sanfte ästhetische Korrekturen: natürlich, individuell, präzise umgesetzt mit unseren Meisterlabor-Partnern.",
-    image: "assets/keramik-kronen-inlays.jpg",
+    image: "assets/keramik-kronen-gruen.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "60–180 Min." },
@@ -162,7 +162,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "helleres Lächeln",
     eyebrow: "Sanfte Aufhellung",
     lede: "Sanfte Aufhellung Ihrer Zähne, als In-Office-Behandlung in der Praxis oder als individuell angepasste Home-Bleaching-Schiene für zu Hause.",
-    image: "assets/bleaching-opalescence.jpg",
+    image: "assets/bleaching-opalescence-boxen.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "90–120 Min." },
@@ -198,7 +198,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "feste Zähne wie eigene",
     eyebrow: "Hochwertiger Zahnersatz",
     lede: "Implantate ersetzen Zähne wie eigene. Aus Titan (oder bei Unverträglichkeit aus Keramik), mit individuell gefertigter Krone aus dem Meisterlabor. Ein Ergebnis, das Jahrzehnte halten kann.",
-    image: "assets/implantat-querschnitt.jpg",
+    image: "assets/implantat-querschnitt-zeichnung.jpg",
     imageFormat: "portrait",
     meta: [
       { label: "Dauer OP", value: "30–60 Min." },
@@ -272,7 +272,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "ruhigem Kiefergelenk",
     eyebrow: "Knirsch-Schiene",
     lede: "Bruxismus, das nächtliche Knirschen, schadet Zähnen und Kiefergelenk. Eine individuell angepasste Knirsch-Schiene schützt zuverlässig und entlastet die Muskulatur.",
-    image: "assets/knirschschiene.jpg",
+    image: "assets/knirschschiene-transparent.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "2 Termine" },
@@ -309,7 +309,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "ruhigeren Nächten",
     eyebrow: "Gegen Schnarchen",
     lede: "Sanfte Vorverlagerung des Unterkiefers während des Schlafs, wirksam bei leichter bis mittlerer Schlafapnoe und Schnarchen.",
-    image: "assets/schnarchschiene-permadental.jpg",
+    image: "assets/schnarchschiene-hand.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Dauer", value: "2 Termine" },
@@ -381,7 +381,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "geraderem Lächeln",
     eyebrow: "Unsichtbare Aligner",
     lede: "Unsichtbare Aligner für sanfte Zahnkorrektur: herausnehmbar, transparent, alltagstauglich.",
-    image: "assets/aligner-clearcorrect.jpg",
+    image: "assets/aligner-clearcorrect-box.jpg",
     imageFormat: "portrait",
     meta: [
       { label: "Dauer", value: "6–18 Monate" },
@@ -454,7 +454,7 @@ window.LEISTUNG_DATA = {
     titleAccent: "Ihrem Tempo",
     eyebrow: "Mit Verständnis",
     lede: "Etwa 7 % der Erwachsenen vermeiden den Zahnarzt aus Angst. Bei uns ist das anders. Wir nehmen Ihre Angst ernst und behandeln in Ihrem Tempo.",
-    image: "assets/gipsvoegel-wanddeko.jpg",
+    image: "assets/angst-teich.jpg",
     imageFormat: "landscape",
     meta: [
       { label: "Erstgespräch", value: "Ohne Behandlung" },

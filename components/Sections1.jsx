@@ -65,7 +65,7 @@ const Intro = () => (
     <div className="container">
       <div className="intro-grid">
         <div className="intro-image">
-          <img src="assets/praxis-flur-neu.jpg" alt="Flur der Praxis" loading="lazy" />
+          <img src="assets/praxis-flur-sessel.jpg" alt="Flur der Praxis" loading="lazy" />
         </div>
         <div className="intro-text">
           <div className="eyebrow">Willkommen</div>

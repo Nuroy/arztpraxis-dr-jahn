@@ -28,9 +28,9 @@ const praxisImages = [
     desc: "Warteraum im Erker mit Blick auf die Kirche."
   },
   {
-    src: "assets/platz_fuer_kunst.jpg",
+    src: "assets/praxis-flur-sessel.jpg",
     title: "Gang",
-    desc: "Der lichtdurchflutete Gang mit Kunstwerken und gemütlicher Sitzgelegenheit."
+    desc: "Der lichtdurchflutete Gang mit Kunstwerken und gemütlichen Sesseln."
   },
   {
     src: "assets/zimmer-jahn-2019-01.jpg",
@@ -196,7 +196,7 @@ const PraxistourPage = () => {
             </div>
             <div className="praxistour-cta-image">
               <img
-                src="assets/keramik-zahn-tulpen-deko.jpg"
+                src="assets/keramik-zahn-tulpen.jpg"
                 alt="Willkommen in unserer Praxis"
                 loading="lazy"
               />

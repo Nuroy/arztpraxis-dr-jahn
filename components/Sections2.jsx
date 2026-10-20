@@ -60,7 +60,7 @@ const DekoSection = () => (
   <div className="deko-section">
     <div className="container">
       <img
-        src="assets/keramik-zahn-tulpen-deko.jpg"
+        src="assets/keramik-zahn-tulpen.jpg"
         alt="Zahnmedizin mit Herz - Keramik-Zahn und Tulpen"
         className="deko-image deko-image-float-right"
         loading="lazy"

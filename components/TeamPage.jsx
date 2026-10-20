@@ -223,7 +223,7 @@ const TeamApp = () => {
             {/* Deko-Bild neben Polaroid-Stack */}
             <div className="team-deko-image">
               <img
-                src="assets/keramik-zahn-tulpen-deko.jpg"
+                src="assets/keramik-zahn-tulpen.jpg"
                 alt="Zahnmedizin mit Lebensfreude"
                 loading="lazy"
               />

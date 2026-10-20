@@ -269,7 +269,7 @@ const LeistungDetailApp = () => {
                 <a href={`leistungen.html#${data.parent.anchor}`} className="btn btn-secondary">Zur Übersicht</a>
               </div>
             </div>
-            <div className={`detail-hero-image ${data.imageFormat || 'portrait'}`}>
+            <div className={`detail-hero-image ${data.imageComparison ? 'comparison' : (data.imageFormat || 'portrait')}`}>
               {data.imageComparison ? (
                 <div className="image-comparison">
                   {data.imageComparison.images.map((img, idx) => (
